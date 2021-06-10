@@ -16,7 +16,7 @@
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 #============================================================================
 
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.20.3)
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.9" CACHE STRING "Minimum OS X deployment version")
 
 set(ProjectName "JediOutcast" CACHE STRING "Project Name")
@@ -133,10 +133,6 @@ else()
 endif()
 
 message(STATUS "Architecture is ${Architecture}")
-
-if(WIN32 AND CMAKE_VERSION VERSION_LESS "3.4")
-	message(WARNING "Building on Windows platform with CMake version less than 3.4 is deprecated. Manifest file will fail to be included.")
-endif()
 
 #=============================================================================
 #
