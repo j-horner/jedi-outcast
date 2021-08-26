@@ -1,44 +1,116 @@
 {
-    "version": 2,
-    "configurePresets": [
-        {
-            "name": "x86-Debug",
-            "displayName": "x86-Debug",
-            "description": "Visual Studio 16 2019 - x86 - Debug mode",
-            "generator": "Visual Studio 16 2019",
-            "toolset": "host=x86",
-            "architecture": "win32",
-            "binaryDir": "${sourceDir}/build/${presetName}",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}"
-            }
+  "version": 2,
+  "cmakeMinimumRequired": {"major": 3, "minor": 20, "patch": 3},
+  "configurePresets": [
+    {
+      "name": "common-build-settings",
+      "description": "Build settings that are common to all presets.",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "${sourceDir}/external/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
         },
-        {
-            "name": "x86-Release",
-            "displayName": "x86-Release",
-            "description": "Visual Studio 16 2019 - x86 - Release mode",
-            "generator": "Visual Studio 16 2019",
-            "toolset": "host=x86",
-            "architecture": "win32",
-            "binaryDir": "${sourceDir}/build/${presetName}",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}"
-            }
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/bin/${presetName}"
+      },
+      "hidden": true
+    },
+    {
+      "name": "linux-remote",
+      "displayName": "Linux Debug",
+      "description": "Target the Windows Subsystem for Linux (WSL) or a remote Linux system.",
+      "inherits": "common-build-settings",
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [
+            "Linux"
+          ]
         },
-        {
-            "name": "x86-RelWithDebInfo",
-            "displayName": "x86-RelWithDebInfo",
-            "description": "Visual Studio 16 2019 - x86 - Release mode with Debug Info",
-            "generator": "Visual Studio 16 2019",
-            "toolset": "host=x86",
-            "architecture": "win32",
-            "binaryDir": "${sourceDir}/build/${presetName}",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}"
-            }
+        "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+          "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
         }
-    ]
+      },
+      "hidden": true
+    },
+    {
+      "name": "windows-default",
+      "description": "Target Windows with the Visual Studio development environment. Builds with MSVC.",
+      "inherits": "common-build-settings",
+      "architecture": {
+        "value": "win32",
+        "strategy": "external"
+      },
+      "toolset": {
+        "value": "host=x86",
+        "strategy": "external"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [
+            "Windows"
+          ]
+        }
+      },
+      "hidden": true
+    },
+    {
+      "name": "windows-clang",
+      "description": "Target Windows with the Visual Studio development environment. Builds with Clang.",
+      "inherits": "windows-default",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang-cl",
+        "CMAKE_CXX_COMPILER": "clang-cl"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [
+            "Windows"
+          ],
+          "intelliSenseMode": "windows-clang-x64"
+        }
+      },
+      "hidden": true
+    },
+    {
+      "name": "windows-x86-msvc-debug",
+      "inherits": "windows-default",
+      "displayName": "Windows MSVC Debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "EXTRA_FLAGS": "/DDEBUG /Od /bigobj /W4 /WX /EHsc /wd4996 /external:anglebrackets /experimental:external /external:W0"
+      },
+      "hidden": true
+    },
+    {
+      "name": "windows-x86-msvc-release",
+      "inherits": "windows-default",
+      "displayName": "Windows MSVC Release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "EXTRA_FLAGS": "/Ox /favor:INTEL64 /W4 /WX /EHsc /wd4996 /external:anglebrackets /experimental:external /external:W0"
+      },
+      "hidden": true
+    },
+    {
+      "name": "windows-x86-clang-debug",
+      "inherits": "windows-clang",
+      "displayName": "Windows Clang Debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "EXTRA_FLAGS": "/Z7 /DDEBUG /Od /bigobj /EHsc -march=native -Wno-deprecated-declarations -Wall -Wextra -Weffc++ -Werror -Wpedantic -Wconversion -Wsign-conversion -Wno-format-security -Wno-format-nonliteral -Wno-c++98-compat-pedantic"
+      },
+      "hidden": true
+    },
+    {
+      "name": "windows-x86-clang-release",
+      "inherits": "windows-clang",
+      "displayName": "Windows Clang Release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "EXTRA_FLAGS": "/Ox /EHsc -march=native -Wno-deprecated-declarations -Wall -Wextra -Weffc++ -Werror -Wpedantic -Wconversion -Wsign-conversion -Wno-format-security -Wno-format-nonliteral -Wno-c++98-compat-pedantic -Wno-missing-prototypes"
+      },
+      "hidden": true
+    }
+  ]
 }
