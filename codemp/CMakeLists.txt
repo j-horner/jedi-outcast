@@ -17,8 +17,3 @@
 #============================================================================
 
 set(MPSharedDefines ${SharedDefines})
-
-#    Add UI Project
-if(BuildMPUI)
-	add_subdirectory("${MPDir}/ui")
-endif(BuildMPUI)
