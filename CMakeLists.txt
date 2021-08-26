@@ -38,8 +38,6 @@ option(BuildJK2SPEngine "Whether to create projects for the jk2 SP engine (openj
 option(BuildJK2SPGame "Whether to create projects for the jk2 sp gamecode mod (jk2gamex86.dll)" ON)
 option(BuildJK2SPRdVanilla "Whether to create projects for the jk2 sp renderer (rdjosp-vanilla_x86.dll)" ON)
 
-option(BuildTests "Whether to build automatic unit tests (requires Boost)" OFF)
-
 include(CMakeDependentOption)
 cmake_dependent_option(BuildSymbolServer "Build WIP Windows Symbol Server (experimental and unused)" OFF "NOT WIN32 OR NOT MSVC" OFF)
 
@@ -370,9 +368,4 @@ add_subdirectory(${MPDir})
 
 if(BuildSymbolServer)
 	add_subdirectory("tools/WinSymbol")
-endif()
-
-if(BuildTests)
-	enable_testing()
-	add_subdirectory("tests")
 endif()
