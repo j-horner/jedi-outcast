@@ -151,7 +151,6 @@ set(SharedLib "shared")
 #
 #=============================================================================
 set(SPDir "${CMAKE_SOURCE_DIR}/code")
-set(MPDir "${CMAKE_SOURCE_DIR}/codemp")
 set(JK2SPDir "${CMAKE_SOURCE_DIR}/codeJK2")
 set(SharedDir ${CMAKE_SOURCE_DIR}/shared)
 set(OpenJKLibDir "${CMAKE_SOURCE_DIR}/lib")
@@ -361,5 +360,3 @@ add_subdirectory(${SPDir})
 if(BuildJK2SPGame)
 	add_subdirectory("${JK2SPDir}/game")
 endif()
-
-add_subdirectory(${MPDir})
