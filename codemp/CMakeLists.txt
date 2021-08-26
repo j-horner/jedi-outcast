@@ -18,11 +18,6 @@
 
 set(MPSharedDefines ${SharedDefines})
 
-#    Add CGame Project
-if(BuildMPCGame)
-	add_subdirectory("${MPDir}/cgame")
-endif(BuildMPCGame)
-
 #    Add UI Project
 if(BuildMPUI)
 	add_subdirectory("${MPDir}/ui")
