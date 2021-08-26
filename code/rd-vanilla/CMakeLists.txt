@@ -17,7 +17,7 @@
 #============================================================================
 
 
-if(BuildSPRdVanilla OR BuildJK2SPRdVanilla)
+if(BuildJK2SPRdVanilla)
 
 	set(SPRDVanillaRendererIncludeDirectories ${SPDir})
 	set(SPRDVanillaRendererIncludeDirectories
@@ -188,12 +188,9 @@ if(BuildSPRdVanilla OR BuildJK2SPRdVanilla)
 		target_link_libraries(${ProjectName} ${SPRDVanillaRendererLibraries})
 	endfunction(add_sp_renderer_project)
 
-	if(BuildSPRdVanilla)
-		add_sp_renderer_project(${SPRDVanillaRenderer} "SP Vanilla Renderer" ${SPEngine} ${JKAInstallDir} ${JKASPClientComponent})
-	endif(BuildSPRdVanilla)
 	if(BuildJK2SPRdVanilla)
 		set(SPRDVanillaDefines ${SPRDVanillaDefines} "JK2_MODE")
 		add_sp_renderer_project(${JK2SPVanillaRenderer} "JK2 SP Vanilla Renderer" ${JK2SPEngine} ${JK2InstallDir} ${JK2SPClientComponent})
 	endif(BuildJK2SPRdVanilla)
 
-endif(BuildSPRdVanilla OR BuildJK2SPRdVanilla)
+endif(BuildJK2SPRdVanilla)
