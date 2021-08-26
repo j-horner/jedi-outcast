@@ -128,7 +128,6 @@ message(STATUS "Architecture is ${Architecture}")
 # Binary names
 #
 #=============================================================================
-set(SPEngine "openjk_sp.${Architecture}")
 set(SPGame "jagame${Architecture}")
 set(SPRDVanillaRenderer "rdsp-vanilla_${Architecture}")
 set(MPEngine "openjk.${Architecture}")
