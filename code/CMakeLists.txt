@@ -16,11 +16,6 @@
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 #============================================================================
 
-#    Add Game Project
-if(BuildSPGame)
-	add_subdirectory("${SPDir}/game")
-endif(BuildSPGame)
-
 #    Add Modular Renderer project
 add_subdirectory("${SPDir}/rd-vanilla")
 

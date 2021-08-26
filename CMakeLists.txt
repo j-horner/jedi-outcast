@@ -34,7 +34,6 @@ message("CMAKE_INSTALL_PREFIX: " ${CMAKE_INSTALL_PREFIX})
 #=============================================================================
 option(BuildPortableVersion "Build portable version (does not read or write files from your user/home directory" OFF)
 
-option(BuildSPGame "Whether to create projects for the SP gamecode (jagamex86.dll)" OFF)
 option(BuildSPRdVanilla "Whether to create projects for the SP default renderer (rdsp-vanilla_x86.dll)" OFF)
 
 option(BuildJK2SPEngine "Whether to create projects for the jk2 SP engine (openjo_sp.exe)" ON)
