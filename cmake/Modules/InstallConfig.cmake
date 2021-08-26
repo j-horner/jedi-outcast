@@ -76,28 +76,6 @@ if(WIN32)
 	set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE)
 	include(InstallRequiredSystemLibraries)
 
-	if(BuildMPEngine)
-		string(REPLACE "/" "\\\\" ICON "${MPDir}/win32/icon.ico")
-		set(CPACK_NSIS_CREATE_ICONS_EXTRA
-			"${CPACK_NSIS_CREATE_ICONS_EXTRA}
-			CreateShortCut '$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\Jedi Academy MP.lnk' \\\\
-				'$INSTDIR\\\\${MPEngine}.exe' \\\\
-				'' \\\\
-				'${ICON}'")
-
-		set(CPACK_NSIS_DELETE_ICONS_EXTRA
-			"${CPACK_NSIS_DELETE_ICONS_EXTRA}
-			Delete '$SMPROGRAMS\\\\$MUI_TEMP\\\\Jedi Academy MP.lnk'")
-
-		install(FILES ${MPDir}/OpenAL32.dll ${MPDir}/EaxMan.dll
-				DESTINATION ${JKAInstallDir}
-				COMPONENT ${JKAMPClientComponent})
-
-		install(PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
-				DESTINATION ${JKAInstallDir}
-				COMPONENT ${JKAMPClientComponent})
-	endif()
-
 	if(BuildSPEngine)
 		string(REPLACE "/" "\\\\" ICON "${SPDir}/win32/starwars.ico")
 		set(CPACK_NSIS_CREATE_ICONS_EXTRA

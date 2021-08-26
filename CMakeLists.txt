@@ -34,7 +34,6 @@ message("CMAKE_INSTALL_PREFIX: " ${CMAKE_INSTALL_PREFIX})
 #=============================================================================
 option(BuildPortableVersion "Build portable version (does not read or write files from your user/home directory" OFF)
 
-option(BuildMPEngine "Whether to create projects for the MP client (openjk.exe)" OFF)
 option(BuildMPRdVanilla "Whether to create projects for the MP default renderer (rd-vanilla_x86.dll)" OFF)
 option(BuildMPDed "Whether to create projects for the MP dedicated server (openjkded.exe)" OFF)
 option(BuildMPGame "Whether to create projects for the MP server-side gamecode (jampgamex86.dll)" OFF)
