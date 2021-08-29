@@ -246,24 +246,11 @@ set(JK2SPGameCommonSafeFiles
 source_group("common/safe" FILES ${JK2SPGameCommonSafeFiles})
 set(JK2SPGameFiles ${JK2SPGameFiles} ${JK2SPGameCommonSafeFiles})
 
-set(JK2SPGameIcarusFiles
-	"${JK2SPDir}/icarus/BlockStream.cpp"
-	"${JK2SPDir}/icarus/Sequence.cpp"
-	"${JK2SPDir}/icarus/Sequencer.cpp"
-	"${JK2SPDir}/icarus/TaskManager.cpp"
-	"${JK2SPDir}/icarus/Instance.cpp"
-	"${JK2SPDir}/icarus/blockstream.h"
-	"${JK2SPDir}/icarus/icarus.h"
-	"${JK2SPDir}/icarus/interface.h"
-	"${JK2SPDir}/icarus/interpreter.h"
-	"${JK2SPDir}/icarus/sequence.h"
-	"${JK2SPDir}/icarus/sequencer.h"
-	"${JK2SPDir}/icarus/taskmanager.h"
-	"${JK2SPDir}/icarus/instance.h"
-	"${JK2SPDir}/icarus/tokenizer.h"
-	)
-source_group("icarus" FILES ${JK2SPGameIcarusFiles})
-set(JK2SPGameFiles ${JK2SPGameFiles} ${JK2SPGameIcarusFiles})
+add_library(JK2SP_icarus 	"${JK2SPDir}/icarus/BlockStream.cpp"
+							"${JK2SPDir}/icarus/Sequence.cpp"
+							"${JK2SPDir}/icarus/Sequencer.cpp"
+							"${JK2SPDir}/icarus/TaskManager.cpp"
+							"${JK2SPDir}/icarus/Instance.cpp")
 
 set(JK2SPGameRuflFiles
 	"${SPDir}/Rufl/hstring.cpp"
@@ -280,6 +267,8 @@ if(WIN32)
 endif(WIN32)
 
 add_library(${JK2SPGame} SHARED ${JK2SPGameFiles})
+
+target_link_libraries(${JK2SPGame} JK2SP_icarus)
 
 if(NOT MSVC)
 	# remove "lib" prefix for .so/.dylib files

@@ -27,11 +27,11 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 // this include must remain at the top of every Icarus CPP file
 #include "icarus.h"
-#include "g_local.h"
+#include "../game/g_local.h"
 
 
 #include <assert.h>
-#include "../code/qcommon/ojk_saved_game_helper.h"
+#include "../../code/qcommon/ojk_saved_game_helper.h"
 
 #define ICARUS_VALIDATE(a) if ( a == false ) return TASK_FAILED;
 
