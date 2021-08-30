@@ -749,7 +749,7 @@ static void CG_DrawHUD( centity_t *cent )
 {
 	int x,y,value;
 	
-	if (cgi_UI_GetMenuInfo("lefthud",&x,&y))
+	if (cgi_UI_GetMenuInfo(const_cast<char*>("lefthud"),&x,&y))
 	{
 		// Draw all the HUD elements --eez
 		cgi_UI_Menu_Paint( cgi_UI_GetMenuByName( "lefthud" ), qtrue );
@@ -767,7 +767,7 @@ static void CG_DrawHUD( centity_t *cent )
 		CG_DrawHUDLeftFrame2(x,y);
 	}
 
-	if (cgi_UI_GetMenuInfo("righthud",&x,&y))
+	if (cgi_UI_GetMenuInfo(const_cast<char*>("righthud"),&x,&y))
 	{
 		// Draw all the HUD elements --eez
 		cgi_UI_Menu_Paint( cgi_UI_GetMenuByName( "righthud" ), qtrue );

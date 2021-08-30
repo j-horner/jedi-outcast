@@ -536,7 +536,7 @@ void camera_die( gentity_t *self, gentity_t *inflictor, gentity_t *attacker, int
 	gentity_t *sparks = G_Spawn();
 	if ( sparks )
 	{
-		sparks->fxFile = "spark";
+		sparks->fxFile = const_cast<char*>("spark");
 		sparks->delay = 100;
 		sparks->random = 500;
 		sparks->s.angles[0] = 180;//point down
@@ -838,21 +838,21 @@ void SP_object_cargo_barrel1(gentity_t *ent)
 	if(ent->spawnflags & 8)
 	{
 		//FIXME: make an index into an external string table for localization
-		ent->fullName = "Powderkeg Barrel";
+		ent->fullName = const_cast<char*>("Powderkeg Barrel");
 		ent->s.modelindex = G_ModelIndex( "/models/mapobjects/cargo/barrel_wood2.md3" );
 //		ent->sounds = G_SoundIndex("sound/weapons/explosions/explode3.wav");
 	}
 	else if(ent->spawnflags & 2)
 	{
 		//FIXME: make an index into an external string table for localization
-		ent->fullName = "Klingon Cargo Barrel";
+		ent->fullName = const_cast<char*>("Klingon Cargo Barrel");
 		ent->s.modelindex = G_ModelIndex( "/models/mapobjects/scavenger/k_barrel.md3" );
 //		ent->sounds = G_SoundIndex("sound/weapons/explosions/explode4.wav");
 	}
 	else
 	{
 		//FIXME: make an index into an external string table for localization
-		ent->fullName = "Federation Cargo Barrel";
+		ent->fullName = const_cast<char*>("Federation Cargo Barrel");
 		ent->s.modelindex = G_ModelIndex( va("/models/mapobjects/cargo/barrel%i.md3", Q_irand( 0, 2 )) );
 //		ent->sounds = G_SoundIndex("sound/weapons/explosions/explode1.wav");
 	}
@@ -1940,7 +1940,7 @@ USETARGET - when used it fires off target
 //------------------------------------------------------------
 void SP_misc_model_shield_power_converter( gentity_t *ent )
 {
-	SetMiscModelDefaults( ent, useF_shield_power_converter_use, "4", CONTENTS_SOLID, 0, qfalse, qfalse );
+	SetMiscModelDefaults( ent, useF_shield_power_converter_use, const_cast<char*>("4"), CONTENTS_SOLID, 0, qfalse, qfalse );
 
 	ent->takedamage = qfalse;
 
@@ -1971,7 +1971,7 @@ void SP_misc_shield_floor_unit( gentity_t *ent )
 	VectorSet( ent->mins, -16, -16, 0 );
 	VectorSet( ent->maxs, 16, 16, 32 );
 
-	SetMiscModelDefaults( ent, useF_shield_power_converter_use, "4", CONTENTS_SOLID, 0, qfalse, qfalse );
+	SetMiscModelDefaults( ent, useF_shield_power_converter_use, const_cast<char*>("4"), CONTENTS_SOLID, 0, qfalse, qfalse );
 
 	ent->takedamage = qfalse;
 
@@ -2148,7 +2148,7 @@ USETARGET - when used it fires off target
 //------------------------------------------------------------
 void SP_misc_model_ammo_power_converter( gentity_t *ent )
 {
-	SetMiscModelDefaults( ent, useF_ammo_power_converter_use, "4", CONTENTS_SOLID, 0, qfalse, qfalse );
+	SetMiscModelDefaults( ent, useF_ammo_power_converter_use, const_cast<char*>("4"), CONTENTS_SOLID, 0, qfalse, qfalse );
 
 	ent->takedamage = qfalse;
 
@@ -2179,7 +2179,7 @@ void SP_misc_ammo_floor_unit( gentity_t *ent )
 	VectorSet( ent->mins, -16, -16, 0 );
 	VectorSet( ent->maxs, 16, 16, 32 );
 
-	SetMiscModelDefaults( ent, useF_ammo_power_converter_use, "4", CONTENTS_SOLID, 0, qfalse, qfalse );
+	SetMiscModelDefaults( ent, useF_ammo_power_converter_use, const_cast<char*>("4"), CONTENTS_SOLID, 0, qfalse, qfalse );
 
 	ent->takedamage = qfalse;
 
@@ -2269,7 +2269,7 @@ void SP_misc_model_welder( gentity_t *ent )
 	VectorSet( ent->mins, 336, -16, 0 );
 	VectorSet( ent->maxs, 368, 16, 32 );
 
-	SetMiscModelDefaults( ent, useF_welder_use, "4", CONTENTS_SOLID, 0, qfalse, qfalse );
+	SetMiscModelDefaults( ent, useF_welder_use, const_cast<char*>("4"), CONTENTS_SOLID, 0, qfalse, qfalse );
 
 	ent->takedamage = qfalse;
 	ent->contents = 0;
@@ -2329,7 +2329,7 @@ void SP_misc_model_jabba_cam( gentity_t *ent )
 	VectorSet( ent->mins, -60.0f, -8.0f, 0.0f );
 	VectorSet( ent->maxs, 60.0f, 8.0f, 16.0f );
 
-	SetMiscModelDefaults( ent, useF_jabba_cam_use, "4", 0, 0, qfalse, qfalse );
+	SetMiscModelDefaults( ent, useF_jabba_cam_use, const_cast<char*>("4"), 0, 0, qfalse, qfalse );
 	G_SetAngles( ent, ent->s.angles );
 
 	ent->s.modelindex = G_ModelIndex( "models/map_objects/nar_shaddar/jabacam/jabacam.glm" );
@@ -2750,7 +2750,7 @@ void SP_misc_atst_drivable( gentity_t *ent )
 	G_SoundIndex( "sound/chars/atst/atst_hatch_close" );
 
 	NPC_ATST_Precache();
-	ent->NPC_type = "atst";
+	ent->NPC_type = const_cast<char*>("atst");
 	NPC_PrecacheAnimationCFG( ent->NPC_type );
 	//open the hatch
 	misc_atst_setanim( ent, ent->rootBone, BOTH_STAND2 );

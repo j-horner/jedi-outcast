@@ -48,23 +48,23 @@ const char	*CG_PlaceString( int rank ) {
 
 	if ( rank & RANK_TIED_FLAG ) {
 		rank &= ~RANK_TIED_FLAG;
-		t = "Tied for ";
+		t = const_cast<char*>("Tied for ");
 	} else {
-		t = "";
+		t = const_cast<char*>("");
 	}
 
 	if ( rank == 1 ) {
-		s = "\03341st\0337";		// draw in blue
+		s = const_cast<char*>("\03341st\0337");		// draw in blue
 	} else if ( rank == 2 ) {
-		s = "\03312nd\0337";		// draw in red
+		s = const_cast<char*>("\03312nd\0337");		// draw in red
 	} else if ( rank == 3 ) {
-		s = "\03333rd\0337";		// draw in yellow
+		s = const_cast<char*>("\03333rd\0337");		// draw in yellow
 	} else if ( rank == 11 ) {
-		s = "11th";
+		s = const_cast<char*>("11th");
 	} else if ( rank == 12 ) {
-		s = "12th";
+		s = const_cast<char*>("12th");
 	} else if ( rank == 13 ) {
-		s = "13th";
+		s = const_cast<char*>("13th");
 	} else if ( rank % 10 == 1 ) {
 		s = va("%ist", rank);
 	} else if ( rank % 10 == 2 ) {
@@ -740,13 +740,13 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 		}
 
 		if ( health < 25 ) {
-			snd = "*pain100.wav";
+			snd = const_cast<char*>("*pain100.wav");
 		} else if ( health < 50 ) {
-			snd = "*pain75.wav";
+			snd = const_cast<char*>("*pain75.wav");
 		} else if ( health < 75 ) {
-			snd = "*pain50.wav";
+			snd = const_cast<char*>("*pain50.wav");
 		} else {
-			snd = "*pain25.wav";
+			snd = const_cast<char*>("*pain25.wav");
 		}
 		CG_TryPlayCustomSound( NULL, es->number, CHAN_VOICE, snd, CS_BASIC );
 

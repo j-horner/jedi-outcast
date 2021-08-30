@@ -429,6 +429,8 @@ if(BuildJK2SPEngine)
 		if(SPEngineLibraries)
 			target_link_libraries(${ProjectName} ${SPEngineLibraries})
 		endif(SPEngineLibraries)
+
+		target_link_libraries(${ProjectName} gsl::gsl-lite gsl::gsl-lite-v0 gsl::gsl-lite-v1)
 	endfunction(add_sp_project)
 	if(BuildJK2SPEngine)
 		set(SPEngineDefines ${SPEngineDefines} "JK2_MODE")

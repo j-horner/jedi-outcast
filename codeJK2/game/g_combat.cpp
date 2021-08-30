@@ -342,7 +342,7 @@ void GoExplodeDeath( gentity_t *self, gentity_t *other, gentity_t *activator)
 {
 	G_ActivateBehavior(self,BSET_USE);
 
-	self->targetname = "";	//Make sure this entity cannot be told to explode again (recursive death fix)
+	self->targetname = const_cast<char*>("");	//Make sure this entity cannot be told to explode again (recursive death fix)
 
 	ExplodeDeath( self );
 }
@@ -1153,7 +1153,7 @@ qboolean G_GetHitLocFromSurfName( gentity_t *ent, const char *surfName, int *hit
 		{//we care about direction (presumably for dismemberment)
 			if ( g_dismemberProbabilities->value<=0.0f||G_Dismemberable( ent, *hitLoc ) )
 			{//either we don't care about probabilties or the probability let us continue
-				char *tagName = NULL;
+				const char *tagName = NULL;
 				float	aoa = 0.5f;
 				//dir must be roughly perpendicular to the hitLoc's cap bolt
 				switch ( *hitLoc )
@@ -1662,7 +1662,7 @@ float hitLocHealthPercentage[HL_MAX] =
 	0.0f	//HL_GENERIC6
 };
 
-char *hitLocName[HL_MAX] =
+const char *hitLocName[HL_MAX] =
 {
 	"none",	//HL_NONE = 0,
 	"right foot",	//HL_FOOT_RT,
@@ -1933,7 +1933,7 @@ static qboolean G_Dismember( gentity_t *ent, vec3_t point,
 //
 	limb->s.radius = 60;
 //4) toss the limb away
-	limb->classname = "limb";
+	limb->classname = const_cast<char*>("limb");
 	limb->owner = ent;
 	limb->enemy = ent->enemy;
 	if ( ent->weaponModel >= 0 && !ent->client->ps.saberInFlight )
@@ -2165,7 +2165,7 @@ extern cvar_t	*g_iscensored;
 			//where the split will be- if the hit dir is roughly perpendicular to
 			//the direction of the cap, then the split is allowed, otherwise we
 			//hit it at the wrong angle and should not dismember...
-			char	*limbBone = NULL, *rotateBone = NULL, *limbName = NULL, *limbCapName = NULL, *stubCapName = NULL, *limbTagName = NULL, *stubTagName = NULL;
+			const char	*limbBone = NULL, *rotateBone = NULL, *limbName = NULL, *limbCapName = NULL, *stubCapName = NULL, *limbTagName = NULL, *stubTagName = NULL;
 			int		anim = -1;
 			float	limbRollBase = 0, limbPitchBase = 0;
 			qboolean doDismemberment = qfalse;
@@ -2315,8 +2315,8 @@ extern cvar_t	*g_iscensored;
 			}
 			if ( doDismemberment )
 			{
-				return G_Dismember( self, point, limbBone, rotateBone, limbName,
-					limbCapName, stubCapName, limbTagName, stubTagName,
+				return G_Dismember( self, point, limbBone, rotateBone, const_cast<char*>(limbName),
+					const_cast<char*>(limbCapName), const_cast<char*>(stubCapName), const_cast<char*>(limbTagName), const_cast<char*>(stubTagName),
 					anim, limbRollBase, limbPitchBase, damage, hitLoc );
 			}
 		}

@@ -183,7 +183,7 @@ void CreateLaserTrap( gentity_t *laserTrap, vec3_t start, gentity_t *owner )
 	{
 		// since we may be coming from a map placed trip mine, we don't want to override that class name....
 		//	That would be bad because the player drop code tries to limit number of placed items...so it would have removed map placed ones as well.
-		laserTrap->classname = "tripmine";
+		laserTrap->classname = const_cast<char*>("tripmine");
 	}
 
 	laserTrap->splashDamage = weaponData[WP_TRIP_MINE].splashDamage;

@@ -78,7 +78,7 @@ static void IT_SetDefaults( void ) {
 	bg_itemlist[itemNum].maxs[1] = 16;
 	bg_itemlist[itemNum].maxs[2] = 16;
 
-	bg_itemlist[itemNum].pickup_sound = PICKUPSOUND;	//give it a default sound
+	bg_itemlist[itemNum].pickup_sound = const_cast<char*>(PICKUPSOUND);	//give it a default sound
 	bg_itemlist[itemNum].precaches = NULL;
 	bg_itemlist[itemNum].sounds = NULL;
 }

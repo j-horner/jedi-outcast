@@ -1441,7 +1441,7 @@ gentity_t *NPC_PickEnemy( gentity_t *closestTo, int enemyTeam, qboolean checkVis
 											}
 											else
 											{
-												Debug_Printf(debugNPCAI, DEBUG_LEVEL_INFO, "%s saw %s trying to hide - hiddenDir %s targetDir %s dot %f\n", NPC->targetname, newenemy->targetname, vtos(newenemy->client->hiddenDir), vtos(diff), dot );
+												Debug_Printf(debugNPCAI, DEBUG_LEVEL_INFO, const_cast<char*>("%s saw %s trying to hide - hiddenDir %s targetDir %s dot %f\n"), NPC->targetname, newenemy->targetname, vtos(newenemy->client->hiddenDir), vtos(diff), dot );
 											}
 										}
 										else
@@ -1451,7 +1451,7 @@ gentity_t *NPC_PickEnemy( gentity_t *closestTo, int enemyTeam, qboolean checkVis
 									}
 									else
 									{
-										Debug_Printf(debugNPCAI, DEBUG_LEVEL_INFO, "%s saw %s trying to hide - hiddenDist %f\n", NPC->targetname, newenemy->targetname, newenemy->client->hiddenDist );
+										Debug_Printf(debugNPCAI, DEBUG_LEVEL_INFO, const_cast<char*>("%s saw %s trying to hide - hiddenDist %f\n"), NPC->targetname, newenemy->targetname, newenemy->client->hiddenDist );
 									}
 								}
 
@@ -1583,7 +1583,7 @@ gentity_t *NPC_PickEnemy( gentity_t *closestTo, int enemyTeam, qboolean checkVis
 									}
 									else
 									{
-										Debug_Printf(debugNPCAI, DEBUG_LEVEL_INFO, "%s saw %s trying to hide - hiddenDir %s targetDir %s dot %f\n", NPC->targetname, newenemy->targetname, vtos(newenemy->client->hiddenDir), vtos(diff), dot );
+										Debug_Printf(debugNPCAI, DEBUG_LEVEL_INFO, const_cast<char*>("%s saw %s trying to hide - hiddenDir %s targetDir %s dot %f\n"), NPC->targetname, newenemy->targetname, vtos(newenemy->client->hiddenDir), vtos(diff), dot );
 									}
 								}
 								else
@@ -1593,7 +1593,7 @@ gentity_t *NPC_PickEnemy( gentity_t *closestTo, int enemyTeam, qboolean checkVis
 							}
 							else
 							{
-								Debug_Printf(debugNPCAI, DEBUG_LEVEL_INFO, "%s saw %s trying to hide - hiddenDist %f\n", NPC->targetname, newenemy->targetname, newenemy->client->hiddenDist );
+								Debug_Printf(debugNPCAI, DEBUG_LEVEL_INFO, const_cast<char*>("%s saw %s trying to hide - hiddenDist %f\n"), NPC->targetname, newenemy->targetname, newenemy->client->hiddenDist );
 							}
 						}
 

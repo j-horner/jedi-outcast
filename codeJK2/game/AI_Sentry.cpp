@@ -195,7 +195,7 @@ void Sentry_Fire (void)
 
 	missile = CreateMissile( muzzle, forward, 1600, 10000, NPC );
 
-	missile->classname = "bryar_proj";
+	missile->classname = const_cast<char*>("bryar_proj");
 	missile->s.weapon = WP_BRYAR_PISTOL;
 
 	missile->dflags = DAMAGE_DEATH_KNOCKBACK;

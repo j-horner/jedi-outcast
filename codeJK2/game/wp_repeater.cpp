@@ -44,7 +44,7 @@ static void WP_RepeaterMainFire( gentity_t *ent, vec3_t dir )
 
 	gentity_t *missile = CreateMissile( start, dir, REPEATER_VELOCITY, 10000, ent );
 
-	missile->classname = "repeater_proj";
+	missile->classname = const_cast<char*>("repeater_proj");
 	missile->s.weapon = WP_REPEATER;
 
 	// Do the damages
@@ -100,7 +100,7 @@ static void WP_RepeaterAltFire( gentity_t *ent )
 		missile = CreateMissile( start, wpFwd, REPEATER_ALT_VELOCITY, 10000, ent, qtrue );
 	}
 
-	missile->classname = "repeater_alt_proj";
+	missile->classname = const_cast<char*>("repeater_alt_proj");
 	missile->s.weapon = WP_REPEATER;
 	missile->mass = 10;
 

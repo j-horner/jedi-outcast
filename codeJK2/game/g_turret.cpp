@@ -135,7 +135,7 @@ static void turret_fire ( gentity_t *ent, vec3_t start, vec3_t dir )
 
 	bolt = G_Spawn();
 
-	bolt->classname = "turret_proj";
+	bolt->classname = const_cast<char*>("turret_proj");
 	bolt->nextthink = level.time + 10000;
 	bolt->e_ThinkFunc = thinkF_G_FreeEntity;
 	bolt->s.eType = ET_MISSILE;
@@ -951,7 +951,7 @@ void laser_arm_start (gentity_t *base)
 	VectorSet( head->maxs, 8, 8, 8 );
 	head->contents = CONTENTS_BODY;
 	//FIXME: make an index into an external string table for localization
-	head->fullName = "Surgical Laser";
+	head->fullName = const_cast<char*>("Surgical Laser");
 	gi.linkentity(head);
 
 	//dmg
@@ -1045,7 +1045,7 @@ void pas_fire( gentity_t *ent )
 
 	bolt = G_Spawn();
 
-	bolt->classname = "turret_proj";
+	bolt->classname = const_cast<char*>("turret_proj");
 	bolt->nextthink = level.time + 10000;
 	bolt->e_ThinkFunc = thinkF_G_FreeEntity;
 	bolt->s.eType = ET_MISSILE;
@@ -1397,7 +1397,7 @@ personal assault sentry, like the ones you can carry in your inventory
 void SP_PAS( gentity_t *base )
 //---------------------------------
 {
-	base->classname = "PAS";
+	base->classname = const_cast<char*>("PAS");
 	G_SetOrigin( base, base->s.origin );
 	G_SetAngles( base, base->s.angles );
 
@@ -1917,7 +1917,7 @@ void panel_turret_shoot( gentity_t *self, vec3_t org, vec3_t dir)
 {
 	gentity_t *missile = CreateMissile( org, dir, self->speed, 10000, self );
 
-	missile->classname = "b_proj";
+	missile->classname = const_cast<char*>("b_proj");
 	missile->s.weapon = WP_EMPLACED_GUN;
 
 	VectorSet( missile->maxs, 7, 7, 7 );

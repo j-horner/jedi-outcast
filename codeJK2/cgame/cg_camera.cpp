@@ -107,7 +107,7 @@ void CGCam_Enable( void )
 			cg.zoomMode = 0;
 		}
 
-		if ( g_entities[0].client->ps.saberInFlight && g_entities[0].client->ps.saberActive )
+		if ( g_entities[0].client->ps.saberInFlight && g_entities[0].client->ps.saberActive)
 		{//saber is out
 			gentity_t *saberent = &g_entities[g_entities[0].client->ps.saberEntityNum];
 			if ( saberent )

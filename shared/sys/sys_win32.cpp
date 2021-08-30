@@ -385,7 +385,7 @@ char **Sys_ListFiles( const char *directory, const char *extension, char *filter
 	if (filter) {
 
 		nfiles = 0;
-		Sys_ListFilteredFiles( directory, "", filter, list, &nfiles );
+		Sys_ListFilteredFiles( directory, const_cast<char*>(""), filter, list, &nfiles );
 
 		list[ nfiles ] = 0;
 		*numfiles = nfiles;

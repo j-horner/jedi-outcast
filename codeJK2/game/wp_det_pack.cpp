@@ -76,7 +76,7 @@ static void WP_DropDetPack( gentity_t *self, vec3_t start, vec3_t dir )
 
 	missile->fxID = G_EffectIndex( "detpack/explosion" ); // if we set an explosion effect, explode death can use that instead
 
-	missile->classname = "detpack";
+	missile->classname = const_cast<char*>("detpack");
 	missile->s.weapon = WP_DET_PACK;
 
 	missile->s.pos.trType = TR_GRAVITY;

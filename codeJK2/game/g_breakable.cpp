@@ -724,7 +724,7 @@ void TieFighterThink ( gentity_t *self )
 
 						bolt = G_Spawn();
 						
-						bolt->classname = "tie_proj";
+						bolt->classname = const_cast<char*>("tie_proj");
 						bolt->nextthink = level.time + 10000;
 						bolt->e_ThinkFunc = thinkF_G_FreeEntity;
 						bolt->s.eType = ET_MISSILE;

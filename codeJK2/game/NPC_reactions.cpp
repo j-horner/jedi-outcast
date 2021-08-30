@@ -538,24 +538,24 @@ void NPC_Touch(gentity_t *self, gentity_t *other, trace_t *trace)
 			{//a goodie key
 				if ( (keyTaken = INV_GoodieKeyGive( other )) == qtrue )
 				{
-					text = "cp @INGAME_TOOK_IMPERIAL_GOODIE_KEY";
+					text = const_cast<char*>("cp @INGAME_TOOK_IMPERIAL_GOODIE_KEY");
 					G_AddEvent( other, EV_ITEM_PICKUP, (FindItemForInventory( INV_GOODIE_KEY )-bg_itemlist) );
 				}
 				else
 				{
-					text = "cp @INGAME_CANT_CARRY_GOODIE_KEY";
+					text = const_cast<char*>("cp @INGAME_CANT_CARRY_GOODIE_KEY");
 				}
 			}
 			else
 			{//a named security key
 				if ( (keyTaken = INV_SecurityKeyGive( player, self->message )) == qtrue )
 				{
-					text = "cp @INGAME_TOOK_IMPERIAL_SECURITY_KEY";
+					text = const_cast<char*>("cp @INGAME_TOOK_IMPERIAL_SECURITY_KEY");
 					G_AddEvent( other, EV_ITEM_PICKUP, (FindItemForInventory( INV_SECURITY_KEY )-bg_itemlist) );
 				}
 				else
 				{
-					text = "cp @INGAME_CANT_CARRY_SECURITY_KEY";
+					text = const_cast<char*>("cp @INGAME_CANT_CARRY_SECURITY_KEY");
 				}
 			}
 			if ( keyTaken )

@@ -345,7 +345,7 @@ static void DrawTris (shaderCommands_t *input)
 		if ( qglLockArraysEXT )
 		{
 			qglLockArraysEXT( 0, input->numVertexes );
-			GLimp_LogComment( "glLockArraysEXT\n" );
+			GLimp_LogComment(const_cast<char*>("glLockArraysEXT\n") );
 		}
 
 		R_DrawElements( input->numIndexes, input->indexes );
@@ -353,7 +353,7 @@ static void DrawTris (shaderCommands_t *input)
 		if ( qglUnlockArraysEXT )
 		{
 			qglUnlockArraysEXT( );
-			GLimp_LogComment( "glUnlockArraysEXT\n" );
+			GLimp_LogComment(const_cast<char*>("glUnlockArraysEXT\n") );
 		}
 
 		qglDisable( GL_POLYGON_OFFSET_LINE );
@@ -371,14 +371,14 @@ static void DrawTris (shaderCommands_t *input)
 
 		if (qglLockArraysEXT) {
 			qglLockArraysEXT(0, input->numVertexes);
-			GLimp_LogComment( "glLockArraysEXT\n" );
+			GLimp_LogComment(const_cast<char*>("glLockArraysEXT\n") );
 		}
 
 		R_DrawElements( input->numIndexes, input->indexes );
 
 		if (qglUnlockArraysEXT) {
 			qglUnlockArraysEXT();
-			GLimp_LogComment( "glUnlockArraysEXT\n" );
+			GLimp_LogComment(const_cast<char*>("glUnlockArraysEXT\n") );
 		}
 
 		qglDepthRange( 0, 1 );
@@ -889,7 +889,7 @@ static void ProjectDlightTexture2( void ) {
 			if (qglUnlockArraysEXT)
 			{
 				qglUnlockArraysEXT();
-				GLimp_LogComment( "glUnlockArraysEXT\n" );
+				GLimp_LogComment(const_cast<char*>("glUnlockArraysEXT\n") );
 			}
 		}
 		qglVertexPointer (3, GL_FLOAT, 16, vertCoordsArray);	// padded for SIMD
@@ -981,7 +981,7 @@ static void ProjectDlightTexture2( void ) {
 		if (qglLockArraysEXT)
 		{
 			qglLockArraysEXT(0, tess.numVertexes);
-			GLimp_LogComment( "glLockArraysEXT\n" );
+			GLimp_LogComment(const_cast<char*>("glLockArraysEXT\n") );
 		}
 	}
 }
@@ -2109,7 +2109,7 @@ void RB_StageIteratorGeneric( void )
 	if (qglLockArraysEXT)
 	{
 		qglLockArraysEXT(0, input->numVertexes);
-		GLimp_LogComment( "glLockArraysEXT\n" );
+		GLimp_LogComment(const_cast<char*>("glLockArraysEXT\n") );
 	}
 
 	//
@@ -2159,7 +2159,7 @@ void RB_StageIteratorGeneric( void )
 	if (qglUnlockArraysEXT)
 	{
 		qglUnlockArraysEXT();
-		GLimp_LogComment( "glUnlockArraysEXT\n" );
+		GLimp_LogComment(const_cast<char*>("glUnlockArraysEXT\n") );
 	}
 
 	//
@@ -2285,6 +2285,6 @@ void RB_EndSurface( void ) {
 	// clear shader so we can tell we don't have any unclosed surfaces
 	tess.numIndexes = 0;
 
-	GLimp_LogComment( "----------\n" );
+	GLimp_LogComment(const_cast<char*>("----------\n") );
 }
 

@@ -38,7 +38,7 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 #include "cg_media.h"
 
-#include "qcommon/safe/string.h"
+#include "../../shared/qcommon/safe/string.h"
 #include <cmath>
 
 
@@ -270,7 +270,7 @@ int CFxScheduler::ParseEffect( const char *file, const CGPGroup& base )
 
 	for( const auto& primitiveGroup : base.GetSubGroups() )
 	{
-		static std::map< gsl::cstring_view, EPrimType, Q::CStringViewILess > primitiveTypes{
+		static std::map< std::string_view, EPrimType, Q::CStringViewILess > primitiveTypes{
 			{ CSTRING_VIEW( "particle" ), Particle },
 			{ CSTRING_VIEW( "line" ), Line },
 			{ CSTRING_VIEW( "tail" ), Tail },

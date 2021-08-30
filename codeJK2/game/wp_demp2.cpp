@@ -44,7 +44,7 @@ static void WP_DEMP2_MainFire( gentity_t *ent )
 
 	gentity_t *missile = CreateMissile( start, wpFwd, DEMP2_VELOCITY, 10000, ent );
 
-	missile->classname = "demp2_proj";
+	missile->classname = const_cast<char*>("demp2_proj");
 	missile->s.weapon = WP_DEMP2;
 
 	// Do the damages
@@ -227,7 +227,7 @@ static void WP_DEMP2_AltFire( gentity_t *ent )
 //	missile->speed = missile->nextthink;
 	VectorCopy( tr.plane.normal, missile->pos1 );
 
-	missile->classname = "demp2_alt_proj";
+	missile->classname = const_cast<char*>("demp2_alt_proj");
 	missile->s.weapon = WP_DEMP2;
 
 	missile->e_ThinkFunc = thinkF_DEMP2_AltDetonate;

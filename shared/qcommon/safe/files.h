@@ -3,8 +3,8 @@
 #include <cstddef>
 #include <cassert>
 
-#include "qcommon/q_platform.h"
-#include "qcommon/safe/gsl.h"
+#include "../q_platform.h"
+#include "gsl.h"
 
 /**
 @file RAII C++ bindings for filesystem operations
@@ -44,9 +44,9 @@ namespace FS
 		{
 			return _buffer != nullptr;
 		}
-		gsl::cstring_view view() const NOEXCEPT
+		std::string_view view() const NOEXCEPT
 		{
-			return{ begin(), end() };
+			return std::string_view(begin(), end());
 		}
 
 	private:

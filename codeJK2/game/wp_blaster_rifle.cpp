@@ -56,7 +56,7 @@ static void WP_FireBlasterMissile( gentity_t *ent, vec3_t start, vec3_t dir, qbo
 
 	gentity_t *missile = CreateMissile( start, dir, velocity, 10000, ent, altFire );
 
-	missile->classname = "blaster_proj";
+	missile->classname = const_cast<char*>("blaster_proj");
 	missile->s.weapon = WP_BLASTER;
 
 	// Do the damages

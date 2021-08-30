@@ -698,7 +698,7 @@ void G_InitGentity( gentity_t *e )
 {
 	e->inuse = qtrue;
 	SetInUse(e);
-	e->classname = "noclass";
+	e->classname = const_cast<char*>("noclass");
 	e->s.number = e - g_entities;
 
 	ICARUS_FreeEnt( e );	//ICARUS information must be added after this point
@@ -834,7 +834,7 @@ void G_FreeEntity( gentity_t *ed ) {
 	//			trouble!!!  Change it to set the s.number to the proper index
 	//			(ed - g_entities) *OR* ENTITYNUM_NONE!!!
 	ed->s.number = ENTITYNUM_NONE;
-	ed->classname = "freed";
+	ed->classname = const_cast<char*>("freed");
 	ed->freetime = level.time;
 	ed->inuse = qfalse;
 	ClearInUse(ed);
@@ -856,7 +856,7 @@ gentity_t *G_TempEntity( vec3_t origin, int event ) {
 	e = G_Spawn();
 	e->s.eType = ET_EVENTS + event;
 
-	e->classname = "tempEntity";
+	e->classname = const_cast<char*>("tempEntity");
 	e->eventTime = level.time;
 	e->freeAfterEvent = qtrue;
 
@@ -1518,7 +1518,7 @@ void G_SetBoltSurfaceRemoval( const int entNum, const int modelIndex, const int 
 
 	e = G_Spawn();
 
-	e->classname = "BoltRemoval";
+	e->classname = const_cast<char*>("BoltRemoval");
 	e->cantHitEnemyCounter = entNum;
 	e->damage = modelIndex;
 	e->attackDebounceTime = boltIndex;

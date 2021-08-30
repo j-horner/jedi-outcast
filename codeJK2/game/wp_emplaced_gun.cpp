@@ -38,7 +38,7 @@ void WP_EmplacedFire( gentity_t *ent )
 
 	gentity_t	*missile = CreateMissile( wpMuzzle, wpFwd, vel, 10000, ent );
 
-	missile->classname = "emplaced_proj";
+	missile->classname = const_cast<char*>("emplaced_proj");
 	missile->s.weapon = WP_EMPLACED_GUN;
 
 	missile->damage = damage; 

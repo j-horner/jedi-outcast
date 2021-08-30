@@ -384,7 +384,7 @@ void fx_explosion_trail_use( gentity_t *self, gentity_t *other, gentity_t *activ
 	// We aren't a missile in the truest sense, rather we just move through the world and spawn effects
 	if ( missile )
 	{
-		missile->classname = "fx_exp_trail";
+		missile->classname = const_cast<char*>("fx_exp_trail");
 
 		missile->nextthink = level.time + 50;
 		missile->e_ThinkFunc = thinkF_fx_explosion_trail_think;

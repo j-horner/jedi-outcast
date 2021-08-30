@@ -2434,7 +2434,7 @@ void FS_Dir_f( void ) {
 
 	if ( Cmd_Argc() == 2 ) {
 		path = Cmd_Argv( 1 );
-		extension = "";
+		extension = const_cast<char*>("");
 	} else {
 		path = Cmd_Argv( 1 );
 		extension = Cmd_Argv( 2 );

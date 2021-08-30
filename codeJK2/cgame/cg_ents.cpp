@@ -786,7 +786,7 @@ Ghoul2 Insert End
 
 		AngleVectors( cent->lerpAngles, dir, NULL, NULL );
 
-		CG_GetTagWorldPosition( &ent, "tag_flash", org, axis );
+		CG_GetTagWorldPosition( &ent, const_cast<char*>("tag_flash"), org, axis );
 
 		theFxScheduler.PlayEffect( "env/light_cone", org, axis[0] );
 

@@ -286,7 +286,7 @@ void Seeker_Fire( void )
 
 	G_PlayEffect( "blaster/muzzle_flash", NPC->currentOrigin, dir );
 
-	missile->classname = "blaster";
+	missile->classname = const_cast<char*>("blaster");
 	missile->s.weapon = WP_BLASTER;
 
 	missile->damage = 5;

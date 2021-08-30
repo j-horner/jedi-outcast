@@ -949,7 +949,7 @@ Use_BinaryMover
 void Use_BinaryMover( gentity_t *ent, gentity_t *other, gentity_t *activator )
 {
 	int	key;
-	char *text;
+	const char *text;
 
 	if ( ent->e_UseFunc == useF_NULL )
 	{//I cannot be used anymore, must be a door with a wait of -1 that's opened.
@@ -1256,7 +1256,7 @@ void Think_SpawnNewDoorTrigger( gentity_t *ent )
 	other->contents = CONTENTS_TRIGGER;
 	other->e_TouchFunc = touchF_Touch_DoorTrigger;
 	gi.linkentity (other);
-	other->classname = "trigger_door";
+	other->classname = const_cast<char*>("trigger_door");
 
 	MatchTeam( ent, ent->moverState, level.time );
 }

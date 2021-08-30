@@ -187,7 +187,7 @@ void Mark2_FireBlaster(qboolean advance)
 
 	missile = CreateMissile( muzzle1, forward, 1600, 10000, NPC );
 
-	missile->classname = "bryar_proj";
+	missile->classname = const_cast<char*>("bryar_proj");
 	missile->s.weapon = WP_BRYAR_PISTOL;
 
 	missile->damage = 1;

@@ -64,7 +64,7 @@ void WP_FireBryarPistol( gentity_t *ent, qboolean alt_fire )
 
 	gentity_t	*missile = CreateMissile( start, wpFwd, BRYAR_PISTOL_VEL, 10000, ent, alt_fire );
 
-	missile->classname = "bryar_proj";
+	missile->classname = const_cast<char*>("bryar_proj");
 	missile->s.weapon = WP_BRYAR_PISTOL;
 
 	if ( alt_fire )

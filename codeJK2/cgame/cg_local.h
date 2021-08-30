@@ -505,7 +505,7 @@ Ghoul2 Insert End
 
 #define MAX_SHOWPOWERS 7
 extern int showPowers[MAX_SHOWPOWERS]; 
-extern char *showPowersName[MAX_SHOWPOWERS];
+extern const char *showPowersName[MAX_SHOWPOWERS];
 extern int force_icons[NUM_FORCE_POWERS];
 #define MAX_DPSHOWPOWERS 11
 

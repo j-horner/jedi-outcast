@@ -74,7 +74,7 @@ Targets will be fired when someone spawns in on them.
 equivalant to info_player_deathmatch
 */
 void SP_info_player_start(gentity_t *ent) {
-	ent->classname = "info_player_deathmatch";
+	ent->classname = const_cast<char*>("info_player_deathmatch");
 
 	ent->spawnflags |= 1;	// James suggests force-ORing the KEEP_PREV flag in for now
 
@@ -1402,7 +1402,7 @@ void G_DriveATST( gentity_t *ent, gentity_t *atst )
 		{
 			gi.G2API_RemoveGhoul2Model( ent->ghoul2, ent->playerModel );
 		}
-		ent->NPC_type = "kyle";
+		ent->NPC_type = const_cast<char*>("kyle");
 		ent->client->NPC_class = CLASS_KYLE;
 		ent->flags &= ~FL_SHIELDED;
 		ent->client->ps.eFlags &= ~EF_IN_ATST;
@@ -1430,7 +1430,7 @@ void G_DriveATST( gentity_t *ent, gentity_t *atst )
 	}
 	else
 	{//become an atst
-		ent->NPC_type = "atst";
+		ent->NPC_type = const_cast<char*>("atst");
 		ent->client->NPC_class = CLASS_ATST;
 		ent->client->ps.eFlags |= EF_IN_ATST;
 		ent->flags |= FL_SHIELDED;
@@ -1616,8 +1616,8 @@ qboolean ClientSpawn(gentity_t *ent, SavedGameJustLoaded_e eSavedGameJustLoaded 
 		ent->takedamage = qtrue;
 		ent->inuse = qtrue;
 		SetInUse(ent);
-		ent->classname = "player";
-		client->squadname = ent->targetname = ent->script_targetname = ent->NPC_type = "kyle";
+		ent->classname = const_cast<char*>("player");
+		client->squadname = ent->targetname = ent->script_targetname = ent->NPC_type = const_cast<char*>("kyle");
 		if ( ent->client->NPC_class == CLASS_NONE )
 		{
 			ent->client->NPC_class = CLASS_KYLE;
@@ -1842,7 +1842,7 @@ void ClientDisconnect( int clientNum ) {
 	ent->s.modelindex = 0;
 	ent->inuse = qfalse;
 	ClearInUse(ent);
-	ent->classname = "disconnected";
+	ent->classname = const_cast<char*>("disconnected");
 	ent->client->pers.connected = CON_DISCONNECTED;
 	ent->client->ps.persistant[PERS_TEAM] = TEAM_FREE;
 

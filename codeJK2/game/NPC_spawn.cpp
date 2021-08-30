@@ -43,7 +43,7 @@ extern void Jedi_Cloak( gentity_t *self );
 extern void G_MatchPlayerWeapon( gentity_t *ent );
 extern void Q3_SetParm (int entID, int parmNum, const char *parmValue);
 extern team_t TranslateTeamName( const char *name );
-extern char	*TeamNames[TEAM_NUM_TEAMS];
+extern const char	*TeamNames[TEAM_NUM_TEAMS];
 
 //extern void CG_ShimmeryThing_Spawner( vec3_t start, vec3_t end, float radius, qboolean taper, int duration );
 extern void Q3_DebugPrint( int level, const char *format, ... );
@@ -905,7 +905,7 @@ void NPC_Begin (gentity_t *ent)
 	ent->takedamage = qtrue;
 	ent->inuse = qtrue;
 	SetInUse(ent);
-	ent->classname = "NPC";
+	ent->classname = const_cast<char*>("NPC");
 //	if ( ent->client->race == RACE_HOLOGRAM )
 //	{//can shoot through holograms, but not walk through them
 //		ent->contents = CONTENTS_PLAYERCLIP|CONTENTS_MONSTERCLIP|CONTENTS_ITEM;//contents_corspe to make them show up in ID and use traces
@@ -1218,7 +1218,7 @@ void NPC_Spawn_Go( gentity_t *ent )
 		return;
 	}
 
-	newent->NPC->tempGoal->classname = "NPC_goal";
+	newent->NPC->tempGoal->classname = const_cast<char*>("NPC_goal");
 	newent->NPC->tempGoal->owner = newent;
 	newent->NPC->tempGoal->svFlags |= SVF_NOCLIENT;
 
@@ -1237,7 +1237,7 @@ void NPC_Spawn_Go( gentity_t *ent )
 
 	if ( ent->NPC_type == NULL ) 
 	{
-		ent->NPC_type = "random";
+		ent->NPC_type = const_cast<char*>("random");
 	}
 	else
 	{
@@ -1290,7 +1290,7 @@ void NPC_Spawn_Go( gentity_t *ent )
 				}
 			}
 			newent->NPC->defaultBehavior = newent->NPC->behaviorState = BS_WAIT;
-			newent->classname = "NPC";
+			newent->classname = const_cast<char*>("NPC");
 	//		newent->svFlags |= SVF_NOPUSH;
 		}
 	}
@@ -1313,7 +1313,7 @@ void NPC_Spawn_Go( gentity_t *ent )
 		}
 	}
 
-	newent->classname = "NPC";
+	newent->classname = const_cast<char*>("NPC");
 	newent->NPC_type = ent->NPC_type;
 	gi.unlinkentity(newent);
 	
@@ -1566,7 +1566,7 @@ void SP_NPC_spawner( gentity_t *self)
 	if ( !self->fullName || !self->fullName[0] )
 	{
 		//FIXME: make an index into an external string table for localization
-		self->fullName = "Humanoid Lifeform";
+		self->fullName = const_cast<char*>("Humanoid Lifeform");
 	}
 
 	//register/precache the models needed for this NPC, not anymore
@@ -1721,7 +1721,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Kyle( gentity_t *self)
 {
-	self->NPC_type = "Kyle";
+	self->NPC_type = const_cast<char*>("Kyle");
 
 	WP_SetSaberModel( NULL, CLASS_KYLE );
 
@@ -1737,7 +1737,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Lando( gentity_t *self)
 {
-	self->NPC_type = "Lando";
+	self->NPC_type = const_cast<char*>("Lando");
 
 	SP_NPC_spawner( self );
 }
@@ -1751,7 +1751,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Jan( gentity_t *self)
 {
-	self->NPC_type = "Jan";
+	self->NPC_type = const_cast<char*>("Jan");
 
 	SP_NPC_spawner( self );
 }
@@ -1765,7 +1765,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Luke( gentity_t *self)
 {
-	self->NPC_type = "Luke";
+	self->NPC_type = const_cast<char*>("Luke");
 
 	WP_SetSaberModel( NULL, CLASS_LUKE );
 
@@ -1781,7 +1781,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_MonMothma( gentity_t *self)
 {
-	self->NPC_type = "MonMothma";
+	self->NPC_type = const_cast<char*>("MonMothma");
 
 	SP_NPC_spawner( self );
 }
@@ -1795,7 +1795,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Tavion( gentity_t *self)
 {
-	self->NPC_type = "Tavion";
+	self->NPC_type = const_cast<char*>("Tavion");
 
 	WP_SetSaberModel( NULL, CLASS_TAVION );
 
@@ -1811,7 +1811,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Reelo( gentity_t *self)
 {
-	self->NPC_type = "Reelo";
+	self->NPC_type = const_cast<char*>("Reelo");
 
 	SP_NPC_spawner( self );
 }
@@ -1829,12 +1829,12 @@ void SP_NPC_Galak( gentity_t *self)
 {
 	if ( self->spawnflags & 1 )
 	{
-		self->NPC_type = "Galak_Mech";
+		self->NPC_type = const_cast<char*>("Galak_Mech");
 		NPC_GalakMech_Precache();
 	}
 	else
 	{
-		self->NPC_type = "Galak";
+		self->NPC_type = const_cast<char*>("Galak");
 	}
 
 	SP_NPC_spawner( self );
@@ -1849,7 +1849,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Desann( gentity_t *self)
 {
-	self->NPC_type = "Desann";
+	self->NPC_type = const_cast<char*>("Desann");
 
 	WP_SetSaberModel( NULL, CLASS_DESANN );
 
@@ -1865,7 +1865,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Bartender( gentity_t *self)
 {
-	self->NPC_type = "Bartender";
+	self->NPC_type = const_cast<char*>("Bartender");
 
 	SP_NPC_spawner( self );
 }
@@ -1879,7 +1879,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_MorganKatarn( gentity_t *self)
 {
-	self->NPC_type = "MorganKatarn";
+	self->NPC_type = const_cast<char*>("MorganKatarn");
 
 	SP_NPC_spawner( self );
 }
@@ -1904,7 +1904,7 @@ void SP_NPC_Jedi( gentity_t *self)
 	{
 		if ( self->spawnflags & 1 )
 		{
-			self->NPC_type = "jeditrainer";
+			self->NPC_type = const_cast<char*>("jeditrainer");
 		}
 		else 
 		{
@@ -1916,11 +1916,11 @@ void SP_NPC_Jedi( gentity_t *self)
 			else 
 			*/if ( Q_irand( 0, 1 ) )
 			{
-				self->NPC_type = "Jedi";
+				self->NPC_type = const_cast<char*>("Jedi");
 			}
 			else
 			{
-				self->NPC_type = "Jedi2";
+				self->NPC_type = const_cast<char*>("Jedi2");
 			}
 		}
 	}
@@ -1943,11 +1943,11 @@ void SP_NPC_Prisoner( gentity_t *self)
 	{
 		if ( Q_irand( 0, 1 ) )
 		{
-			self->NPC_type = "Prisoner";
+			self->NPC_type = const_cast<char*>("Prisoner");
 		}
 		else
 		{
-			self->NPC_type = "Prisoner2";
+			self->NPC_type = const_cast<char*>("Prisoner2");
 		}
 	}
 
@@ -1967,11 +1967,11 @@ void SP_NPC_Rebel( gentity_t *self)
 	{
 		if ( Q_irand( 0, 1 ) )
 		{
-			self->NPC_type = "Rebel";
+			self->NPC_type = const_cast<char*>("Rebel");
 		}
 		else
 		{
-			self->NPC_type = "Rebel2";
+			self->NPC_type = const_cast<char*>("Rebel2");
 		}
 	}
 
@@ -2000,29 +2000,29 @@ void SP_NPC_Stormtrooper( gentity_t *self)
 {
 	if ( self->spawnflags & 8 )
 	{//rocketer
-		self->NPC_type = "rockettrooper";
+		self->NPC_type = const_cast<char*>("rockettrooper");
 	}
 	else if ( self->spawnflags & 4 )
 	{//alt-officer
-		self->NPC_type = "stofficeralt";
+		self->NPC_type = const_cast<char*>("stofficeralt");
 	}
 	else if ( self->spawnflags & 2 )
 	{//commander
-		self->NPC_type = "stcommander";
+		self->NPC_type = const_cast<char*>("stcommander");
 	}
 	else if ( self->spawnflags & 1 )
 	{//officer
-		self->NPC_type = "stofficer";
+		self->NPC_type = const_cast<char*>("stofficer");
 	}
 	else
 	{//regular trooper
 		if ( Q_irand( 0, 1 ) )
 		{
-			self->NPC_type = "StormTrooper";
+			self->NPC_type = const_cast<char*>("StormTrooper");
 		}
 		else
 		{
-			self->NPC_type = "StormTrooper2";
+			self->NPC_type = const_cast<char*>("StormTrooper2");
 		}
 	}
 
@@ -2044,7 +2044,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Tie_Pilot( gentity_t *self)
 {
-	self->NPC_type = "stormpilot";
+	self->NPC_type = const_cast<char*>("stormpilot");
 
 	SP_NPC_spawner( self );
 }
@@ -2062,11 +2062,11 @@ void SP_NPC_Ugnaught( gentity_t *self)
 	{
 		if ( Q_irand( 0, 1 ) )
 		{
-			self->NPC_type = "Ugnaught";
+			self->NPC_type = const_cast<char*>("Ugnaught");
 		}
 		else
 		{
-			self->NPC_type = "Ugnaught2";
+			self->NPC_type = const_cast<char*>("Ugnaught2");
 		}
 	}
 
@@ -2090,21 +2090,21 @@ void SP_NPC_Gran( gentity_t *self)
 	{
 		if ( self->spawnflags & 1 )
 		{
-			self->NPC_type = "granshooter";
+			self->NPC_type = const_cast<char*>("granshooter");
 		}
 		else if ( self->spawnflags & 2 )
 		{
-			self->NPC_type = "granboxer";
+			self->NPC_type = const_cast<char*>("granboxer");
 		}
 		else
 		{
 			if ( Q_irand( 0, 1 ) )
 			{
-				self->NPC_type = "gran";
+				self->NPC_type = const_cast<char*>("gran");
 			}
 			else
 			{
-				self->NPC_type = "gran2";
+				self->NPC_type = const_cast<char*>("gran2");
 			}
 		}
 	}
@@ -2127,11 +2127,11 @@ void SP_NPC_Rodian( gentity_t *self)
 	{
 		if ( self->spawnflags&1 )
 		{
-			self->NPC_type = "rodian2";
+			self->NPC_type = const_cast<char*>("rodian2");
 		}
 		else
 		{
-			self->NPC_type = "rodian";
+			self->NPC_type = const_cast<char*>("rodian");
 		}
 	}
 
@@ -2152,16 +2152,16 @@ void SP_NPC_Weequay( gentity_t *self)
 		switch ( Q_irand( 0, 3 ) )
 		{
 		case 0:
-			self->NPC_type = "Weequay";
+			self->NPC_type = const_cast<char*>("Weequay");
 			break;
 		case 1:
-			self->NPC_type = "Weequay2";
+			self->NPC_type = const_cast<char*>("Weequay2");
 			break;
 		case 2:
-			self->NPC_type = "Weequay3";
+			self->NPC_type = const_cast<char*>("Weequay3");
 			break;
 		case 3:
-			self->NPC_type = "Weequay4";
+			self->NPC_type = const_cast<char*>("Weequay4");
 			break;
 		}
 	}
@@ -2180,7 +2180,7 @@ void SP_NPC_Trandoshan( gentity_t *self)
 {
 	if ( !self->NPC_type )
 	{
-		self->NPC_type = "Trandoshan";
+		self->NPC_type = const_cast<char*>("Trandoshan");
 	}
 
 	SP_NPC_spawner( self );
@@ -2200,11 +2200,11 @@ void SP_NPC_SwampTrooper( gentity_t *self)
 	{
 		if ( self->spawnflags & 1 )
 		{
-			self->NPC_type = "SwampTrooper2";
+			self->NPC_type = const_cast<char*>("SwampTrooper2");
 		}
 		else
 		{
-			self->NPC_type = "SwampTrooper";
+			self->NPC_type = const_cast<char*>("SwampTrooper");
 		}
 	}
 
@@ -2232,15 +2232,15 @@ void SP_NPC_Imperial( gentity_t *self)
 	{
 		if ( self->spawnflags & 1 )
 		{
-			self->NPC_type = "ImpOfficer";
+			self->NPC_type = const_cast<char*>("ImpOfficer");
 		}
 		else if ( self->spawnflags & 2 )
 		{
-			self->NPC_type = "ImpCommander";
+			self->NPC_type = const_cast<char*>("ImpCommander");
 		}
 		else
 		{
-			self->NPC_type = "Imperial";
+			self->NPC_type = const_cast<char*>("Imperial");
 		}
 	}
 
@@ -2272,15 +2272,15 @@ void SP_NPC_ImpWorker( gentity_t *self)
 	{
 		if ( !Q_irand( 0, 2 ) )
 		{
-			self->NPC_type = "ImpWorker";
+			self->NPC_type = const_cast<char*>("ImpWorker");
 		}
 		else if ( Q_irand( 0, 1 ) )
 		{
-			self->NPC_type = "ImpWorker2";
+			self->NPC_type = const_cast<char*>("ImpWorker2");
 		}
 		else
 		{
-			self->NPC_type = "ImpWorker3";
+			self->NPC_type = const_cast<char*>("ImpWorker3");
 		}
 	}
 
@@ -2300,11 +2300,11 @@ void SP_NPC_BespinCop( gentity_t *self)
 	{
 		if ( !Q_irand( 0, 1 ) )
 		{
-			self->NPC_type = "BespinCop";
+			self->NPC_type = const_cast<char*>("BespinCop");
 		}
 		else
 		{
-			self->NPC_type = "BespinCop2";
+			self->NPC_type = const_cast<char*>("BespinCop2");
 		}
 	}
 
@@ -2334,23 +2334,23 @@ void SP_NPC_Reborn( gentity_t *self)
 	{
 		if ( self->spawnflags & 1 )
 		{
-			self->NPC_type = "rebornforceuser";
+			self->NPC_type = const_cast<char*>("rebornforceuser");
 		}
 		else if ( self->spawnflags & 2 )
 		{
-			self->NPC_type = "rebornfencer";
+			self->NPC_type = const_cast<char*>("rebornfencer");
 		}
 		else if ( self->spawnflags & 4 )
 		{
-			self->NPC_type = "rebornacrobat";
+			self->NPC_type = const_cast<char*>("rebornacrobat");
 		}
 		else if ( self->spawnflags & 8 )
 		{
-			self->NPC_type = "rebornboss";
+			self->NPC_type = const_cast<char*>("rebornboss");
 		}
 		else
 		{
-			self->NPC_type = "reborn";
+			self->NPC_type = const_cast<char*>("reborn");
 		}
 	}
 	
@@ -2371,11 +2371,11 @@ void SP_NPC_ShadowTrooper( gentity_t *self)
 	{
 		if ( !Q_irand( 0, 1 ) )
 		{
-			self->NPC_type = "ShadowTrooper";
+			self->NPC_type = const_cast<char*>("ShadowTrooper");
 		}
 		else
 		{
-			self->NPC_type = "ShadowTrooper2";
+			self->NPC_type = const_cast<char*>("ShadowTrooper2");
 		}
 	}
 	
@@ -2397,7 +2397,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Monster_Murjj( gentity_t *self)
 {
-	self->NPC_type = "Murjj";
+	self->NPC_type = const_cast<char*>("Murjj");
 
 	SP_NPC_spawner( self );
 }
@@ -2411,7 +2411,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Monster_Swamp( gentity_t *self)
 {
-	self->NPC_type = "Swamp";
+	self->NPC_type = const_cast<char*>("Swamp");
 
 	SP_NPC_spawner( self );
 }
@@ -2425,7 +2425,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Monster_Howler( gentity_t *self)
 {
-	self->NPC_type = "howler";
+	self->NPC_type = const_cast<char*>("howler");
 
 	SP_NPC_spawner( self );
 }
@@ -2439,7 +2439,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_MineMonster( gentity_t *self)
 {
-	self->NPC_type = "minemonster";
+	self->NPC_type = const_cast<char*>("minemonster");
 
 	SP_NPC_spawner( self );
 	NPC_MineMonster_Precache();
@@ -2454,7 +2454,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Monster_Claw( gentity_t *self)
 {
-	self->NPC_type = "Claw";
+	self->NPC_type = const_cast<char*>("Claw");
 
 	SP_NPC_spawner( self );
 }
@@ -2468,7 +2468,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Monster_Glider( gentity_t *self)
 {
-	self->NPC_type = "Glider";
+	self->NPC_type = const_cast<char*>("Glider");
 
 	SP_NPC_spawner( self );
 }
@@ -2482,7 +2482,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Monster_Flier2( gentity_t *self)
 {
-	self->NPC_type = "Flier2";
+	self->NPC_type = const_cast<char*>("Flier2");
 
 	SP_NPC_spawner( self );
 }
@@ -2496,7 +2496,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Monster_Lizard( gentity_t *self)
 {
-	self->NPC_type = "Lizard";
+	self->NPC_type = const_cast<char*>("Lizard");
 
 	SP_NPC_spawner( self );
 }
@@ -2510,7 +2510,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Monster_Fish( gentity_t *self)
 {
-	self->NPC_type = "Fish";
+	self->NPC_type = const_cast<char*>("Fish");
 
 	SP_NPC_spawner( self );
 }
@@ -2528,7 +2528,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Droid_Interrogator( gentity_t *self)
 {
-	self->NPC_type = "interrogator";
+	self->NPC_type = const_cast<char*>("interrogator");
 
 	SP_NPC_spawner( self );
 
@@ -2546,7 +2546,7 @@ Imperial Probe Droid - the multilegged floating droid that Han and Chewie shot o
 */
 void SP_NPC_Droid_Probe( gentity_t *self)
 {
-	self->NPC_type = "probe";
+	self->NPC_type = const_cast<char*>("probe");
 
 	SP_NPC_spawner( self );
 
@@ -2565,7 +2565,7 @@ Big walking droid
 */
 void SP_NPC_Droid_Mark1( gentity_t *self)
 {
-	self->NPC_type = "mark1";
+	self->NPC_type = const_cast<char*>("mark1");
 
 	SP_NPC_spawner( self );
 
@@ -2584,7 +2584,7 @@ Small rolling droid with one gun.
 */
 void SP_NPC_Droid_Mark2( gentity_t *self)
 {
-	self->NPC_type = "mark2";
+	self->NPC_type = const_cast<char*>("mark2");
 
 	SP_NPC_spawner( self );
 
@@ -2600,7 +2600,7 @@ SHY - Spawner is shy
 */
 void SP_NPC_Droid_ATST( gentity_t *self)
 {
-	self->NPC_type = "atst";
+	self->NPC_type = const_cast<char*>("atst");
 
 	SP_NPC_spawner( self );
 
@@ -2618,7 +2618,7 @@ Remote Droid - the floating round droid used by Obi Wan to train Luke about the 
 */
 void SP_NPC_Droid_Remote( gentity_t *self)
 {
-	self->NPC_type = "remote";
+	self->NPC_type = const_cast<char*>("remote");
 
 	SP_NPC_spawner( self );
 
@@ -2636,7 +2636,7 @@ Seeker Droid - floating round droids that shadow troopers spawn
 */
 void SP_NPC_Droid_Seeker( gentity_t *self)
 {
-	self->NPC_type = "seeker";
+	self->NPC_type = const_cast<char*>("seeker");
 
 	SP_NPC_spawner( self );
 
@@ -2654,7 +2654,7 @@ Sentry Droid - Large, armored floating Imperial droids with 3 forward-facing gun
 */
 void SP_NPC_Droid_Sentry( gentity_t *self)
 {
-	self->NPC_type = "sentry";
+	self->NPC_type = const_cast<char*>("sentry");
 
 	SP_NPC_spawner( self );
 
@@ -2674,7 +2674,7 @@ NOTARGET by default
 */
 void SP_NPC_Droid_Gonk( gentity_t *self)
 {
-	self->NPC_type = "gonk";
+	self->NPC_type = const_cast<char*>("gonk");
 
 	SP_NPC_spawner( self );
 
@@ -2695,7 +2695,7 @@ NOTARGET by default
 */
 void SP_NPC_Droid_Mouse( gentity_t *self)
 {
-	self->NPC_type = "mouse";
+	self->NPC_type = const_cast<char*>("mouse");
 
 	SP_NPC_spawner( self );
 
@@ -2719,11 +2719,11 @@ void SP_NPC_Droid_R2D2( gentity_t *self)
 {
 	if ( self->spawnflags&1 )
 	{//imperial skin
-		self->NPC_type = "r2d2_imp";
+		self->NPC_type = const_cast<char*>("r2d2_imp");
 	}
 	else
 	{
-		self->NPC_type = "r2d2";
+		self->NPC_type = const_cast<char*>("r2d2");
 	}
 
 	SP_NPC_spawner( self );
@@ -2747,11 +2747,11 @@ void SP_NPC_Droid_R5D2( gentity_t *self)
 {
 	if ( self->spawnflags&1 )
 	{//imperial skin
-		self->NPC_type = "r5d2_imp";
+		self->NPC_type = const_cast<char*>("r5d2_imp");
 	}
 	else
 	{
-		self->NPC_type = "r5d2";
+		self->NPC_type = const_cast<char*>("r5d2");
 	}
 
 	SP_NPC_spawner( self );
@@ -2772,11 +2772,11 @@ void SP_NPC_Droid_Protocol( gentity_t *self)
 {
 	if ( self->spawnflags&1 )
 	{//imperial skin
-		self->NPC_type = "protocol_imp";
+		self->NPC_type = const_cast<char*>("protocol_imp");
 	}
 	else
 	{
-		self->NPC_type = "protocol";
+		self->NPC_type = const_cast<char*>("protocol");
 	}
 
 	SP_NPC_spawner( self );

@@ -304,17 +304,17 @@ void CG_MiscModelExplosion( vec3_t mins, vec3_t maxs, int size, material_t chunk
 	switch( chunkType )
 	{
 	case MAT_GLASS:
-		effect = "chunks/glassbreak";
+		effect = const_cast<char*>("chunks/glassbreak");
 		ct = 5;
 		break;
 	case MAT_GLASS_METAL:
-		effect = "chunks/glassbreak";
-		effect2 = "chunks/metalexplode";
+		effect = const_cast<char*>("chunks/glassbreak");
+		effect2 = const_cast<char*>("chunks/metalexplode");
 		ct = 5;
 		break;
 	case MAT_ELECTRICAL:
 	case MAT_ELEC_METAL:
-		effect = "chunks/sparkexplode";
+		effect = const_cast<char*>("chunks/sparkexplode");
 		ct = 5;
 		break;
 	case MAT_METAL:
@@ -322,16 +322,16 @@ void CG_MiscModelExplosion( vec3_t mins, vec3_t maxs, int size, material_t chunk
 	case MAT_METAL3:
 	case MAT_CRATE1:
 	case MAT_CRATE2:
-		effect = "chunks/metalexplode";
+		effect = const_cast<char*>("chunks/metalexplode");
 		ct = 2;
 		break;
 	case MAT_GRATE1:
-		effect = "chunks/grateexplode";
+		effect = const_cast<char*>("chunks/grateexplode");
 		ct = 8;
 		break;
 	case MAT_ROPE:
 		ct = 20;
-		effect = "chunks/ropebreak";
+		effect = const_cast<char*>("chunks/ropebreak");
 		break;
 	case MAT_WHITE_METAL: //not sure what this crap is really supposed to be..
 	case MAT_DRK_STONE:
@@ -340,11 +340,11 @@ void CG_MiscModelExplosion( vec3_t mins, vec3_t maxs, int size, material_t chunk
 		switch( size )
 		{
 		case 2:
-			effect = "chunks/rockbreaklg";
+			effect = const_cast<char*>("chunks/rockbreaklg");
 			break;
 		case 1:
 		default:
-			effect = "chunks/rockbreakmed";
+			effect = const_cast<char*>("chunks/rockbreakmed");
 			break;
 		}
 	default:

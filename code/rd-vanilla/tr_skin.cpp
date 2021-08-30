@@ -94,7 +94,7 @@ static char *CommaParse( char **data_p ) {
 	}
 
 	if ( c == 0 ) {
-		return "";
+		return const_cast<char*>("");
 	}
 
 	// handle quoted strings

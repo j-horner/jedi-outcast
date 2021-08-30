@@ -1090,7 +1090,7 @@ Key_CompleteUnbind
 static void Key_CompleteUnbind( char *args, int argNum ) {
 	if ( argNum == 2 ) {
 		// Skip "unbind "
-		char *p = Com_SkipTokens( args, 1, " " );
+		char *p = Com_SkipTokens( args, 1, const_cast<char*>(" ") );
 		if ( p > args )
 			Field_CompleteKeyname();
 	}
@@ -1106,14 +1106,14 @@ static void Key_CompleteBind( char *args, int argNum ) {
 
 	if ( argNum == 2 ) {
 		// Skip "bind "
-		p = Com_SkipTokens( args, 1, " " );
+		p = Com_SkipTokens( args, 1, const_cast<char*>(" "));
 
 		if ( p > args )
 			Field_CompleteKeyname();
 	}
 	else if ( argNum >= 3 ) {
 		// Skip "bind <key> "
-		p = Com_SkipTokens( args, 2, " " );
+		p = Com_SkipTokens( args, 2, const_cast<char*>(" "));
 
 		if ( p > args )
 			Field_CompleteCommand( p, qtrue, qtrue );

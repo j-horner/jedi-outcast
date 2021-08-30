@@ -158,7 +158,7 @@ mdxaCompQuatBone_t
 
 
 #ifndef MDXABONEDEF
-typedef struct {
+typedef struct mdxaBone_t_ {
 	float matrix[3][4];
 
 

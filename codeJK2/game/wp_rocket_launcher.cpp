@@ -156,7 +156,7 @@ void WP_FireRocket( gentity_t *ent, qboolean alt_fire )
 
 	gentity_t *missile = CreateMissile( start, wpFwd, vel, 10000, ent, alt_fire );
 
-	missile->classname = "rocket_proj";
+	missile->classname = const_cast<char*>("rocket_proj");
 	missile->s.weapon = WP_ROCKET_LAUNCHER;
 	missile->mass = 10;
 

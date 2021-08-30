@@ -1841,7 +1841,7 @@ char *G2API_GetAnimFileNameIndex(qhandle_t modelIndex)
 	{
 		return mod_m->mdxm->animName;
 	}
-	return "";
+	return const_cast<char*>("");
 }
 
 // as above, but gets the internal embedded name, not the name of the disk file.
@@ -1855,7 +1855,7 @@ char *G2API_GetAnimFileInternalNameIndex(qhandle_t modelIndex)
 	{
 		return mod_a->mdxa->name;
 	}
-	return "";
+	return const_cast<char*>("");
 }
 
 /************************************************************************************************

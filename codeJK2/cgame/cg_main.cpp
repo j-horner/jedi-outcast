@@ -1112,40 +1112,40 @@ void CG_RegisterClientModels (int entityNum)
 
 forceTicPos_t forceTicPos[] =
 {
-	{ 11, 41, 20, 10, "gfx/hud/force_tick1", NULL_HANDLE },		// Left Top
-	{ 12, 45, 20, 10, "gfx/hud/force_tick2", NULL_HANDLE },
-	{ 14, 49, 20, 10, "gfx/hud/force_tick3", NULL_HANDLE },
-	{ 17, 52, 20, 10, "gfx/hud/force_tick4", NULL_HANDLE },
-	{ 22, 55, 10, 10, "gfx/hud/force_tick5", NULL_HANDLE },
-	{ 28, 57, 10, 20, "gfx/hud/force_tick6", NULL_HANDLE },
-	{ 34, 59, 10, 10, "gfx/hud/force_tick7", NULL_HANDLE },		// Left bottom
+	{ 11, 41, 20, 10, const_cast<char*>("gfx/hud/force_tick1"), NULL_HANDLE },		// Left Top
+	{ 12, 45, 20, 10, const_cast<char*>("gfx/hud/force_tick2"), NULL_HANDLE },
+	{ 14, 49, 20, 10, const_cast<char*>("gfx/hud/force_tick3"), NULL_HANDLE },
+	{ 17, 52, 20, 10, const_cast<char*>("gfx/hud/force_tick4"), NULL_HANDLE },
+	{ 22, 55, 10, 10, const_cast<char*>("gfx/hud/force_tick5"), NULL_HANDLE },
+	{ 28, 57, 10, 20, const_cast<char*>("gfx/hud/force_tick6"), NULL_HANDLE },
+	{ 34, 59, 10, 10, const_cast<char*>("gfx/hud/force_tick7"), NULL_HANDLE },		// Left bottom
 
-	{ 46, 59, -10, 10, "gfx/hud/force_tick7", NULL_HANDLE },		// Right bottom
-	{ 52, 57, -10, 20, "gfx/hud/force_tick6", NULL_HANDLE },
-	{ 58, 55, -10, 10, "gfx/hud/force_tick5", NULL_HANDLE },
-	{ 63, 52, -20, 10, "gfx/hud/force_tick4", NULL_HANDLE },
-	{ 66, 49, -20, 10, "gfx/hud/force_tick3", NULL_HANDLE },
-	{ 68, 45, -20, 10, "gfx/hud/force_tick2", NULL_HANDLE },
-	{ 69, 41, -20, 10, "gfx/hud/force_tick1", NULL_HANDLE },		// Right top
+	{ 46, 59, -10, 10, const_cast<char*>("gfx/hud/force_tick7"), NULL_HANDLE },		// Right bottom
+	{ 52, 57, -10, 20, const_cast<char*>("gfx/hud/force_tick6"), NULL_HANDLE },
+	{ 58, 55, -10, 10, const_cast<char*>("gfx/hud/force_tick5"), NULL_HANDLE },
+	{ 63, 52, -20, 10, const_cast<char*>("gfx/hud/force_tick4"), NULL_HANDLE },
+	{ 66, 49, -20, 10, const_cast<char*>("gfx/hud/force_tick3"), NULL_HANDLE },
+	{ 68, 45, -20, 10, const_cast<char*>("gfx/hud/force_tick2"), NULL_HANDLE },
+	{ 69, 41, -20, 10, const_cast<char*>("gfx/hud/force_tick1"), NULL_HANDLE },		// Right top
 };
 
 forceTicPos_t ammoTicPos[] =
 {
-	{ 12, 34, 10, 10, "gfx/hud/ammo_tick7-l", NULL_HANDLE }, 	// Bottom
-	{ 13, 28, 10, 10, "gfx/hud/ammo_tick6-l", NULL_HANDLE },
-	{ 15, 23, 10, 10, "gfx/hud/ammo_tick5-l", NULL_HANDLE },
-	{ 19, 19, 10, 10, "gfx/hud/ammo_tick4-l", NULL_HANDLE },
-	{ 23, 15, 10, 10, "gfx/hud/ammo_tick3-l", NULL_HANDLE },
-	{ 29, 12, 10, 10, "gfx/hud/ammo_tick2-l", NULL_HANDLE },
-	{ 34, 11, 10, 10, "gfx/hud/ammo_tick1-l", NULL_HANDLE },
+	{ 12, 34, 10, 10, const_cast<char*>("gfx/hud/ammo_tick7-l"), NULL_HANDLE }, 	// Bottom
+	{ 13, 28, 10, 10, const_cast<char*>("gfx/hud/ammo_tick6-l"), NULL_HANDLE },
+	{ 15, 23, 10, 10, const_cast<char*>("gfx/hud/ammo_tick5-l"), NULL_HANDLE },
+	{ 19, 19, 10, 10, const_cast<char*>("gfx/hud/ammo_tick4-l"), NULL_HANDLE },
+	{ 23, 15, 10, 10, const_cast<char*>("gfx/hud/ammo_tick3-l"), NULL_HANDLE },
+	{ 29, 12, 10, 10, const_cast<char*>("gfx/hud/ammo_tick2-l"), NULL_HANDLE },
+	{ 34, 11, 10, 10, const_cast<char*>("gfx/hud/ammo_tick1-l"), NULL_HANDLE },
 
-	{ 47, 11, -10, 10, "gfx/hud/ammo_tick1-r", NULL_HANDLE },
-	{ 52, 12, -10, 10, "gfx/hud/ammo_tick2-r", NULL_HANDLE },
-	{ 58, 15, -10, 10, "gfx/hud/ammo_tick3-r", NULL_HANDLE },
-	{ 62, 19, -10, 10, "gfx/hud/ammo_tick4-r", NULL_HANDLE },
-	{ 66, 23, -10, 10, "gfx/hud/ammo_tick5-r", NULL_HANDLE },
-	{ 68, 28, -10, 10, "gfx/hud/ammo_tick6-r", NULL_HANDLE },
-	{ 69, 34, -10, 10, "gfx/hud/ammo_tick7-r", NULL_HANDLE },
+	{ 47, 11, -10, 10, const_cast<char*>("gfx/hud/ammo_tick1-r"), NULL_HANDLE },
+	{ 52, 12, -10, 10, const_cast<char*>("gfx/hud/ammo_tick2-r"), NULL_HANDLE },
+	{ 58, 15, -10, 10, const_cast<char*>("gfx/hud/ammo_tick3-r"), NULL_HANDLE },
+	{ 62, 19, -10, 10, const_cast<char*>("gfx/hud/ammo_tick4-r"), NULL_HANDLE },
+	{ 66, 23, -10, 10, const_cast<char*>("gfx/hud/ammo_tick5-r"), NULL_HANDLE },
+	{ 68, 28, -10, 10, const_cast<char*>("gfx/hud/ammo_tick6-r"), NULL_HANDLE },
+	{ 69, 34, -10, 10, const_cast<char*>("gfx/hud/ammo_tick7-r"), NULL_HANDLE },
 };
 
 
@@ -1162,7 +1162,7 @@ This function may execute for a couple of minutes with a slow disk.
 static void CG_RegisterGraphics( void ) {
 	int			i;
 	char		items[MAX_ITEMS+1];
-	static char		*sb_nums[11] = {
+	static const char		*sb_nums[11] = {
 		"gfx/2d/numbers/zero",
 		"gfx/2d/numbers/one",
 		"gfx/2d/numbers/two",
@@ -1176,7 +1176,7 @@ static void CG_RegisterGraphics( void ) {
 		"gfx/2d/numbers/minus",
 	};
 
-	static char		*sb_t_nums[11] = {
+	static const char		*sb_t_nums[11] = {
 		"gfx/2d/numbers/t_zero",
 		"gfx/2d/numbers/t_one",
 		"gfx/2d/numbers/t_two",
@@ -1190,7 +1190,7 @@ static void CG_RegisterGraphics( void ) {
 		"gfx/2d/numbers/t_minus",
 	};
 
-	static char		*sb_c_nums[11] = {
+	static const char		*sb_c_nums[11] = {
 		"gfx/2d/numbers/c_zero",
 		"gfx/2d/numbers/c_one",
 		"gfx/2d/numbers/c_two",
@@ -1742,7 +1742,7 @@ void CG_Init( int serverCommandSequence ) {
 	cgs.media.loadTick		= cgi_R_RegisterShaderNoMip( "gfx/hud/load_tick" );
 	cgs.media.loadTickCap	= cgi_R_RegisterShaderNoMip( "gfx/hud/load_tick_cap" );
 
-	static char		*force_icon_files[NUM_FORCE_POWERS] =
+	static const char		*force_icon_files[NUM_FORCE_POWERS] =
 	{
 		"gfx/hud/f_icon_heal",
 		"gfx/hud/f_icon_levitation",
@@ -2223,7 +2223,7 @@ void CG_ParseMenu(const char *menuFile)
 	if (!result)
 	{
 		Com_Printf("Unable to load hud menu file: %s. Using default ui/testhud.menu.\n", menuFile);
-		result = cgi_UI_StartParseSession("ui/testhud.menu",&buf);
+		result = cgi_UI_StartParseSession(const_cast<char*>("ui/testhud.menu"),&buf);
 		if (!result)
 		{
 			Com_Printf("Unable to load default ui/testhud.menu.\n");
@@ -2765,7 +2765,7 @@ void CG_DrawInventorySelect( void )
 	}
 
 	int x2,y2;
-	if (!cgi_UI_GetMenuInfo("inventoryselecthud",&x2,&y2))
+	if (!cgi_UI_GetMenuInfo(const_cast<char*>("inventoryselecthud"),&x2,&y2))
 	{
 		return;
 	}
@@ -2941,7 +2941,7 @@ void CG_DrawInventorySelect( void )
 
 int cgi_UI_GetItemText(char *menuFile,char *itemName, char *text);
 
-char *inventoryDesc[15] =
+const char *inventoryDesc[15] =
 {
 "NEURO_SAAV_DESC",
 "BACTA_DESC",
@@ -3172,7 +3172,7 @@ int showPowers[MAX_SHOWPOWERS] =
 	FP_GRIP,
 	FP_LIGHTNING
 };
-char *showPowersName[MAX_SHOWPOWERS] =
+const char *showPowersName[MAX_SHOWPOWERS] =
 {
 	"HEAL2",
 	"SPEED2",
@@ -3566,7 +3566,7 @@ void CG_DPPrevForcePower_f( void )
 	cg.DataPadforcepowerSelect = original;
 }
 
-char *forcepowerDesc[NUM_FORCE_POWERS] =
+const char *forcepowerDesc[NUM_FORCE_POWERS] =
 {
 "FORCE_HEAL_DESC",
 "FORCE_JUMP_DESC",
@@ -3581,7 +3581,7 @@ char *forcepowerDesc[NUM_FORCE_POWERS] =
 "FORCE_SABER_OFFENSE_DESC",
 };
 
-char *forcepowerLvl1Desc[NUM_FORCE_POWERS] =
+const char *forcepowerLvl1Desc[NUM_FORCE_POWERS] =
 {
 "FORCE_HEAL_LVL1_DESC",
 "FORCE_JUMP_LVL1_DESC",
@@ -3596,7 +3596,7 @@ char *forcepowerLvl1Desc[NUM_FORCE_POWERS] =
 "FORCE_SABER_OFFENSE_LVL1_DESC",
 };
 
-char *forcepowerLvl2Desc[NUM_FORCE_POWERS] =
+const char *forcepowerLvl2Desc[NUM_FORCE_POWERS] =
 {
 "FORCE_HEAL_LVL2_DESC",
 "FORCE_JUMP_LVL2_DESC",
@@ -3611,7 +3611,7 @@ char *forcepowerLvl2Desc[NUM_FORCE_POWERS] =
 "FORCE_SABER_OFFENSE_LVL2_DESC",
 };
 
-char *forcepowerLvl3Desc[NUM_FORCE_POWERS] =
+const char *forcepowerLvl3Desc[NUM_FORCE_POWERS] =
 {
 "FORCE_HEAL_LVL3_DESC",
 "FORCE_JUMP_LVL3_DESC",

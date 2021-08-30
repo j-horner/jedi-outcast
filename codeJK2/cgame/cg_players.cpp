@@ -460,11 +460,11 @@ void CG_NewClientinfo( int clientNum )
 	cvar_t	*sex = gi.cvar( "sex", "male", 0 );
 	if ( Q_stricmp("female", sex->string ) == 0 )
 	{
-		ci->customBasicSoundDir = "kyla";
+		ci->customBasicSoundDir = const_cast<char*>("kyla");
 	}
 	else
 	{
-		ci->customBasicSoundDir = "kyle";
+		ci->customBasicSoundDir = const_cast<char*>("kyle");
 	}
 
 	//player uses only the basic custom sound set, not the combat or extra
@@ -4472,7 +4472,7 @@ Ghoul2 Insert Start
 	}
 	else
 	{
-		CG_GetTagWorldPosition( saber, "tag_flash", org_, axis_ );
+		CG_GetTagWorldPosition( saber, const_cast<char*>("tag_flash"), org_, axis_ );
 	}
 
 /*
@@ -5716,7 +5716,7 @@ Ghoul2 Insert End
 
 		VectorCopy( cent->lerpOrigin, torso.lightingOrigin );
 
-		CG_PositionRotatedEntityOnTag( &torso, &legs, legs.hModel, "tag_torso", &tag_torso );
+		CG_PositionRotatedEntityOnTag( &torso, &legs, legs.hModel, const_cast<char*>("tag_torso"), &tag_torso );
 		VectorCopy( torso.origin, cent->gent->client->renderInfo.torsoPoint );
 		vectoangles( tag_torso.axis[0], cent->gent->client->renderInfo.torsoAngles );
 
@@ -5738,7 +5738,7 @@ Ghoul2 Insert End
 
 			VectorCopy( cent->lerpOrigin, head.lightingOrigin );
 
-			CG_PositionRotatedEntityOnTag( &head, &torso, torso.hModel, "tag_head", &tag_head );
+			CG_PositionRotatedEntityOnTag( &head, &torso, torso.hModel, const_cast<char*>("tag_head"), &tag_head );
 			VectorCopy( head.origin, cent->gent->client->renderInfo.headPoint );
 			vectoangles( tag_head.axis[0], cent->gent->client->renderInfo.headAngles );
 
@@ -5787,7 +5787,7 @@ Ghoul2 Insert End
 			//FIXME: allow it to be put anywhere and move this out of if(torso.hModel)
 			//Will have to call CG_PositionRotatedEntityOnTag
 
-			CG_PositionEntityOnTag( &gun, &torso, torso.hModel, "tag_weapon");
+			CG_PositionEntityOnTag( &gun, &torso, torso.hModel, const_cast<char*>("tag_weapon"));
 
 //--------------------- start saber hacks
 
@@ -5876,7 +5876,7 @@ Ghoul2 Insert End
 
 				cent->muzzleFlashTime  = 0;
 
-				CG_PositionEntityOnTag( &flash, &gun, gun.hModel, "tag_flash");
+				CG_PositionEntityOnTag( &flash, &gun, gun.hModel, const_cast<char*>("tag_flash"));
 
 				// Try and get a default muzzle so we have one to fall back on
 				if ( wData->mMuzzleEffectID )

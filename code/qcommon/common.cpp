@@ -1797,7 +1797,7 @@ void Field_CompleteCommand( char *cmd, qboolean doCommands, qboolean doCvars )
 	int completionArgument = 0;
 
 	// Skip leading whitespace and quotes
-	cmd = Com_SkipCharset( cmd, " \"" );
+	cmd = Com_SkipCharset( cmd, const_cast<char*>(" \"") );
 
 	Cmd_TokenizeStringIgnoreQuotes( cmd );
 	completionArgument = Cmd_Argc();

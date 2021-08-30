@@ -61,7 +61,7 @@ extern qboolean Sys_LowPhysicalMemory();
 const int iMP3MusicStream_DiskBytesToRead = 10000;//4096;
 const int iMP3MusicStream_DiskBufferSize = iMP3MusicStream_DiskBytesToRead*2; //*10;
 
-typedef struct
+typedef struct MusicInfo_t_
 {
 	qboolean	bIsMP3;
 	//
@@ -5517,17 +5517,17 @@ static bool LoadEALFile(char *szEALFilename)
 		// For a valid eal file ... need to find 'Center' tag, record num of instances,  and then find
 		// the right number of instances of 'Aperture0a' and 'Aperture0b'.
 
-		if (s_lpEAXManager->GetSourceID("Center", &lID)==EM_OK)
+		if (s_lpEAXManager->GetSourceID(const_cast<char*>("Center"), &lID)==EM_OK)
 		{
 			if (s_lpEAXManager->GetSourceNumInstances(lID, &s_lNumEnvironments)==EM_OK)
 			{
-				if (s_lpEAXManager->GetSourceID("Aperture0a", &lID)==EM_OK)
+				if (s_lpEAXManager->GetSourceID(const_cast<char*>("Aperture0a"), &lID)==EM_OK)
 				{
 					if (s_lpEAXManager->GetSourceNumInstances(lID, &lNumInst)==EM_OK)
 					{
 						if (lNumInst == s_lNumEnvironments)
 						{
-							if (s_lpEAXManager->GetSourceID("Aperture0b", &lID)==EM_OK)
+							if (s_lpEAXManager->GetSourceID(const_cast<char*>("Aperture0b"), &lID)==EM_OK)
 							{
 								if (s_lpEAXManager->GetSourceNumInstances(lID, &lNumInst)==EM_OK)
 								{

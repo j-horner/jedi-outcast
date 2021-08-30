@@ -74,7 +74,7 @@ static void WP_FlechetteMainFire( gentity_t *ent )
 
 		missile = CreateMissile( start, fwd, vel, 10000, ent );
 
-		missile->classname = "flech_proj";
+		missile->classname = const_cast<char*>("flech_proj");
 		missile->s.weapon = WP_FLECHETTE;
 
 		VectorSet( missile->maxs, FLECHETTE_SIZE, FLECHETTE_SIZE, FLECHETTE_SIZE );
@@ -222,7 +222,7 @@ static void WP_CreateFlechetteBouncyThing( vec3_t start, vec3_t fwd, gentity_t *
 	missile->e_ThinkFunc = thinkF_WP_flechette_alt_blow;
 
 	missile->s.weapon = WP_FLECHETTE;
-	missile->classname = "flech_alt";
+	missile->classname = const_cast<char*>("flech_alt");
 	missile->mass = 4;
 
 	// How 'bout we give this thing a size...

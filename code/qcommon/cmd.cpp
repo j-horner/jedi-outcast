@@ -386,7 +386,7 @@ Cmd_Argv
 */
 char	*Cmd_Argv( int arg ) {
 	if ( (unsigned)arg >= (unsigned)cmd_argc )
-		return "";
+		return const_cast<char*>("");
 
 	return cmd_argv[arg];
 }

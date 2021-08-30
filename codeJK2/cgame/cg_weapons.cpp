@@ -1088,7 +1088,7 @@ void CG_AddViewWeapon( playerState_t *ps )
 	}
 
 	AnglesToAxis( angles, gun.axis );
-	CG_PositionEntityOnTag( &gun, &hand, weapon->handsModel, "tag_weapon");
+	CG_PositionEntityOnTag( &gun, &hand, weapon->handsModel, const_cast<char*>("tag_weapon"));
 
 	gun.renderfx = RF_DEPTHHACK | RF_FIRST_PERSON;
 
@@ -1099,7 +1099,7 @@ void CG_AddViewWeapon( playerState_t *ps )
 	{
 		vec3_t org_, axis_[3];
 
-		CG_GetTagWorldPosition( &gun, "tag_flash", org_, axis_ );
+		CG_GetTagWorldPosition( &gun, const_cast<char*>("tag_flash"), org_, axis_ );
 		if ( cent->gent->client->ps.saberActive && cent->gent->client->ps.saberLength < cent->gent->client->ps.saberLengthMax )
 		{
 			cent->gent->client->ps.saberLength += cg.frametime*0.03;
@@ -1146,7 +1146,7 @@ void CG_AddViewWeapon( playerState_t *ps )
 		AnglesToAxis( angles, barrel.axis );
 		if (!i)
 		{
-			CG_PositionRotatedEntityOnTag( &barrel, &hand, weapon->handsModel, "tag_barrel", NULL );
+			CG_PositionRotatedEntityOnTag( &barrel, &hand, weapon->handsModel, const_cast<char*>("tag_barrel"), NULL );
 		} else
 		{
 			CG_PositionRotatedEntityOnTag( &barrel, &hand, weapon->handsModel, va("tag_barrel%d",i+1), NULL );
@@ -1158,7 +1158,7 @@ void CG_AddViewWeapon( playerState_t *ps )
 	memset (&flash, 0, sizeof(flash));
 
 	// Seems like we should always do this in case we have an animating muzzle flash....that way we can always store the correct muzzle dir, etc.
-	CG_PositionEntityOnTag( &flash, &gun, gun.hModel, "tag_flash");
+	CG_PositionEntityOnTag( &flash, &gun, gun.hModel, const_cast<char*>("tag_flash"));
 
 	CG_DoMuzzleFlash( cent, flash.origin, flash.axis[0], wData );
 
@@ -1316,7 +1316,7 @@ void CG_DrawIconBackground(void)
 	}
 
 
-	if (!cgi_UI_GetMenuInfo("iconbackground",&x2,&y2))
+	if (!cgi_UI_GetMenuInfo(const_cast<char*>("iconbackground"),&x2,&y2))
 	{
 		return;
 	}
@@ -1427,7 +1427,7 @@ void CG_DrawIconBackground(void)
 
 int cgi_UI_GetItemText(char *menuFile,char *itemName, char *text);
 
-char *weaponDesc[13] =
+const char *weaponDesc[13] =
 {
 "SABER_DESC",
 "BLASTER_PISTOL_DESC",
@@ -1821,7 +1821,7 @@ void CG_DrawWeaponSelect( void )
 	vec4_t	calcColor;
 	vec4_t	textColor = { .875f, .718f, .121f, 1.0f };
 
-	if (!cgi_UI_GetMenuInfo("weaponselecthud",&x2,&y2))
+	if (!cgi_UI_GetMenuInfo(const_cast<char*>("weaponselecthud"),&x2,&y2))
 	{
 		return;
 	}

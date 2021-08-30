@@ -76,7 +76,7 @@ void NPC_Blocked( gentity_t *self, gentity_t *blocker )
 		return;
 	}
 
-	Debug_Printf( debugNPCAI, DEBUG_LEVEL_WARNING, "%s: Excuse me, %s %s!\n", self->targetname, blocker->classname, blocker->targetname );
+	Debug_Printf( debugNPCAI, DEBUG_LEVEL_WARNING, const_cast<char*>("%s: Excuse me, %s %s!\n"), self->targetname, blocker->classname, blocker->targetname );
 
 	//If we're being blocked by the player, say something to them
 	if ( ( blocker->s.number == 0 ) && ( ( blocker->client->playerTeam == self->client->playerTeam ) ) )
@@ -1261,7 +1261,7 @@ void SP_waypoint ( gentity_t *ent )
 		gi.linkentity( ent );
 
 		ent->count = -1;
-		ent->classname = "waypoint";
+		ent->classname = const_cast<char*>("waypoint");
 
 		if( !(ent->spawnflags&1) && G_CheckInSolid (ent, qtrue))
 		{//if not SOLID_OK, and in solid
@@ -1307,7 +1307,7 @@ void SP_waypoint_small (gentity_t *ent)
 		gi.linkentity( ent );
 
 		ent->count = -1;
-		ent->classname = "waypoint";
+		ent->classname = const_cast<char*>("waypoint");
 
 		if ( !(ent->spawnflags&1) && G_CheckInSolid( ent, qtrue ) )
 		{
@@ -1370,7 +1370,7 @@ void SP_waypoint_navgoal( gentity_t *ent )
 	}
 	TAG_Add( ent->targetname, NULL, ent->s.origin, ent->s.angles, radius, RTF_NAVGOAL );
 
-	ent->classname = "navgoal";
+	ent->classname = const_cast<char*>("navgoal");
 	G_FreeEntity( ent );//can't do this, they need to be found later by some functions, though those could be fixed, maybe?
 }
 
@@ -1406,7 +1406,7 @@ void SP_waypoint_navgoal_8( gentity_t *ent )
 
 	TAG_Add( ent->targetname, NULL, ent->s.origin, ent->s.angles, 8, RTF_NAVGOAL );
 
-	ent->classname = "navgoal";
+	ent->classname = const_cast<char*>("navgoal");
 	G_FreeEntity( ent );//can't do this, they need to be found later by some functions, though those could be fixed, maybe?
 }
 
@@ -1442,7 +1442,7 @@ void SP_waypoint_navgoal_4( gentity_t *ent )
 
 	TAG_Add( ent->targetname, NULL, ent->s.origin, ent->s.angles, 4, RTF_NAVGOAL );
 
-	ent->classname = "navgoal";
+	ent->classname = const_cast<char*>("navgoal");
 	G_FreeEntity( ent );//can't do this, they need to be found later by some functions, though those could be fixed, maybe?
 }
 
@@ -1478,7 +1478,7 @@ void SP_waypoint_navgoal_2( gentity_t *ent )
 
 	TAG_Add( ent->targetname, NULL, ent->s.origin, ent->s.angles, 2, RTF_NAVGOAL );
 
-	ent->classname = "navgoal";
+	ent->classname = const_cast<char*>("navgoal");
 	G_FreeEntity( ent );//can't do this, they need to be found later by some functions, though those could be fixed, maybe?
 }
 
@@ -1514,7 +1514,7 @@ void SP_waypoint_navgoal_1( gentity_t *ent )
 
 	TAG_Add( ent->targetname, NULL, ent->s.origin, ent->s.angles, 1, RTF_NAVGOAL );
 
-	ent->classname = "navgoal";
+	ent->classname = const_cast<char*>("navgoal");
 	G_FreeEntity( ent );//can't do this, they need to be found later by some functions, though those could be fixed, maybe?
 }
 

@@ -285,7 +285,7 @@ typedef enum {
 
 typedef struct
 {
-	char *name;
+	const char *name;
 	int animToUse;
 	int	startQuad;
 	int	endQuad;

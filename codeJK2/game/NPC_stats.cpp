@@ -32,7 +32,7 @@ extern qboolean NPCsPrecached;
 extern vec3_t playerMins;
 extern vec3_t playerMaxs;
 
-char	*TeamNames[TEAM_NUM_TEAMS] =
+const char	*TeamNames[TEAM_NUM_TEAMS] =
 {
 	"",
 	"player",
@@ -41,7 +41,7 @@ char	*TeamNames[TEAM_NUM_TEAMS] =
 };
 
 // this list was made using the model directories, this MUST be in the same order as the CLASS_ enum in teams.h
-char	*ClassNames[CLASS_NUM_CLASSES] =
+const char	*ClassNames[CLASS_NUM_CLASSES] =
 {
 	"",				// class none
 	"atst",
@@ -532,7 +532,7 @@ void G_LoadAnimFileSet( gentity_t *ent, const char *modelName )
 	if ( !GLAName)
 	{
 		Com_Printf( S_COLOR_RED"Failed find animation file name models/players/%s/animation.cfg\n", modelName );
-		strippedName="broken";
+		strippedName= const_cast<char*>("broken");
 	}
 	else
 	{
@@ -1054,7 +1054,7 @@ void NPC_BuildRandom( gentity_t *NPC )
 	NPC->s.modelScale[0] = NPC->s.modelScale[1] = NPC->s.modelScale[2] = Q_irand(87, 102)/100.0f;
 	NPC->NPC->rank = RANK_CREWMAN;
 	NPC->client->playerTeam = TEAM_PLAYER;
-	NPC->client->clientInfo.customBasicSoundDir = "kyle";
+	NPC->client->clientInfo.customBasicSoundDir = const_cast<char*>("kyle");
 }
 
 extern void G_SetG2PlayerModel( gentity_t * const ent, const char *modelName, const char *customSkin, const char *surfOff, const char *surfOn );

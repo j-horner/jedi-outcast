@@ -115,7 +115,7 @@ void CQuickSpriteSystem::Flush(void)
 	if ( qglLockArraysEXT )
 	{
 		qglLockArraysEXT(0, mNextVert);
-		GLimp_LogComment( "glLockArraysEXT\n" );
+		GLimp_LogComment( const_cast<char*>("glLockArraysEXT\n") );
 	}
 
 	qglDrawArrays(GL_QUADS, 0, mNextVert);
@@ -162,7 +162,7 @@ void CQuickSpriteSystem::Flush(void)
 	if (qglUnlockArraysEXT)
 	{
 		qglUnlockArraysEXT();
-		GLimp_LogComment( "glUnlockArraysEXT\n" );
+		GLimp_LogComment( const_cast<char*>("glUnlockArraysEXT\n") );
 	}
 
 	mNextVert=0;

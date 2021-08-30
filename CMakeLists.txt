@@ -153,7 +153,13 @@ set(SPDir "${CMAKE_SOURCE_DIR}/code")
 set(JK2SPDir "${CMAKE_SOURCE_DIR}/codeJK2")
 set(SharedDir ${CMAKE_SOURCE_DIR}/shared)
 set(OpenJKLibDir "${CMAKE_SOURCE_DIR}/lib")
-set(GSLIncludeDirectory "${OpenJKLibDir}/gsl-lite/include")
+
+find_package(gsl-lite CONFIG REQUIRED)
+# target_link_libraries(main PRIVATE gsl::gsl-lite gsl::gsl-lite-v0 gsl::gsl-lite-v1)
+
+set(GSLIncludeDirectory "${CMAKE_SOURCE_DIR}/external/vcpkg/packages/gsl-lite_x86-windows/include")
+
+# set(GSLIncludeDirectory "${OpenJKLibDir}/gsl-lite/include")
 
 include(InstallConfig)
 
@@ -179,6 +185,8 @@ endif()
 if(CMAKE_SYSTEM_NAME MATCHES "BSD")
   add_definitions(-DIOAPI_NO_64)
 endif()
+
+set(CMAKE_CXX_STANDARD 20)
 
 # Compiler settings
 if(MSVC)
@@ -221,9 +229,6 @@ elseif (("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU") OR ("${CMAKE_C_COMPILER_ID}" M
 
 	set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O3")
 	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
-
-	# enable somewhat modern C++
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 	
 	if("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
 		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
@@ -339,6 +344,8 @@ else()
   find_package(JPEG REQUIRED)
 endif()
 
+# works, but when game is launched, missing zlibd1.dll
+# find_package(ZLIB REQUIRED)
 if(UseInternalZlib)
   add_subdirectory(lib/zlib)
 else()
@@ -355,7 +362,7 @@ endif()
 add_subdirectory(lib/minizip)
 
 # Add projects
-add_subdirectory(${SPDir})
+add_subdirectory(${SPDir})		# NOTE: Certain parts needed to build JK2 are specified in ${SPDir}, not ${JK2SPDir}...
 if(BuildJK2SPGame)
 	add_subdirectory("${JK2SPDir}/game")
 endif()

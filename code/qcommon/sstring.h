@@ -30,8 +30,9 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #define SSTRING_H
 
 #include "../qcommon/q_shared.h"
-#include "qcommon/safe/gsl.h"
+#include "../../shared/qcommon/safe/gsl.h"
 #include <algorithm>
+#include <string_view>
 
 template<int MaxSize>
 class sstring
@@ -61,7 +62,7 @@ public:
 		//strcpy(mStorage.data,s);
 		Q_strncpyz(mStorage.data,s,sizeof(mStorage.data));
 	}
-	sstring( const gsl::cstring_view& v )
+	sstring( const std::string_view& v )
 	{
 		if( v.size() + 1 > sizeof( mStorage.data ) )
 		{

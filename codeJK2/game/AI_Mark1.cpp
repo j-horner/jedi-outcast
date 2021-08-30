@@ -159,7 +159,7 @@ void Mark1Dead_FireRocket (void)
 
 	gentity_t *missile = CreateMissile( muzzle1, muzzle_dir, BOWCASTER_VELOCITY, 10000, NPC );
 
-	missile->classname = "bowcaster_proj";
+	missile->classname = const_cast<char*>("bowcaster_proj");
 	missile->s.weapon = WP_BOWCASTER;
 
 	VectorSet( missile->maxs, BOWCASTER_SIZE, BOWCASTER_SIZE, BOWCASTER_SIZE );
@@ -206,7 +206,7 @@ void Mark1Dead_FireBlaster (void)
 
 	G_Sound( NPC, G_SoundIndex("sound/chars/mark1/misc/mark1_fire"));
 
-	missile->classname = "bryar_proj";
+	missile->classname = const_cast<char*>("bryar_proj");
 	missile->s.weapon = WP_BRYAR_PISTOL;
 
 	missile->damage = 1;
@@ -491,7 +491,7 @@ void Mark1_FireBlaster(void)
 
 	missile = CreateMissile( muzzle1, forward, 1600, 10000, NPC );
 
-	missile->classname = "bryar_proj";
+	missile->classname = const_cast<char*>("bryar_proj");
 	missile->s.weapon = WP_BRYAR_PISTOL;
 
 	missile->damage = 1;
@@ -592,7 +592,7 @@ void Mark1_FireRocket(void)
 
 	gentity_t *missile = CreateMissile( muzzle1, forward, BOWCASTER_VELOCITY, 10000, NPC );
 
-	missile->classname = "bowcaster_proj";
+	missile->classname = const_cast<char*>("bowcaster_proj");
 	missile->s.weapon = WP_BOWCASTER;
 
 	VectorSet( missile->maxs, BOWCASTER_SIZE, BOWCASTER_SIZE, BOWCASTER_SIZE );

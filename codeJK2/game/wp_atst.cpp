@@ -48,7 +48,7 @@ void WP_ATSTMainFire( gentity_t *ent )
 
 	gentity_t	*missile = CreateMissile( wpMuzzle, wpFwd, vel, 10000, ent );
 
-	missile->classname = "atst_main_proj";
+	missile->classname = const_cast<char*>("atst_main_proj");
 	missile->s.weapon = WP_ATST_MAIN;
 
 	missile->damage = weaponData[WP_ATST_MAIN].damage;
@@ -78,7 +78,7 @@ void WP_ATSTSideAltFire( gentity_t *ent )
 
 	gentity_t *missile = CreateMissile( wpMuzzle, wpFwd, vel, 10000, ent, qtrue );
 
-	missile->classname = "atst_rocket";
+	missile->classname = const_cast<char*>("atst_rocket");
 	missile->s.weapon = WP_ATST_SIDE;
 
 	missile->mass = 10;
@@ -129,7 +129,7 @@ void WP_ATSTSideFire( gentity_t *ent )
 
 	gentity_t *missile = CreateMissile( wpMuzzle, wpFwd, ATST_SIDE_MAIN_VELOCITY, 10000, ent, qfalse );
 
-	missile->classname = "atst_side_proj";
+	missile->classname = const_cast<char*>("atst_side_proj");
 	missile->s.weapon = WP_ATST_SIDE;
 
 	// Do the damages

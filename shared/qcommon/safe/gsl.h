@@ -1,7 +1,7 @@
 #pragma once
 
 // central point of include to simplify possible future swap for Microsoft's implementation
-#include <gsl/gsl-lite.h>
+#include <gsl/gsl-lite.hpp>
 
 // the default cstring_view constructor from string literals includes the terminating null; this one does not.
 #if defined( _MSC_VER ) && _MSC_VER < 1900
@@ -16,10 +16,14 @@ inline gsl::cstring_view vs2013hack_cstring_view_literal( const char (&str)[leng
 	return{ str, str + length - 1 };
 }
 #else
-# define CSTRING_VIEW(x) x ## _v
+#include <string_view>
+using namespace std::literals::string_view_literals;
+# define CSTRING_VIEW(x) x ## sv
+
+
 /** gsl::cstring_view from string literal (without null-termination) */
-inline gsl::cstring_view operator"" _v( const char* str, std::size_t length )
-{
-	return{ str, str + length };
-}
+// inline gsl::cstring_view operator"" _v( const char* str, std::size_t length )
+// {
+// 	return{ str, str + length };
+// }
 #endif

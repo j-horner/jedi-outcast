@@ -103,7 +103,7 @@ static void WP_BowcasterMainFire( gentity_t *ent )
 
 		missile = CreateMissile( start, dir, vel, 10000, ent );
 
-		missile->classname = "bowcaster_proj";
+		missile->classname = const_cast<char*>("bowcaster_proj");
 		missile->s.weapon = WP_BOWCASTER;
 
 		VectorSet( missile->maxs, BOWCASTER_SIZE, BOWCASTER_SIZE, BOWCASTER_SIZE );
@@ -139,7 +139,7 @@ static void WP_BowcasterAltFire( gentity_t *ent )
 
 	gentity_t *missile = CreateMissile( start, wpFwd, BOWCASTER_VELOCITY, 10000, ent, qtrue );
 
-	missile->classname = "bowcaster_alt_proj";
+	missile->classname = const_cast<char*>("bowcaster_alt_proj");
 	missile->s.weapon = WP_BOWCASTER;
 
 	// Do the damages

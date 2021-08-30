@@ -155,7 +155,7 @@ char *Cvar_VariableString( const char *var_name ) {
 
 	var = Cvar_FindVar (var_name);
 	if (!var)
-		return "";
+		return const_cast<char*>("");
 	return var->string;
 }
 
@@ -1346,7 +1346,7 @@ void Cvar_CompleteCvarName( char *args, int argNum )
 	if( argNum == 2 )
 	{
 		// Skip "<cmd> "
-		char *p = Com_SkipTokens( args, 1, " " );
+		char *p = Com_SkipTokens( args, 1, const_cast<char*>(" ") );
 
 		if( p > args )
 			Field_CompleteCommand( p, qfalse, qtrue );

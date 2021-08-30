@@ -521,7 +521,7 @@ Create
 
 int CBlockStream::Create( char *filename )
 {
-	char	*id_header = IBI_HEADER_ID;
+	const char	*id_header = IBI_HEADER_ID;
 	float	version = IBI_VERSION;
 
 	//Strip the extension and add the BLOCK_EXT extension

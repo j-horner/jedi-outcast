@@ -41,15 +41,15 @@ void Debug_Printf (cvar_t *cv, int debugLevel, char *fmt, ...)
 		return;
 
 	if (debugLevel == DEBUG_LEVEL_DETAIL)
-		color = S_COLOR_WHITE;
+		color = const_cast<char*>(S_COLOR_WHITE);
 	else if (debugLevel == DEBUG_LEVEL_INFO)
-		color = S_COLOR_GREEN;
+		color = const_cast<char*>(S_COLOR_GREEN);
 	else if (debugLevel == DEBUG_LEVEL_WARNING)
-		color = S_COLOR_YELLOW;
+		color = const_cast<char*>(S_COLOR_YELLOW);
 	else if (debugLevel == DEBUG_LEVEL_ERROR)
-		color = S_COLOR_RED;
+		color = const_cast<char*>(S_COLOR_RED);
 	else
-		color = S_COLOR_RED;
+		color = const_cast<char*>(S_COLOR_RED);
 
 	va_start (argptr,fmt);
 	Q_vsnprintf (msg, sizeof(msg), fmt, argptr);

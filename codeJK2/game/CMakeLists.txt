@@ -161,58 +161,55 @@ set(JK2SPGameGameFiles
 source_group("game" FILES ${JK2SPGameGameFiles})
 set(JK2SPGameFiles ${JK2SPGameFiles} ${JK2SPGameGameFiles})
 
-set(JK2SPGameCGameFiles
-	"${JK2SPDir}/cgame/FX_ATSTMain.cpp"
-	"${JK2SPDir}/cgame/FX_Blaster.cpp"
-	"${JK2SPDir}/cgame/FX_Bowcaster.cpp"
-	"${JK2SPDir}/cgame/FX_BryarPistol.cpp"
-	"${JK2SPDir}/cgame/FX_DEMP2.cpp"
-	"${JK2SPDir}/cgame/FX_Disruptor.cpp"
-	"${JK2SPDir}/cgame/FX_Emplaced.cpp"
-	"${JK2SPDir}/cgame/FX_Flechette.cpp"
-	"${JK2SPDir}/cgame/FX_HeavyRepeater.cpp"
-	"${JK2SPDir}/cgame/FX_RocketLauncher.cpp"
-	"${JK2SPDir}/cgame/FxPrimitives.cpp"
-	"${JK2SPDir}/cgame/FxPrimitives.h"
-	"${JK2SPDir}/cgame/FxScheduler.cpp"
-	"${JK2SPDir}/cgame/FxScheduler.h"
-	"${JK2SPDir}/cgame/FxSystem.cpp"
-	"${JK2SPDir}/cgame/FxSystem.h"
-	"${JK2SPDir}/cgame/FxTemplate.cpp"
-	"${JK2SPDir}/cgame/FxUtil.cpp"
-	"${JK2SPDir}/cgame/FxUtil.h"
-	"${JK2SPDir}/cgame/animtable.h"
-	"${JK2SPDir}/cgame/cg_camera.cpp"
-	"${JK2SPDir}/cgame/cg_camera.h"
-	"${JK2SPDir}/cgame/cg_consolecmds.cpp"
-	"${JK2SPDir}/cgame/cg_credits.cpp"
-	"${JK2SPDir}/cgame/cg_draw.cpp"
-	"${JK2SPDir}/cgame/cg_drawtools.cpp"
-	"${JK2SPDir}/cgame/cg_effects.cpp"
-	"${JK2SPDir}/cgame/cg_ents.cpp"
-	"${JK2SPDir}/cgame/cg_event.cpp"
-	"${JK2SPDir}/cgame/cg_info.cpp"
-	"${JK2SPDir}/cgame/cg_lights.cpp"
-	"${JK2SPDir}/cgame/cg_local.h"
-	"${JK2SPDir}/cgame/cg_localents.cpp"
-	"${JK2SPDir}/cgame/cg_main.cpp"
-	"${JK2SPDir}/cgame/cg_marks.cpp"
-	"${JK2SPDir}/cgame/cg_media.h"
-	"${JK2SPDir}/cgame/cg_players.cpp"
-	"${JK2SPDir}/cgame/cg_playerstate.cpp"
-	"${JK2SPDir}/cgame/cg_predict.cpp"
-	"${JK2SPDir}/cgame/cg_public.h"
-	"${JK2SPDir}/cgame/cg_scoreboard.cpp"
-	"${JK2SPDir}/cgame/cg_servercmds.cpp"
-	"${JK2SPDir}/cgame/cg_snapshot.cpp"
-	"${JK2SPDir}/cgame/cg_syscalls.cpp"
-	"${JK2SPDir}/cgame/cg_text.cpp"
-	"${JK2SPDir}/cgame/cg_view.cpp"
-	"${JK2SPDir}/cgame/cg_weapons.cpp"
-	"${JK2SPDir}/cgame/strip_objectives.h"
-	)
-source_group("cgame" FILES ${JK2SPGameCGameFiles})
-set(JK2SPGameFiles ${JK2SPGameFiles} ${JK2SPGameCGameFiles})
+add_library(JK2SP_cgame_FX 	"${JK2SPDir}/cgame/FX_ATSTMain.cpp"
+							"${JK2SPDir}/cgame/FX_Blaster.cpp"
+							"${JK2SPDir}/cgame/FX_Bowcaster.cpp"
+							"${JK2SPDir}/cgame/FX_BryarPistol.cpp"
+							"${JK2SPDir}/cgame/FX_DEMP2.cpp"
+							"${JK2SPDir}/cgame/FX_Disruptor.cpp"
+							"${JK2SPDir}/cgame/FX_Emplaced.cpp"
+							"${JK2SPDir}/cgame/FX_Flechette.cpp"
+							"${JK2SPDir}/cgame/FX_HeavyRepeater.cpp"
+							"${JK2SPDir}/cgame/FX_RocketLauncher.cpp"
+							"${JK2SPDir}/cgame/FxPrimitives.cpp"
+							"${JK2SPDir}/cgame/FxScheduler.cpp"
+							"${JK2SPDir}/cgame/FxSystem.cpp"
+							"${JK2SPDir}/cgame/FxTemplate.cpp"
+							"${JK2SPDir}/cgame/FxUtil.cpp")
+
+# target_link_libraries(JK2SP_cgame_FX PRIVATE gsl::gsl-lite gsl::gsl-lite-v0 gsl::gsl-lite-v1)
+set_target_properties(JK2SP_cgame_FX PROPERTIES INCLUDE_DIRECTORIES "${JK2SPGameIncludeDirectories}")
+set_target_properties(JK2SP_cgame_FX PROPERTIES COMPILE_DEFINITIONS "${JK2SPGameDefines}")
+
+
+add_library(JK2SP_cgame_cg 	"${JK2SPDir}/cgame/cg_camera.cpp"
+							"${JK2SPDir}/cgame/cg_consolecmds.cpp"
+							"${JK2SPDir}/cgame/cg_credits.cpp"
+							"${JK2SPDir}/cgame/cg_draw.cpp"
+							"${JK2SPDir}/cgame/cg_drawtools.cpp"
+							"${JK2SPDir}/cgame/cg_effects.cpp"
+							"${JK2SPDir}/cgame/cg_ents.cpp"
+							"${JK2SPDir}/cgame/cg_event.cpp"
+							"${JK2SPDir}/cgame/cg_info.cpp"
+							"${JK2SPDir}/cgame/cg_lights.cpp"
+							"${JK2SPDir}/cgame/cg_localents.cpp"
+							"${JK2SPDir}/cgame/cg_main.cpp"
+							"${JK2SPDir}/cgame/cg_marks.cpp"
+							"${JK2SPDir}/cgame/cg_players.cpp"
+							"${JK2SPDir}/cgame/cg_playerstate.cpp"
+							"${JK2SPDir}/cgame/cg_predict.cpp"
+							"${JK2SPDir}/cgame/cg_scoreboard.cpp"
+							"${JK2SPDir}/cgame/cg_servercmds.cpp"
+							"${JK2SPDir}/cgame/cg_snapshot.cpp"
+							"${JK2SPDir}/cgame/cg_syscalls.cpp"
+							"${JK2SPDir}/cgame/cg_text.cpp"
+							"${JK2SPDir}/cgame/cg_view.cpp"
+							"${JK2SPDir}/cgame/cg_weapons.cpp")
+
+# target_link_libraries(JK2SP_cgame_cg PRIVATE gsl::gsl-lite gsl::gsl-lite-v0 gsl::gsl-lite-v1)
+set_target_properties(JK2SP_cgame_cg PROPERTIES INCLUDE_DIRECTORIES "${JK2SPGameIncludeDirectories}")
+set_target_properties(JK2SP_cgame_cg PROPERTIES COMPILE_DEFINITIONS "${JK2SPGameDefines}")
+
 
 set(JK2SPGameUIFiles
 	"${SPDir}/ui/gameinfo.cpp"
@@ -268,7 +265,9 @@ endif(WIN32)
 
 add_library(${JK2SPGame} SHARED ${JK2SPGameFiles})
 
-target_link_libraries(${JK2SPGame} JK2SP_icarus)
+target_link_libraries(${JK2SPGame}	JK2SP_icarus
+									JK2SP_cgame_cg
+									JK2SP_cgame_FX)
 
 if(NOT MSVC)
 	# remove "lib" prefix for .so/.dylib files

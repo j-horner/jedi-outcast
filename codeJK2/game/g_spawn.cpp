@@ -179,7 +179,7 @@ typedef enum {
 
 typedef struct
 {
-	char	*name;
+	const char	*name;
 	size_t		ofs;
 	fieldtype_t	type;
 	int		flags;
@@ -314,7 +314,7 @@ field_t fields[] = {
 
 
 typedef struct {
-	char	*name;
+	const char	*name;
 	void	(*spawn)(gentity_t *ent);
 } spawn_t;
 
@@ -1045,7 +1045,7 @@ qboolean G_ParseSpawnVars( const char **data ) {
 	return qtrue;
 }
 
-static	char *defaultStyles[LS_NUM_STYLES][3] = 
+static const	char *defaultStyles[LS_NUM_STYLES][3] = 
 {
 	{	// 0 normal
 		"z",
@@ -1300,7 +1300,7 @@ void SP_worldspawn( void ) {
 	}	
 
 	g_entities[ENTITYNUM_WORLD].s.number = ENTITYNUM_WORLD;
-	g_entities[ENTITYNUM_WORLD].classname = "worldspawn";
+	g_entities[ENTITYNUM_WORLD].classname = const_cast<char*>("worldspawn");
 }
 
 /*

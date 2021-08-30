@@ -314,7 +314,7 @@ gentity_t *G_CreateObject ( gentity_t *owner, vec3_t origin, vec3_t angles, int 
 		return NULL;
 	}
 
-	object->classname = "object";//?
+	object->classname = const_cast<char*>("object");//?
 	object->nextthink = level.time + FRAMETIME;
 	object->e_ThinkFunc = thinkF_G_RunObject;
 	object->s.eType = ET_GENERAL;

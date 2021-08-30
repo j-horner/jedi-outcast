@@ -369,16 +369,16 @@ int WP_SetSaberModel( gclient_t *client, class_t npcClass )
 		switch ( npcClass )
 		{
 		case CLASS_DESANN://Desann
-			client->ps.saberModel = "models/weapons2/saber_desann/saber_w.glm";
+			client->ps.saberModel = const_cast<char*>("models/weapons2/saber_desann/saber_w.glm");
 			break;
 		case CLASS_LUKE://Luke
-			client->ps.saberModel = "models/weapons2/saber_luke/saber_w.glm";
+			client->ps.saberModel = const_cast<char*>("models/weapons2/saber_luke/saber_w.glm");
 			break;
 		case CLASS_KYLE://Kyle NPC and player
-			client->ps.saberModel = "models/weapons2/saber/saber_w.glm";
+			client->ps.saberModel = const_cast<char*>("models/weapons2/saber/saber_w.glm");
 			break;
 		default://reborn and tavion and everyone else
-			client->ps.saberModel = "models/weapons2/saber_reborn/saber_w.glm";
+			client->ps.saberModel = const_cast<char*>("models/weapons2/saber_reborn/saber_w.glm");
 			break;
 		}
 		return ( G_ModelIndex( client->ps.saberModel ) );
@@ -483,7 +483,7 @@ void WP_SaberInitBladeData( gentity_t *ent )
 		{
 			saberent = G_Spawn();
 			ent->client->ps.saberEntityNum = saberent->s.number;
-			saberent->classname = "lightsaber";
+			saberent->classname = const_cast<char*>("lightsaber");
 
 			saberent->s.eType = ET_GENERAL;
 			saberent->svFlags = SVF_USE_CURRENT_ORIGIN;
@@ -1261,8 +1261,8 @@ qboolean WP_SabersIntersection( gentity_t *ent1, gentity_t *ent2, vec3_t interse
 	return qtrue;
 }
 
-char *hit_blood_sparks = "blood_sparks";
-char *hit_sparks = "saber_cut";
+char *hit_blood_sparks = const_cast<char*>("blood_sparks");
+char *hit_sparks = const_cast<char*>("saber_cut");
 
 extern qboolean G_GetHitLocFromSurfName( gentity_t *ent, const char *surfName, int *hitLoc, vec3_t point, vec3_t dir, vec3_t bladeDir, int mod );
 qboolean WP_SaberDamageEffects( trace_t *tr, const vec3_t start, float length, float dmg, vec3_t dmgDir, vec3_t bladeDir, int enemyTeam )

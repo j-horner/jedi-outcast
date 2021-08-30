@@ -30,7 +30,7 @@ extern void Q3_SetViewEntity(int entID, const char *name);
 extern qboolean G_ClearViewEntity( gentity_t *ent );
 
 extern team_t TranslateTeamName( const char *name );
-extern char	*TeamNames[TEAM_NUM_TEAMS];
+extern const char	*TeamNames[TEAM_NUM_TEAMS];
 
 /*
 ===================

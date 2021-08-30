@@ -278,7 +278,7 @@ gentity_t *WP_FireThermalDetonator( gentity_t *ent, qboolean alt_fire )
 
 	bolt = G_Spawn();
 
-	bolt->classname = "thermal_detonator";
+	bolt->classname = const_cast<char*>("thermal_detonator");
 
 	if ( ent->s.number != 0 )
 	{

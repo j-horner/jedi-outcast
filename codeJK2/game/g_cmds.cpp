@@ -329,7 +329,7 @@ extern void SP_fx_runner( gentity_t *ent );
 
 			SP_fx_runner( fx_ent );
 			fx_ent->delay = 2000;			// adjusting delay
-			fx_ent->classname = "cmd_fx";	//	and classname
+			fx_ent->classname = const_cast<char*>("cmd_fx");	//	and classname
 
 			return;
 		}

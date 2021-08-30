@@ -269,7 +269,7 @@ void Remote_Fire (void)
 
 	G_PlayEffect( "bryar/muzzle_flash", NPC->currentOrigin, forward );
 
-	missile->classname = "briar";
+	missile->classname = const_cast<char*>("briar");
 	missile->s.weapon = WP_BRYAR_PISTOL;
 
 	missile->damage = 10;

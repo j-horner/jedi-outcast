@@ -5,6 +5,7 @@
     "catch2",
     "zlib",
     "sdl2",
-    "libpng"
+    "libpng",
+    "gsl-lite"
   ]
 }
