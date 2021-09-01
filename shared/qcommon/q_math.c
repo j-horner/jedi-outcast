@@ -670,6 +670,9 @@ void GetAnglesForDirection( const vec3_t p1, const vec3_t p2, vec3_t out ) {
 
 void ProjectPointOnPlane( vec3_t dst, const vec3_t p, const vec3_t normal )
 {
+	assert((Q_fabs(normal[0]) != 0.0f) || (Q_fabs(normal[1]) != 0.0f) || (Q_fabs(normal[2]) != 0.0f));
+
+
 	float d;
 	vec3_t n;
 	float inv_denom;
@@ -1351,6 +1354,8 @@ void AngleVectors( const vec3_t angles, vec3_t forward, vec3_t right, vec3_t up)
 */
 void PerpendicularVector( vec3_t dst, const vec3_t src )
 {
+	assert((Q_fabs(src[0]) != 0.0f) || (Q_fabs(src[1]) != 0.0f) || (Q_fabs(src[2]) != 0.0f));
+	
 	int	pos;
 	int i;
 	float minelem = 1.0F;

@@ -128,21 +128,10 @@ message(STATUS "Architecture is ${Architecture}")
 # Binary names
 #
 #=============================================================================
-set(SPGame "jagame${Architecture}")
-set(SPRDVanillaRenderer "rdsp-vanilla_${Architecture}")
-set(MPEngine "openjk.${Architecture}")
-set(MPVanillaRenderer "rd-vanilla_${Architecture}")
-set(MPDed "openjkded.${Architecture}")
-set(MPGame "jampgame${Architecture}")
-set(MPCGame "cgame${Architecture}")
-set(MPUI "ui${Architecture}")
 set(JK2SPEngine "openjo_sp.${Architecture}")
 set(JK2SPGame "jospgame${Architecture}")
 set(JK2SPVanillaRenderer "rdjosp-vanilla_${Architecture}")
-set(AssetsPk3 "openjk-${Architecture}.pk3")
-# Library names
-set(MPBotLib "botlib")
-set(SharedLib "shared")
+
 
 #=============================================================================
 #
@@ -153,6 +142,8 @@ set(SPDir "${CMAKE_SOURCE_DIR}/code")
 set(JK2SPDir "${CMAKE_SOURCE_DIR}/codeJK2")
 set(SharedDir ${CMAKE_SOURCE_DIR}/shared)
 set(OpenJKLibDir "${CMAKE_SOURCE_DIR}/lib")
+
+find_package(OpenGL REQUIRED)
 
 find_package(gsl-lite CONFIG REQUIRED)
 # target_link_libraries(main PRIVATE gsl::gsl-lite gsl::gsl-lite-v0 gsl::gsl-lite-v1)
@@ -311,7 +302,6 @@ message(STATUS "Git revision is ${GIT_HASH}")
 configure_file(shared/qcommon/q_version.h.in shared/qcommon/q_version.h @ONLY)
 
 #=============================================================================
-
 # Files shared across all projects
 #
 #=============================================================================
@@ -332,6 +322,7 @@ set(SharedCommonSafeFiles
 	"${SharedDir}/qcommon/safe/sscanf.h"
 	"${SharedDir}/qcommon/safe/limited_vector.h"
 	)
+
 
 #=============================================================================
 #

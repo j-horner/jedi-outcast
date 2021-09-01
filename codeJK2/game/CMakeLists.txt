@@ -199,12 +199,10 @@ set_target_properties(JK2SP_cgame_cg PROPERTIES INCLUDE_DIRECTORIES "${JK2SPGame
 set_target_properties(JK2SP_cgame_cg PROPERTIES COMPILE_DEFINITIONS "${JK2SPGameDefines}")
 
 
-set(JK2SPGameUIFiles
-	"${SPDir}/ui/gameinfo.cpp"
-	"${SPDir}/ui/gameinfo.h"
-	)
-source_group("ui" FILES ${JK2SPGameUIFiles})
-set(JK2SPGameFiles ${JK2SPGameFiles} ${JK2SPGameUIFiles})
+add_library(JS2SP_UI_GameInfo "${SPDir}/ui/gameinfo.cpp")
+
+set_target_properties(JS2SP_UI_GameInfo PROPERTIES INCLUDE_DIRECTORIES "${JK2SPGameIncludeDirectories}")
+set_target_properties(JS2SP_UI_GameInfo PROPERTIES COMPILE_DEFINITIONS "${JK2SPGameDefines}")
 
 set(JK2SPGameCommonFiles
 	#We only have JKA qcommon files now.
@@ -230,12 +228,14 @@ set(JK2SPGameCommonSafeFiles
 	)
 source_group("common/safe" FILES ${JK2SPGameCommonSafeFiles})
 set(JK2SPGameFiles ${JK2SPGameFiles} ${JK2SPGameCommonSafeFiles})
-
 add_library(JK2SP_icarus 	"${JK2SPDir}/icarus/BlockStream.cpp"
 							"${JK2SPDir}/icarus/Sequence.cpp"
 							"${JK2SPDir}/icarus/Sequencer.cpp"
 							"${JK2SPDir}/icarus/TaskManager.cpp"
 							"${JK2SPDir}/icarus/Instance.cpp")
+
+set_target_properties(JK2SP_icarus PROPERTIES INCLUDE_DIRECTORIES "${JK2SPGameIncludeDirectories}")
+set_target_properties(JK2SP_icarus PROPERTIES COMPILE_DEFINITIONS "${JK2SPGameDefines}")
 
 set(JK2SPGameRuflFiles
 	"${SPDir}/Rufl/hstring.cpp"
@@ -262,7 +262,8 @@ target_link_libraries(${JK2SPGame}	JK2SP_icarus
 									JK2SP_game_g
 									JK2SP_game_genericparser2
 									JK2SP_game_bg
-									JK2SP_game_Q3)
+									JK2SP_game_Q3
+									JS2SP_UI_GameInfo)
 
 if(NOT MSVC)
 	# remove "lib" prefix for .so/.dylib files
