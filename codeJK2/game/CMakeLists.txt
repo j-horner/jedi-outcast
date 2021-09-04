@@ -215,19 +215,32 @@ set(JK2SPGameCommonFiles
 	"${SPDir}/qcommon/ojk_saved_game_helper.h"
 	"${SPDir}/qcommon/ojk_saved_game_helper_fwd.h"
 	"${SPDir}/qcommon/ojk_scope_guard.h"
-	${SharedCommonFiles}
+	"${SharedDir}/qcommon/q_color.h"
+	"${SharedDir}/qcommon/q_color.c"
+	"${SharedDir}/qcommon/q_math.h"
+	"${SharedDir}/qcommon/q_math.c"
+	"${SharedDir}/qcommon/q_string.h"
+	"${SharedDir}/qcommon/q_string.c"
+	"${SharedDir}/qcommon/q_platform.h"
+	"${CMAKE_BINARY_DIR}/shared/qcommon/q_version.h"
 	)
 source_group("common" FILES ${JK2SPGameCommonFiles})
 set(JK2SPGameFiles ${JK2SPGameFiles} ${JK2SPGameCommonFiles})
 
 set(JK2SPGameCommonSafeFiles
-	${SharedCommonSafeFiles}
+	"${SharedDir}/qcommon/safe/gsl.h"
+	"${SharedDir}/qcommon/safe/string.cpp"
+	"${SharedDir}/qcommon/safe/string.h"
+	"${SharedDir}/qcommon/safe/sscanf.h"
+	"${SharedDir}/qcommon/safe/limited_vector.h"
 	"${SharedDir}/qcommon/safe/files.h"
 	"${SharedDir}/qcommon/safe/files.cpp"
 	"${JK2SPDir}/qcommon/safe/memory.h"
 	)
 source_group("common/safe" FILES ${JK2SPGameCommonSafeFiles})
 set(JK2SPGameFiles ${JK2SPGameFiles} ${JK2SPGameCommonSafeFiles})
+
+
 add_library(JK2SP_icarus 	"${JK2SPDir}/icarus/BlockStream.cpp"
 							"${JK2SPDir}/icarus/Sequence.cpp"
 							"${JK2SPDir}/icarus/Sequencer.cpp"

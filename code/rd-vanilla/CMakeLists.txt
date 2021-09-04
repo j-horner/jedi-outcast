@@ -70,16 +70,26 @@ set(SPRDVanillaCommonFiles
 	"${SPDir}/qcommon/ojk_saved_game_helper.h"
 	"${SPDir}/qcommon/ojk_saved_game_helper_fwd.h"
 	"${SPDir}/qcommon/ojk_scope_guard.h"
-		${SharedCommonFiles}
+	"${SharedDir}/qcommon/q_color.h"
+	"${SharedDir}/qcommon/q_color.c"
+	"${SharedDir}/qcommon/q_math.h"
+	"${SharedDir}/qcommon/q_math.c"
+	"${SharedDir}/qcommon/q_string.h"
+	"${SharedDir}/qcommon/q_string.c"
+	"${SharedDir}/qcommon/q_platform.h"
+	"${CMAKE_BINARY_DIR}/shared/qcommon/q_version.h"
 	)
 source_group("common" FILES ${SPRDVanillaCommonFiles})
 set(SPRDVanillaFiles ${SPRDVanillaFiles} ${SPRDVanillaCommonFiles})
 
 # Misc files
 set(SPRDVanillaCommonSafeFiles
-		${SharedCommonSafeFiles}
+	"${SharedDir}/qcommon/safe/gsl.h"
+	"${SharedDir}/qcommon/safe/string.cpp"
+	"${SharedDir}/qcommon/safe/string.h"
+	"${SharedDir}/qcommon/safe/sscanf.h"
+	"${SharedDir}/qcommon/safe/limited_vector.h")
 
-	)
 source_group("common/safe" FILES ${SPRDVanillaCommonSafeFiles})
 set(SPRDVanillaFiles ${SPRDVanillaFiles} ${SPRDVanillaCommonSafeFiles})
 

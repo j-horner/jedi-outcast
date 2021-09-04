@@ -176,7 +176,14 @@ if(BuildJK2SPEngine)
 		"${SPDir}/qcommon/ojk_saved_game_helper_fwd.h"
 		"${SPDir}/qcommon/ojk_scope_guard.h"
 
-		${SharedCommonFiles}
+		"${SharedDir}/qcommon/q_color.h"
+		"${SharedDir}/qcommon/q_color.c"
+		"${SharedDir}/qcommon/q_math.h"
+		"${SharedDir}/qcommon/q_math.c"
+		"${SharedDir}/qcommon/q_string.h"
+		"${SharedDir}/qcommon/q_string.c"
+		"${SharedDir}/qcommon/q_platform.h"
+		"${CMAKE_BINARY_DIR}/shared/qcommon/q_version.h"
 		)
 	source_group("common" FILES ${SPEngineCommonFiles})
 	set(SPEngineFiles ${SPEngineFiles} ${SPEngineCommonFiles})
@@ -184,7 +191,11 @@ if(BuildJK2SPEngine)
 	set(SPEngineCommonSafeFiles
 		"${SharedDir}/qcommon/safe/files.cpp"
 		"${SharedDir}/qcommon/safe/files.h"
-		${SharedCommonSafeFiles}
+		"${SharedDir}/qcommon/safe/gsl.h"
+		"${SharedDir}/qcommon/safe/string.cpp"
+		"${SharedDir}/qcommon/safe/string.h"
+		"${SharedDir}/qcommon/safe/sscanf.h"
+		"${SharedDir}/qcommon/safe/limited_vector.h"
 		"${SPDir}/qcommon/safe/memory.h"
 		)
 	source_group("common/safe" FILES ${SPEngineCommonSafeFiles})

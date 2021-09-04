@@ -301,28 +301,6 @@ message(STATUS "Git revision is ${GIT_HASH}")
 
 configure_file(shared/qcommon/q_version.h.in shared/qcommon/q_version.h @ONLY)
 
-#=============================================================================
-# Files shared across all projects
-#
-#=============================================================================
-set(SharedCommonFiles
-	"${SharedDir}/qcommon/q_color.h"
-	"${SharedDir}/qcommon/q_color.c"
-	"${SharedDir}/qcommon/q_math.h"
-	"${SharedDir}/qcommon/q_math.c"
-	"${SharedDir}/qcommon/q_string.h"
-	"${SharedDir}/qcommon/q_string.c"
-	"${SharedDir}/qcommon/q_platform.h"
-	"${CMAKE_BINARY_DIR}/shared/qcommon/q_version.h"
-	)
-set(SharedCommonSafeFiles
-	"${SharedDir}/qcommon/safe/gsl.h"
-	"${SharedDir}/qcommon/safe/string.cpp"
-	"${SharedDir}/qcommon/safe/string.h"
-	"${SharedDir}/qcommon/safe/sscanf.h"
-	"${SharedDir}/qcommon/safe/limited_vector.h"
-	)
-
 
 #=============================================================================
 #
