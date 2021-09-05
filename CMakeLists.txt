@@ -162,29 +162,26 @@ include(InstallConfig)
 
 # Operating system settings
 if(WIN64)
-	set(SharedDefines ${SharedDefines} "WIN64")
+	add_compile_definitions(WIN64)
 endif()
 
 if (APPLE)
-	set(SharedDefines "MACOS_X")
+	add_compile_definitions(MACOS_X)
 endif()
 
 if (NOT WIN32 AND NOT APPLE)
-	set(SharedDefines "ARCH_STRING=\"${Architecture}\"")
+	add_compile_definitions(ARCH_STRING=${Architecture})
 endif()
 
 if(CMAKE_SYSTEM_NAME MATCHES "BSD")
-  add_definitions(-DIOAPI_NO_64)
+	add_compile_definitions(IOAPI_NO_64)
 endif()
 
 set(CMAKE_CXX_STANDARD 20)
 
 # Compiler settings
 if(MSVC)
-	set(SharedDefines ${SharedDefines} "NOMINMAX")
-	set(SharedDefines ${SharedDefines} "_CRT_SECURE_NO_WARNINGS")
-	set(SharedDefines ${SharedDefines} "_SCL_SECURE_NO_WARNINGS")
-	set(SharedDefines ${SharedDefines} "_CRT_NONSTDC_NO_DEPRECATE")
+	add_compile_definitions(NOMINMAX _CRT_SECURE_NO_WARNINGS _SCL_SECURE_NO_WARNINGS _CRT_NONSTDC_NO_DEPRECATE)
 
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /arch:SSE2")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP")
@@ -268,8 +265,8 @@ else()
 	message(ERROR "Unsupported compiler")
 endif()
 
-set(SharedDefines ${SharedDefines} "$<$<CONFIG:Debug>:_DEBUG>")
-set(SharedDefines ${SharedDefines} "$<$<NOT:$<CONFIG:Debug>>:FINAL_BUILD>")
+add_compile_definitions($<$<CONFIG:Debug>:_DEBUG>)
+add_compile_definitions($<$<NOT:$<CONFIG:Debug>>:FINAL_BUILD>)
 
 if(BuildPortableVersion)
 	set(BUILD_PORTABLE ON)

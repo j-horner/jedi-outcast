@@ -16,7 +16,7 @@
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 #============================================================================
 
-set(JK2SPGameDefines ${SharedDefines} "JK2_MODE" "SP_GAME")
+set(JK2SPGameDefines "JK2_MODE" "SP_GAME")
 
 set(JK2SPGameIncludeDirectories
 	"${JK2SPDir}"

@@ -26,7 +26,7 @@ set(SPRDVanillaRendererIncludeDirectories
 	)
 
 # Defines
-set(SPRDVanillaDefines ${SharedDefines} "RENDERER" "_JK2EXE" "JK2_MODE")
+set(SPRDVanillaDefines "RENDERER" "_JK2EXE" "JK2_MODE")
 
 # Modular Renderer crap (let's hope this works..)
 

@@ -45,10 +45,8 @@ set(TestIncludeDirectories
 	"${SharedDir}"
 	"${GSLIncludeDirectory}"
 	)
-set(TestDefines "${SharedDefines}")
 
 add_executable(${TestTarget} ${TestFiles})
-set_target_properties(${TestTarget} PROPERTIES COMPILE_DEFINITIONS "${TestDefines}")
 set_target_properties(${TestTarget} PROPERTIES INCLUDE_DIRECTORIES "${TestIncludeDirectories}")
 set_target_properties(${TestTarget} PROPERTIES PROJECT_LABEL "Unit Tests")
 target_link_libraries(${TestTarget} ${TestLibraries})
