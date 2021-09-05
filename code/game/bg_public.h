@@ -694,10 +694,10 @@ typedef struct ginfoitem_s
 
 //==============================================================================
 
-extern weaponData_t weaponData[WP_NUM_WEAPONS];
+extern weaponData_s weaponData[WP_NUM_WEAPONS];
 
 //==============================================================================
-extern ammoData_t ammoData[AMMO_MAX];
+extern ammoData_s ammoData[AMMO_MAX];
 
 //==============================================================================
 

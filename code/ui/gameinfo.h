@@ -20,15 +20,14 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 ===========================================================================
 */
 
-#ifndef __GAMEINFO_H__
-#define __GAMEINFO_H__
+#pragma once
 
 
 #include "../qcommon/q_shared.h"
 #include <stdio.h>
 
 
-typedef struct {
+struct gameinfo_import_t {
 	int			(*FS_FOpenFile)( const char *qpath, fileHandle_t *file, fsMode_t mode );
 	int 		(*FS_Read)( void *buffer, int len, fileHandle_t f );
 	void		(*FS_FCloseFile)( fileHandle_t f );
@@ -38,9 +37,8 @@ typedef struct {
 	int			(*FS_ReadFile)( const char *name, void **buf );
 	void		(*FS_FreeFile)( void *buf );
 	void		(*Printf)( const char *fmt, ... );
-} gameinfo_import_t;
+};
 
 
 void GI_Init( gameinfo_import_t *import );
 
-#endif

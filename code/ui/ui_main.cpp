@@ -4858,8 +4858,8 @@ static void	UI_RecordWeapons( void )
 
 	int wpns = 0;
 	// always add blaster and saber
-	wpns |= (1<<WP_SABER);
-	wpns |= (1<<WP_BLASTER_PISTOL);
+	wpns |= (1<< static_cast<int>(weapon_t::WP_SABER));
+	wpns |= (1<< static_cast<int>(weapon_t::WP_BLASTER_PISTOL));
 	wpns |= (1<< uiInfo.selectedWeapon1);
 	wpns |= (1<< uiInfo.selectedWeapon2);
 	wpns |= (1<< uiInfo.selectedThrowWeapon);
@@ -5561,7 +5561,7 @@ static void UI_ClearWeapons ( void )
 		// Clear out any weapons for the player
 		pState->stats[ STAT_WEAPONS ] = 0;
 
-		pState->weapon = WP_NONE;
+		pState->weapon = static_cast<int>(weapon_t::WP_NONE);
 
 	}
 

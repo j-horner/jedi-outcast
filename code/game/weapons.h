@@ -26,12 +26,11 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 // Note that this is now included from both server and game modules, so don't include any other header files
 //	within this one that might break stuff...
 
-#ifndef __WEAPONS_H__
-#define __WEAPONS_H__
+#pragma once
 
 #include "../qcommon/q_shared.h"
 
-typedef enum //# weapon_e
+enum class weapon_t
 {
 	WP_NONE,
 
@@ -81,13 +80,12 @@ typedef enum //# weapon_e
 
 	//# #eol
 	WP_NUM_WEAPONS
-} weapon_t;
+};
 
-#define FIRST_WEAPON		WP_SABER		// this is the first weapon for next and prev weapon switching
-#define MAX_PLAYER_WEAPONS	WP_STUN_BATON	// this is the max you can switch to and get with the give all. - FIXME: it's actually this one *minus* one... why?
+constexpr static auto WP_NUM_WEAPONS = static_cast<int>(weapon_t::WP_NUM_WEAPONS);
 
 // AMMO_NONE must be first and AMMO_MAX must be last, cause weapon load validates based off of these vals
-typedef enum //# ammo_e
+enum class ammo_t
 {
 	AMMO_NONE,
 	AMMO_FORCE,		// AMMO_PHASER
@@ -100,17 +98,16 @@ typedef enum //# ammo_e
 	AMMO_TRIPMINE,
 	AMMO_DETPACK,
 	AMMO_MAX
-} ammo_t;
+};
 
+constexpr static auto AMMO_MAX = static_cast<int>(ammo_t::AMMO_MAX);
 
-typedef struct weaponData_s
-{
+struct weaponData_s {
 	char	classname[32];		// Spawning name
 	char	weaponMdl[64];		// Weapon Model
 	char	firingSnd[64];		// Sound made when fired
 	char	altFiringSnd[64];	// Sound made when alt-fired
-//	char	flashSnd[64];		// Sound made by flash
-//	char	altFlashSnd[64];	// Sound made by an alt-flash
+
 	char	stopSnd[64];		// Sound made when weapon stops firing
 	char	chargeSnd[64];		// sound to start when the weapon initiates the charging sequence
 	char	altChargeSnd[64];	// alt sound to start when the weapon initiates the charging sequence
@@ -156,231 +153,226 @@ typedef struct weaponData_s
 	int		altSplashDamage;
 	float	splashRadius;
 	float	altSplashRadius;
+};
 
-} weaponData_t;
 
-
-typedef struct ammoData_s
+struct ammoData_s
 {
 	char	icon[64];	// Name of ammo icon file
 	int		max;		// Max amount player can hold of ammo
-} ammoData_t;
+};
 
 // Bryar Pistol
 //--------
-#define BRYAR_PISTOL_VEL			1800
-#define BRYAR_PISTOL_DAMAGE			14
-#define BRYAR_CHARGE_UNIT			200.0f	// bryar charging gives us one more unit every 200ms--if you change this, you'll have to do the same in bg_pmove
+constexpr static auto BRYAR_PISTOL_VEL = 1800;
+constexpr static auto BRYAR_PISTOL_DAMAGE = 14;
+constexpr static auto BRYAR_CHARGE_UNIT = 200.0f;	// bryar charging gives us one more unit every 200ms--if you change this, you'll have to do the same in bg_pmove
 
 // E11 Blaster
 //---------
-#define BLASTER_MAIN_SPREAD			0.5f
-#define BLASTER_ALT_SPREAD			1.5f
-#define BLASTER_NPC_SPREAD			0.5f
-#define BLASTER_VELOCITY			2300
-#define BLASTER_NPC_VEL_CUT			0.5f
-#define BLASTER_NPC_HARD_VEL_CUT	0.7f
-#define BLASTER_DAMAGE				20
-#define	BLASTER_NPC_DAMAGE_EASY		6
-#define	BLASTER_NPC_DAMAGE_NORMAL	12 // 14
-#define	BLASTER_NPC_DAMAGE_HARD		16 // 18
+constexpr static auto BLASTER_MAIN_SPREAD = 0.5f;
+constexpr static auto BLASTER_ALT_SPREAD = 1.5f;
+constexpr static auto BLASTER_NPC_SPREAD = 0.5f;
+constexpr static auto BLASTER_VELOCITY = 2300;
+constexpr static auto BLASTER_NPC_VEL_CUT = 0.5f;
+constexpr static auto BLASTER_NPC_HARD_VEL_CUT = 0.7f;
+constexpr static auto BLASTER_DAMAGE = 20;
+constexpr static auto BLASTER_NPC_DAMAGE_EASY = 6;
+constexpr static auto BLASTER_NPC_DAMAGE_NORMAL = 12; // 14
+constexpr static auto BLASTER_NPC_DAMAGE_HARD = 16; // 18
 
 // Tenloss Disruptor
 //----------
-#define DISRUPTOR_MAIN_DAMAGE			14
-#define DISRUPTOR_NPC_MAIN_DAMAGE_EASY	5
-#define DISRUPTOR_NPC_MAIN_DAMAGE_MEDIUM	10
-#define DISRUPTOR_NPC_MAIN_DAMAGE_HARD	15
+constexpr static auto  DISRUPTOR_MAIN_DAMAGE = 14;
+constexpr static auto  DISRUPTOR_NPC_MAIN_DAMAGE_EASY = 5;
+constexpr static auto  DISRUPTOR_NPC_MAIN_DAMAGE_MEDIUM = 10;
+constexpr static auto  DISRUPTOR_NPC_MAIN_DAMAGE_HARD = 15;
 
-#define DISRUPTOR_ALT_DAMAGE			12
-#define DISRUPTOR_NPC_ALT_DAMAGE_EASY	15
-#define DISRUPTOR_NPC_ALT_DAMAGE_MEDIUM	25
-#define DISRUPTOR_NPC_ALT_DAMAGE_HARD	30
-#define DISRUPTOR_ALT_TRACES			3		// can go through a max of 3 entities
-#define DISRUPTOR_CHARGE_UNIT			150.0f	// distruptor charging gives us one more unit every 150ms--if you change this, you'll have to do the same in bg_pmove
+constexpr static auto  DISRUPTOR_ALT_DAMAGE = 12;
+constexpr static auto  DISRUPTOR_NPC_ALT_DAMAGE_EASY = 15;
+constexpr static auto  DISRUPTOR_NPC_ALT_DAMAGE_MEDIUM = 25;
+constexpr static auto  DISRUPTOR_NPC_ALT_DAMAGE_HARD = 30;
+constexpr static auto  DISRUPTOR_ALT_TRACES = 3;		// can go through a max of 3 entities
+constexpr static auto  DISRUPTOR_CHARGE_UNIT = 150.0f;	// distruptor charging gives us one more unit every 150ms--if you change this, you'll have to do the same in bg_pmove
 
 // Wookie Bowcaster
 //----------
-#define	BOWCASTER_DAMAGE			45
-#define	BOWCASTER_VELOCITY			1300
-#define	BOWCASTER_NPC_DAMAGE_EASY	12
-#define	BOWCASTER_NPC_DAMAGE_NORMAL	24
-#define	BOWCASTER_NPC_DAMAGE_HARD	36
-#define BOWCASTER_SPLASH_DAMAGE		0
-#define BOWCASTER_SPLASH_RADIUS		0
-#define BOWCASTER_SIZE				2
+constexpr static auto 	BOWCASTER_DAMAGE = 45;
+constexpr static auto 	BOWCASTER_VELOCITY = 1300;
+constexpr static auto 	BOWCASTER_NPC_DAMAGE_EASY = 12;
+constexpr static auto 	BOWCASTER_NPC_DAMAGE_NORMAL = 24;
+constexpr static auto 	BOWCASTER_NPC_DAMAGE_HARD = 36;
+constexpr static auto  BOWCASTER_SPLASH_DAMAGE = 0;
+constexpr static auto  BOWCASTER_SPLASH_RADIUS = 0;
+constexpr static auto  BOWCASTER_SIZE = 2;
 
-#define BOWCASTER_ALT_SPREAD		5.0f
-#define BOWCASTER_VEL_RANGE			0.3f
-#define BOWCASTER_CHARGE_UNIT		200.0f	// bowcaster charging gives us one more unit every 200ms--if you change this, you'll have to do the same in bg_pmove
+constexpr static auto  BOWCASTER_ALT_SPREAD = 5.0f;
+constexpr static auto  BOWCASTER_VEL_RANGE = 0.3f;
+constexpr static auto  BOWCASTER_CHARGE_UNIT = 200.0f;	// bowcaster charging gives us one more unit every 200ms--if you change this, you'll have to do the same in bg_pmove
 
 // Heavy Repeater
 //----------
-#define REPEATER_SPREAD				1.4f
-#define REPEATER_NPC_SPREAD			0.7f
-#define	REPEATER_DAMAGE				8
-#define	REPEATER_VELOCITY			1600
-#define	REPEATER_NPC_DAMAGE_EASY	2
-#define	REPEATER_NPC_DAMAGE_NORMAL	4
-#define	REPEATER_NPC_DAMAGE_HARD	6
+constexpr static auto  REPEATER_SPREAD = 1.4f;
+constexpr static auto  REPEATER_NPC_SPREAD = 0.7f;
+constexpr static auto 	REPEATER_DAMAGE = 8;
+constexpr static auto 	REPEATER_VELOCITY = 1600;
+constexpr static auto 	REPEATER_NPC_DAMAGE_EASY = 2;
+constexpr static auto 	REPEATER_NPC_DAMAGE_NORMAL = 4;
+constexpr static auto 	REPEATER_NPC_DAMAGE_HARD = 6;
 
-#define REPEATER_ALT_SIZE				3	// half of bbox size
-#define	REPEATER_ALT_DAMAGE				60
-#define REPEATER_ALT_SPLASH_DAMAGE		60
-#define REPEATER_ALT_SPLASH_RADIUS		128
-#define	REPEATER_ALT_VELOCITY			1100
-#define	REPEATER_ALT_NPC_DAMAGE_EASY	15
-#define	REPEATER_ALT_NPC_DAMAGE_NORMAL	30
-#define	REPEATER_ALT_NPC_DAMAGE_HARD	45
+constexpr static auto  REPEATER_ALT_SIZE = 3;	// half of bbox size
+constexpr static auto 	REPEATER_ALT_DAMAGE = 60;
+constexpr static auto  REPEATER_ALT_SPLASH_DAMAGE = 60;
+constexpr static auto  REPEATER_ALT_SPLASH_RADIUS = 128;
+constexpr static auto 	REPEATER_ALT_VELOCITY = 1100;
+constexpr static auto 	REPEATER_ALT_NPC_DAMAGE_EASY = 15;
+constexpr static auto 	REPEATER_ALT_NPC_DAMAGE_NORMAL = 30;
+constexpr static auto 	REPEATER_ALT_NPC_DAMAGE_HARD = 45;
 
 // DEMP2
 //----------
-#define	DEMP2_DAMAGE				15
-#define	DEMP2_VELOCITY				1800
-#define	DEMP2_NPC_DAMAGE_EASY		6
-#define	DEMP2_NPC_DAMAGE_NORMAL		12
-#define	DEMP2_NPC_DAMAGE_HARD		18
-#define	DEMP2_SIZE					2		// half of bbox size
+constexpr static auto 	DEMP2_DAMAGE = 15;
+constexpr static auto 	DEMP2_VELOCITY = 1800;
+constexpr static auto 	DEMP2_NPC_DAMAGE_EASY = 6;
+constexpr static auto 	DEMP2_NPC_DAMAGE_NORMAL = 12;
+constexpr static auto 	DEMP2_NPC_DAMAGE_HARD = 18;
+constexpr static auto 	DEMP2_SIZE = 2;		// half of bbox size
 
-#define DEMP2_ALT_DAMAGE			15
-#define DEMP2_CHARGE_UNIT			500.0f	// demp2 charging gives us one more unit every 500ms--if you change this, you'll have to do the same in bg_pmove
-#define DEMP2_ALT_RANGE				4096
-#define DEMP2_ALT_SPLASHRADIUS		256
+constexpr static auto  DEMP2_ALT_DAMAGE = 15;
+constexpr static auto  DEMP2_CHARGE_UNIT = 500.0f;	// demp2 charging gives us one more unit every 500ms--if you change this, you'll have to do the same in bg_pmove
+constexpr static auto  DEMP2_ALT_RANGE = 4096;
+constexpr static auto  DEMP2_ALT_SPLASHRADIUS = 256;
 
 // Golan Arms Flechette
 //---------
-#define FLECHETTE_SHOTS				6
-#define FLECHETTE_SPREAD			4.0f
-#define FLECHETTE_DAMAGE			15
-#define FLECHETTE_VEL				3500
-#define FLECHETTE_SIZE				1
+constexpr static auto  FLECHETTE_SHOTS = 6;
+constexpr static auto  FLECHETTE_SPREAD = 4.0f;
+constexpr static auto  FLECHETTE_DAMAGE = 15;
+constexpr static auto  FLECHETTE_VEL = 3500;
+constexpr static auto  FLECHETTE_SIZE = 1;
 
-#define FLECHETTE_ALT_DAMAGE		20
-#define FLECHETTE_ALT_SPLASH_DAM	20
-#define FLECHETTE_ALT_SPLASH_RAD	128
+constexpr static auto  FLECHETTE_ALT_DAMAGE = 20;
+constexpr static auto  FLECHETTE_ALT_SPLASH_DAM = 20;
+constexpr static auto  FLECHETTE_ALT_SPLASH_RAD = 128;
 
 // NOT CURRENTLY USED
-#define FLECHETTE_MINE_RADIUS_CHECK		200
-#define FLECHETTE_MINE_VEL				1000
-#define FLECHETTE_MINE_DAMAGE			100
-#define FLECHETTE_MINE_SPLASH_DAMAGE	200
-#define FLECHETTE_MINE_SPLASH_RADIUS	200
+constexpr static auto  FLECHETTE_MINE_RADIUS_CHECK = 200;
+constexpr static auto  FLECHETTE_MINE_VEL = 1000;
+constexpr static auto  FLECHETTE_MINE_DAMAGE = 100;
+constexpr static auto  FLECHETTE_MINE_SPLASH_DAMAGE = 200;
+constexpr static auto  FLECHETTE_MINE_SPLASH_RADIUS = 200;
 
 // Personal Rocket Launcher
 //---------
-#define	ROCKET_VELOCITY				900
-#define	ROCKET_DAMAGE				100
-#define	ROCKET_SPLASH_DAMAGE		100
-#define	ROCKET_SPLASH_RADIUS		160
-#define ROCKET_NPC_DAMAGE_EASY		20
-#define ROCKET_NPC_DAMAGE_NORMAL	40
-#define ROCKET_NPC_DAMAGE_HARD		60
-#define ROCKET_SIZE					3
+constexpr static auto 	ROCKET_VELOCITY = 900;
+constexpr static auto 	ROCKET_DAMAGE = 100;
+constexpr static auto 	ROCKET_SPLASH_DAMAGE = 100;
+constexpr static auto 	ROCKET_SPLASH_RADIUS = 160;
+constexpr static auto  ROCKET_NPC_DAMAGE_EASY = 20;
+constexpr static auto  ROCKET_NPC_DAMAGE_NORMAL = 40;
+constexpr static auto  ROCKET_NPC_DAMAGE_HARD = 60;
+constexpr static auto  ROCKET_SIZE = 3;
 
-#define	ROCKET_ALT_VELOCITY			(ROCKET_VELOCITY*0.5)
-#define ROCKET_ALT_THINK_TIME		100
+constexpr static auto 	ROCKET_ALT_VELOCITY = (ROCKET_VELOCITY*0.5);
+constexpr static auto  ROCKET_ALT_THINK_TIME = 100;
 
 // Concussion Rifle
 //---------
 //primary
-#define	CONC_VELOCITY				3000
-#define	CONC_DAMAGE					150
-#define CONC_NPC_SPREAD				0.7f
-#define	CONC_NPC_DAMAGE_EASY		15
-#define	CONC_NPC_DAMAGE_NORMAL		30
-#define	CONC_NPC_DAMAGE_HARD		50
-#define	CONC_SPLASH_DAMAGE			50
-#define	CONC_SPLASH_RADIUS			300
+constexpr static auto 	CONC_VELOCITY = 3000;
+constexpr static auto 	CONC_DAMAGE = 150;
+constexpr static auto  CONC_NPC_SPREAD = 0.7f;
+constexpr static auto 	CONC_NPC_DAMAGE_EASY = 15;
+constexpr static auto 	CONC_NPC_DAMAGE_NORMAL = 30;
+constexpr static auto 	CONC_NPC_DAMAGE_HARD = 50;
+constexpr static auto 	CONC_SPLASH_DAMAGE = 50;
+constexpr static auto 	CONC_SPLASH_RADIUS = 300;
 //alt
-#define CONC_ALT_DAMAGE				225//100
-#define CONC_ALT_NPC_DAMAGE_EASY	10
-#define CONC_ALT_NPC_DAMAGE_MEDIUM	20
-#define CONC_ALT_NPC_DAMAGE_HARD	30
+constexpr static auto  CONC_ALT_DAMAGE = 225; //100
+constexpr static auto  CONC_ALT_NPC_DAMAGE_EASY = 10;
+constexpr static auto  CONC_ALT_NPC_DAMAGE_MEDIUM = 20;
+constexpr static auto  CONC_ALT_NPC_DAMAGE_HARD = 30;
 
 // Emplaced Gun
 //--------------
-#define EMPLACED_VEL				6000	// very fast
-#define EMPLACED_DAMAGE				150		// and very damaging
-#define EMPLACED_SIZE				5		// make it easier to hit things
+constexpr static auto  EMPLACED_VEL = 6000;	// very fast;
+constexpr static auto  EMPLACED_DAMAGE = 150;		// and very damaging
+constexpr static auto  EMPLACED_SIZE = 5;		// make it easier to hit things
 
 // ATST Main Gun
 //--------------
-#define ATST_MAIN_VEL				4000	//
-#define ATST_MAIN_DAMAGE			25		//
-#define ATST_MAIN_SIZE				3		// make it easier to hit things
+constexpr static auto  ATST_MAIN_VEL = 4000;	//;
+constexpr static auto  ATST_MAIN_DAMAGE = 25;		//;
+constexpr static auto  ATST_MAIN_SIZE = 3;		// make it easier to hit things;
 
 // ATST Side Gun
 //---------------
-#define ATST_SIDE_MAIN_DAMAGE				75
-#define ATST_SIDE_MAIN_VELOCITY				1300
-#define ATST_SIDE_MAIN_NPC_DAMAGE_EASY		30
-#define ATST_SIDE_MAIN_NPC_DAMAGE_NORMAL	40
-#define ATST_SIDE_MAIN_NPC_DAMAGE_HARD		50
-#define ATST_SIDE_MAIN_SIZE					4
-#define ATST_SIDE_MAIN_SPLASH_DAMAGE		10	// yeah, pretty small, either zero out or make it worth having?
-#define ATST_SIDE_MAIN_SPLASH_RADIUS		16	// yeah, pretty small, either zero out or make it worth having?
+constexpr static auto  ATST_SIDE_MAIN_DAMAGE = 75;
+constexpr static auto  ATST_SIDE_MAIN_VELOCITY = 1300;
+constexpr static auto  ATST_SIDE_MAIN_NPC_DAMAGE_EASY = 30;
+constexpr static auto  ATST_SIDE_MAIN_NPC_DAMAGE_NORMAL = 40;
+constexpr static auto  ATST_SIDE_MAIN_NPC_DAMAGE_HARD = 50;
+constexpr static auto  ATST_SIDE_MAIN_SIZE = 4;
+constexpr static auto  ATST_SIDE_MAIN_SPLASH_DAMAGE = 10;	// yeah, pretty small, either zero out or make it worth having?;
+constexpr static auto  ATST_SIDE_MAIN_SPLASH_RADIUS = 16;	// yeah, pretty small, either zero out or make it worth having?;
 
-#define ATST_SIDE_ALT_VELOCITY				1100
-#define ATST_SIDE_ALT_NPC_VELOCITY			600
-#define ATST_SIDE_ALT_DAMAGE				130
+constexpr static auto  ATST_SIDE_ALT_VELOCITY = 1100;
+constexpr static auto  ATST_SIDE_ALT_NPC_VELOCITY = 600;
+constexpr static auto  ATST_SIDE_ALT_DAMAGE = 130;
 
-#define ATST_SIDE_ROCKET_NPC_DAMAGE_EASY	30
-#define ATST_SIDE_ROCKET_NPC_DAMAGE_NORMAL	50
-#define ATST_SIDE_ROCKET_NPC_DAMAGE_HARD	90
+constexpr static auto  ATST_SIDE_ROCKET_NPC_DAMAGE_EASY = 30;
+constexpr static auto  ATST_SIDE_ROCKET_NPC_DAMAGE_NORMAL = 50;
+constexpr static auto  ATST_SIDE_ROCKET_NPC_DAMAGE_HARD = 90;
 
-#define	ATST_SIDE_ALT_SPLASH_DAMAGE			130
-#define	ATST_SIDE_ALT_SPLASH_RADIUS			200
-#define ATST_SIDE_ALT_ROCKET_SIZE			5
-#define ATST_SIDE_ALT_ROCKET_SPLASH_SCALE	0.5f	// scales splash for NPC's
+constexpr static auto 	ATST_SIDE_ALT_SPLASH_DAMAGE = 130;
+constexpr static auto 	ATST_SIDE_ALT_SPLASH_RADIUS = 200;
+constexpr static auto  ATST_SIDE_ALT_ROCKET_SIZE = 5;
+constexpr static auto  ATST_SIDE_ALT_ROCKET_SPLASH_SCALE = 0.5f;	// scales splash for NPC's
 
 // Stun Baton
 //--------------
-#define STUN_BATON_DAMAGE			22
-#define STUN_BATON_ALT_DAMAGE		22
-#define STUN_BATON_RANGE			25
+constexpr static auto  STUN_BATON_DAMAGE = 22;
+constexpr static auto  STUN_BATON_ALT_DAMAGE = 22;
+constexpr static auto  STUN_BATON_RANGE = 25;
 
 // Laser Trip Mine
 //--------------
-#define LT_DAMAGE			150
-#define LT_SPLASH_RAD		256.0f
-#define LT_SPLASH_DAM		90
+constexpr static auto  LT_DAMAGE = 150;
+constexpr static auto  LT_SPLASH_RAD = 256.0f;
+constexpr static auto  LT_SPLASH_DAM = 90;
 
-#define LT_VELOCITY			250.0f
-#define LT_ALT_VELOCITY		1000.0f
+constexpr static auto  LT_VELOCITY = 250.0f;
+constexpr static auto  LT_ALT_VELOCITY = 1000.0f;
 
-#define PROX_MINE_RADIUS_CHECK		190
+constexpr static auto  PROX_MINE_RADIUS_CHECK = 190;
 
-#define LT_SIZE				3.0f
-#define LT_ALT_TIME			2000
-#define	LT_ACTIVATION_DELAY	1000
-#define	LT_DELAY_TIME		50
+constexpr static auto  LT_SIZE = 3.0f;
+constexpr static auto  LT_ALT_TIME = 2000;
+constexpr static auto 	LT_ACTIVATION_DELAY = 1000;
+constexpr static auto 	LT_DELAY_TIME = 50;
 
 // Thermal Detonator
 //--------------
-#define TD_DAMAGE			100
-#define TD_NPC_DAMAGE_CUT	0.6f	// NPC thrown dets deliver only 60% of the damage that a player thrown one does
-#define TD_SPLASH_RAD		128
-#define TD_SPLASH_DAM		90
-#define TD_VELOCITY			900
-#define TD_MIN_CHARGE		0.15f
-#define TD_TIME				4000
-#define TD_THINK_TIME		300		// don't think too often?
-#define TD_TEST_RAD			(TD_SPLASH_RAD * 0.8f) // no sense in auto-blowing up if exactly on the radius edge--it would hardly do any damage
-#define TD_ALT_TIME			3000
+constexpr static auto  TD_DAMAGE = 100;
+constexpr static auto  TD_NPC_DAMAGE_CUT = 0.6f;	// NPC thrown dets deliver only 60% of the damage that a player thrown one does;
+constexpr static auto  TD_SPLASH_RAD = 128;
+constexpr static auto  TD_SPLASH_DAM = 90;
+constexpr static auto  TD_VELOCITY = 900;
+constexpr static auto  TD_MIN_CHARGE = 0.15f;
+constexpr static auto  TD_TIME = 4000;
+constexpr static auto  TD_THINK_TIME = 300;		// don't think too often?;
+constexpr static auto  TD_TEST_RAD = (TD_SPLASH_RAD * 0.8f); // no sense in auto-blowing up if exactly on the radius edge--it would hardly do any damage;
 
-#define TD_ALT_DAMAGE		100
-#define TD_ALT_SPLASH_RAD	128
-#define TD_ALT_SPLASH_DAM	90
-#define TD_ALT_VELOCITY		600
-#define TD_ALT_MIN_CHARGE	0.15f
-#define TD_ALT_TIME			3000
+constexpr static auto  TD_ALT_DAMAGE = 100;
+constexpr static auto  TD_ALT_SPLASH_RAD = 128;
+constexpr static auto  TD_ALT_SPLASH_DAM = 90;
+constexpr static auto  TD_ALT_VELOCITY = 600;
+constexpr static auto  TD_ALT_MIN_CHARGE = 0.15f;
+constexpr static auto  TD_ALT_TIME = 3000;
 
 // Tusken Rifle Shot
 //--------------
-#define TUSKEN_RIFLE_VEL			3000	// fast
-#define TUSKEN_RIFLE_DAMAGE_EASY	20		// damaging
-#define TUSKEN_RIFLE_DAMAGE_MEDIUM	30		// very damaging
-#define TUSKEN_RIFLE_DAMAGE_HARD	50		// extremely damaging
-
-
-#endif//#ifndef __WEAPONS_H__
+constexpr static auto  TUSKEN_RIFLE_VEL = 3000;	// fast;
+constexpr static auto  TUSKEN_RIFLE_DAMAGE_EASY = 20;		// damaging;
+constexpr static auto  TUSKEN_RIFLE_DAMAGE_MEDIUM = 30;		// very damaging;
+constexpr static auto  TUSKEN_RIFLE_DAMAGE_HARD = 50;		// extremely damaging;
