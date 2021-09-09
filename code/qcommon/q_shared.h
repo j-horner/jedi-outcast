@@ -1640,7 +1640,23 @@ public:
 	int			stats[MAX_STATS];
 	int			persistant[MAX_PERSISTANT];				// stats that aren't cleared on death
 	int			powerups[MAX_POWERUPS];					// level.time that the powerup runs out
-	int			ammo[MAX_AMMO];
+	
+	struct AmmoData {
+
+		constexpr auto& operator[](int i) const noexcept { return data[i]; }
+		constexpr auto& operator[](int i) noexcept { return data[i]; }
+		
+		constexpr auto& operator[](ammo_t a) const noexcept { return data[static_cast<int>(a)]; }
+		constexpr auto& operator[](ammo_t a) noexcept { return data[static_cast<int>(a)]; }
+
+		int data[AMMO_MAX];
+	};
+
+	AmmoData	ammo;
+
+	// int			ammo[MAX_AMMO];
+	
+	
 	int			inventory[MAX_INVENTORY];							// Count of each inventory item.
 	char  		security_key_message[MAX_SECURITY_KEYS][MAX_SECURITY_KEY_MESSSAGE];	// Security key types
 
@@ -1952,7 +1968,7 @@ public:
 		saved_game.write<int32_t>(stats);
 		saved_game.write<int32_t>(persistant);
 		saved_game.write<int32_t>(powerups);
-		saved_game.write<int32_t>(ammo);
+		saved_game.write<int32_t>(ammo.data);
 		saved_game.write<int32_t>(inventory);
 		saved_game.write<int8_t>(security_key_message);
 		saved_game.write<float>(serverViewOrg);
@@ -2121,7 +2137,7 @@ public:
 		saved_game.read<int32_t>(stats);
 		saved_game.read<int32_t>(persistant);
 		saved_game.read<int32_t>(powerups);
-		saved_game.read<int32_t>(ammo);
+		saved_game.read<int32_t>(ammo.data);
 		saved_game.read<int32_t>(inventory);
 		saved_game.read<int8_t>(security_key_message);
 		saved_game.read<float>(serverViewOrg);

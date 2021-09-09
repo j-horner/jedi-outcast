@@ -698,7 +698,7 @@ typedef struct ginfoitem_s
 extern WeaponData weaponData;
 
 //==============================================================================
-extern ammoData_s ammoData[AMMO_MAX];
+extern AmmoData ammoData;
 
 //==============================================================================
 

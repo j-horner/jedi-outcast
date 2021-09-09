@@ -33,7 +33,7 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 WeaponData weaponData;
 
-ammoData_s ammoData[AMMO_MAX];
+AmmoData ammoData;
 
 extern void WP_LoadWeaponParms (void);
 

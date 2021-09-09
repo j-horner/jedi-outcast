@@ -1118,7 +1118,7 @@ void MSG_WriteDeltaPlayerstate( msg_t *msg, playerState_t *from, playerState_t *
 		MSG_WriteShort( msg, ammobits );
 		for (i=0 ; i<MAX_AMMO ; i++)
 			if (ammobits & (1<<i) )
-				MSG_WriteSShort (msg, to->ammo[i]);
+				MSG_WriteSShort (msg, static_cast<int>(to->ammo[i]));
 	} else {
 		MSG_WriteBits( msg, 0, 1 );	// no change
 	}
