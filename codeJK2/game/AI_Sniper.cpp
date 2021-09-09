@@ -702,7 +702,7 @@ void NPC_BSSniper_Attack( void )
 				{//he can get right to me
 					NPCInfo->scriptFlags &= ~SCF_ALT_FIRE;
 					//reset fire-timing variables
-					NPC_ChangeWeapon( WP_DISRUPTOR );
+					NPC_ChangeWeapon(static_cast<int>(WP_DISRUPTOR) );
 					NPC_UpdateAngles( qtrue, qtrue );
 					return;
 				}
@@ -718,7 +718,7 @@ void NPC_BSSniper_Attack( void )
 			{//use primary fire
 				NPCInfo->scriptFlags |= SCF_ALT_FIRE;
 				//reset fire-timing variables
-				NPC_ChangeWeapon( WP_DISRUPTOR );
+				NPC_ChangeWeapon(static_cast<int>(WP_DISRUPTOR) );
 				NPC_UpdateAngles( qtrue, qtrue );
 				return;
 			}

@@ -253,8 +253,10 @@ void ViewHeightFix(const gentity_t *const ent)
 	}
 }
 
-qboolean W_AccuracyLoggableWeapon( int weapon, qboolean alt_fire, int mod )
+qboolean W_AccuracyLoggableWeapon( int weapon_, qboolean alt_fire, int mod )
 {
+	const auto weapon = static_cast<weapon_t>(weapon_);
+	
 	if ( mod != MOD_UNKNOWN )
 	{
 		switch( mod )
@@ -699,7 +701,7 @@ void FireWeapon( gentity_t *ent, qboolean alt_fire )
 		if ( ent->s.weapon == WP_FLECHETTE || (ent->s.weapon == WP_BOWCASTER && !alt_fire) )
 		{//these can fire multiple shots, count them individually within the firing functions
 		}
-		else if ( W_AccuracyLoggableWeapon( ent->s.weapon, alt_fire, MOD_UNKNOWN ) )
+		else if ( W_AccuracyLoggableWeapon(static_cast<int>(ent->s.weapon), alt_fire, MOD_UNKNOWN ) )
 		{
 			ent->client->sess.missionStats.shotsFired++;
 		}
@@ -781,7 +783,7 @@ void emplaced_gun_use( gentity_t *self, gentity_t *other, gentity_t *activator )
 	// don't allow using it again for half a second
 	if ( self->delay + 500 < level.time )
 	{
-		int	oldWeapon = activator->s.weapon;
+		auto	oldWeapon = activator->s.weapon;
 
 		if ( oldWeapon == WP_SABER )
 		{
@@ -790,8 +792,8 @@ void emplaced_gun_use( gentity_t *self, gentity_t *other, gentity_t *activator )
 
 		// swap the users weapon with the emplaced gun and add the ammo the gun has to the player
 		activator->client->ps.weapon = self->s.weapon;
-		Add_Ammo( activator, WP_EMPLACED_GUN, self->count );
-		activator->client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_EMPLACED_GUN );
+		Add_Ammo( activator, static_cast<int>(WP_EMPLACED_GUN), self->count );
+		activator->client->ps.stats[STAT_WEAPONS] |= ( 1 << static_cast<int>(WP_EMPLACED_GUN) );
 
 		// Allow us to point from one to the other
 		activator->owner = self; // kind of dumb, but when we are locked to the weapon, we are owned by it.
@@ -819,12 +821,12 @@ extern void ChangeWeapon( gentity_t *ent, int newWeapon );
 //				gi.linkentity( activator );
 			}
 
-			ChangeWeapon( activator, WP_EMPLACED_GUN );
+			ChangeWeapon( activator, static_cast<int>(WP_EMPLACED_GUN) );
 		}
 		else if ( activator->s.number == 0 )
 		{
 			// we don't want for it to draw the weapon select stuff
-			cg.weaponSelect = WP_EMPLACED_GUN;
+			cg.weaponSelect = static_cast<int>(WP_EMPLACED_GUN);
 			CG_CenterPrint( "@INGAME_EXIT_VIEW", SCREEN_HEIGHT * 0.95 );
 		}
 		// Since we move the activator inside of the gun, we reserve a solid spot where they were standing in order to be able to get back out without being in solid

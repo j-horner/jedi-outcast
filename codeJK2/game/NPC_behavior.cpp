@@ -620,7 +620,7 @@ void NPC_BSFollowLeader (void)
 				NPCInfo->enemyCheckDebounceTime = level.time + Q_irand( 1000, 2000 );
 			}
 		}
-		else if ( NPC->client->ps.weapon && NPCInfo->enemyCheckDebounceTime < level.time )
+		else if ( (NPC->client->ps.weapon != weapon_t::WP_NONE) && NPCInfo->enemyCheckDebounceTime < level.time )
 		{
 			NPC_CheckEnemy(
 				(qboolean)((NPCInfo->confusionTime < level.time) || (NPCInfo->tempBehavior != BS_FOLLOW_LEADER)),
@@ -628,7 +628,7 @@ void NPC_BSFollowLeader (void)
 		}
 	}
 
-	if ( NPC->enemy && NPC->client->ps.weapon )
+	if ( NPC->enemy && (NPC->client->ps.weapon != weapon_t::WP_NONE))
 	{//If have an enemy, face him and fire
 		if ( NPC->client->ps.weapon == WP_SABER )//|| NPCInfo->confusionTime>level.time )
 		{//lightsaber user or charmed enemy

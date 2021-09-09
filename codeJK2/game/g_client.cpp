@@ -1346,7 +1346,7 @@ void G_PilotXWing( gentity_t *ent )
 	}
 	if ( ent->client->ps.vehicleModel != 0 )
 	{
-		CG_ChangeWeapon( WP_SABER );
+		CG_ChangeWeapon( static_cast<int>(WP_SABER) );
 		ent->client->ps.vehicleModel = 0;
 		ent->svFlags &= ~SVF_CUSTOM_GRAVITY;
 		ent->client->ps.stats[STAT_ARMOR] = 0;//HACK
@@ -1366,12 +1366,12 @@ void G_PilotXWing( gentity_t *ent )
 	{
 		ent->client->ps.vehicleModel = G_ModelIndex( "models/map_objects/ships/x_wing.md3" );
 
-		ent->client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_ATST_SIDE );
+		ent->client->ps.stats[STAT_WEAPONS] |= ( 1 << static_cast<int>(WP_ATST_SIDE) );
 		ent->client->ps.ammo[weaponData[WP_ATST_SIDE].ammoIndex] = ammoData[weaponData[WP_ATST_SIDE].ammoIndex].max;
 		gitem_t *item = FindItemForWeapon( WP_ATST_SIDE );
 		RegisterItem( item );	//make sure the weapon is cached in case this runs at startup
 		G_AddEvent( ent, EV_ITEM_PICKUP, (item - bg_itemlist) );
-		CG_ChangeWeapon( WP_ATST_SIDE );
+		CG_ChangeWeapon( static_cast<int>(WP_ATST_SIDE) );
 
 		ent->client->ps.gravity = 0;
 		ent->svFlags |= SVF_CUSTOM_GRAVITY;
@@ -1413,10 +1413,10 @@ void G_DriveATST( gentity_t *ent, gentity_t *atst )
 		ent->client->standheight = DEFAULT_MAXS_2;
 		G_SetG2PlayerModel( ent, "kyle", NULL, NULL, NULL );
 		//FIXME: reset/initialize their weapon
-		ent->client->ps.stats[STAT_WEAPONS] &= ~(( 1 << WP_ATST_MAIN )|( 1 << WP_ATST_SIDE ));
+		ent->client->ps.stats[STAT_WEAPONS] &= ~(( 1 << static_cast<int>(WP_ATST_MAIN) )|( 1 << static_cast<int>(WP_ATST_SIDE) ));
 		ent->client->ps.ammo[weaponData[WP_ATST_MAIN].ammoIndex] = 0;
 		ent->client->ps.ammo[weaponData[WP_ATST_SIDE].ammoIndex] = 0;
-		CG_ChangeWeapon( WP_BRYAR_PISTOL );
+		CG_ChangeWeapon( static_cast<int>(WP_BRYAR_PISTOL) );
 		//camera
 		//if ( ent->client->ps.weapon != WP_SABER )
 		{
@@ -1471,10 +1471,10 @@ void G_DriveATST( gentity_t *ent, gentity_t *atst )
 		item = FindItemForWeapon( WP_ATST_SIDE );	//precache the weapon
 		CG_RegisterItemSounds( (item-bg_itemlist) );
 		CG_RegisterItemVisuals( (item-bg_itemlist) );
-		ent->client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_ATST_MAIN )|( 1 << WP_ATST_SIDE );
+		ent->client->ps.stats[STAT_WEAPONS] |= ( 1 << static_cast<int>(WP_ATST_MAIN) )|( 1 << static_cast<int>(WP_ATST_SIDE) );
 		ent->client->ps.ammo[weaponData[WP_ATST_MAIN].ammoIndex] = ammoData[weaponData[WP_ATST_MAIN].ammoIndex].max;
 		ent->client->ps.ammo[weaponData[WP_ATST_SIDE].ammoIndex] = ammoData[weaponData[WP_ATST_SIDE].ammoIndex].max;
-		CG_ChangeWeapon( WP_ATST_MAIN );
+		CG_ChangeWeapon( static_cast<int>(WP_ATST_MAIN) );
 		//HACKHACKHACKTEMP
 		item = FindItemForWeapon( WP_EMPLACED_GUN );
 		CG_RegisterItemSounds( (item-bg_itemlist) );
@@ -1644,18 +1644,18 @@ qboolean ClientSpawn(gentity_t *ent, SavedGameJustLoaded_e eSavedGameJustLoaded 
 		client->ps.clientNum = index;
 
 		// give default weapons
-		client->ps.stats[STAT_WEAPONS] = ( 1 << WP_NONE );
-		client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_BRYAR_PISTOL );	//these are precached in g_items, ClearRegisteredItems()
+		client->ps.stats[STAT_WEAPONS] = ( 1 << static_cast<int>(WP_NONE) );
+		client->ps.stats[STAT_WEAPONS] |= ( 1 << static_cast<int>(WP_BRYAR_PISTOL) );	//these are precached in g_items, ClearRegisteredItems()
 		client->ps.inventory[INV_ELECTROBINOCULARS] = 1;
 
 		// always give the bryar pistol, but we have to give EITHER the saber or the stun baton..never both
 		if ( spawnPoint->spawnflags & 32 ) // STUN_BATON
 		{
-			client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_STUN_BATON );
+			client->ps.stats[STAT_WEAPONS] |= ( 1 << static_cast<int>(WP_STUN_BATON) );
 		}
 		else
 		{	// give the saber AND the blaster because most test maps will not have the STUN BATON flag set
-			client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_SABER );	//this is precached in SP_info_player_deathmatch
+			client->ps.stats[STAT_WEAPONS] |= ( 1 << static_cast<int>(WP_SABER) );	//this is precached in SP_info_player_deathmatch
 		}
 
 		for ( i = 0; i < AMMO_THERMAL; i++ ) // don't give ammo for explosives
@@ -1749,7 +1749,7 @@ qboolean ClientSpawn(gentity_t *ent, SavedGameJustLoaded_e eSavedGameJustLoaded 
 		ucmd = client->pers.lastCommand;
 		ucmd.serverTime = level.time;
 		VectorCopyM( client->pers.cmd_angles, ucmd.angles );
-		ucmd.weapon = client->ps.weapon;	// client think calls Pmove which sets the client->ps.weapon to ucmd.weapon, so ...
+		ucmd.weapon = static_cast<byte>(client->ps.weapon);	// client think calls Pmove which sets the client->ps.weapon to ucmd.weapon, so ...
 		ent->client->ps.groundEntityNum = ENTITYNUM_NONE;
 		ClientThink( ent-g_entities, &ucmd );
 
@@ -1765,13 +1765,13 @@ qboolean ClientSpawn(gentity_t *ent, SavedGameJustLoaded_e eSavedGameJustLoaded 
 
 		if ( spawnPoint->spawnflags & 64 )
 		{//player starts with absolutely no weapons
-			ent->client->ps.stats[STAT_WEAPONS] = ( 1 << WP_NONE );
+			ent->client->ps.stats[STAT_WEAPONS] = ( 1 << static_cast<int>(WP_NONE) );
 			ent->client->ps.ammo[weaponData[WP_NONE].ammoIndex] = 32000;	// checkme
 			ent->client->ps.weapon = WP_NONE;
 			ent->client->ps.weaponstate = WEAPON_READY;
 		}
 
-		if ( ent->client->ps.stats[STAT_WEAPONS] & ( 1 << WP_SABER ) )
+		if ( ent->client->ps.stats[STAT_WEAPONS] & ( 1 << static_cast<int>(WP_SABER) ) )
 		{//set up so has lightsaber
 			WP_SaberInitBladeData( ent );
 			if ( ent->weaponModel == -1 && ent->client->ps.weapon == WP_SABER )

@@ -31,7 +31,10 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "g_vehicles.h"
 
 
-extern weaponData_t weaponData[WP_NUM_WEAPONS];
+// extern weaponData_t weaponData[WP_NUM_WEAPONS];
+
+extern WeaponData weaponData;
+
 extern ammoData_t ammoData[AMMO_MAX];
 
 

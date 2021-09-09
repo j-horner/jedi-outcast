@@ -863,7 +863,7 @@ void NPC_BSGM_Attack( void )
 				NPCInfo->scriptFlags &= ~SCF_ALT_FIRE;
 				NPC->alt_fire = qfalse;
 				//FIXME: use weap raise & lower anims
-				NPC_ChangeWeapon( WP_REPEATER );
+				NPC_ChangeWeapon(static_cast<int>(WP_REPEATER) );
 			}
 		}
 		else if ( (enemyDist > MAX_LOB_DIST_SQUARED || (NPC->enemy->s.weapon == WP_TURRET && !Q_stricmp( "PAS", NPC->enemy->classname )))
@@ -874,7 +874,7 @@ void NPC_BSGM_Attack( void )
 				NPCInfo->scriptFlags |= SCF_ALT_FIRE;
 				NPC->alt_fire = qtrue;
 				//FIXME: use weap raise & lower anims
-				NPC_ChangeWeapon( WP_REPEATER );
+				NPC_ChangeWeapon(static_cast<int>(WP_REPEATER) );
 			}
 		}
 	}
@@ -1038,7 +1038,7 @@ void NPC_BSGM_Attack( void )
 			{//have a clear straight shot, so switch to primary
 				NPCInfo->scriptFlags &= ~SCF_ALT_FIRE;
 				NPC->alt_fire = qfalse;
-				NPC_ChangeWeapon( WP_REPEATER );
+				NPC_ChangeWeapon(static_cast<int>(WP_REPEATER) );
 				//keep this weap for a bit
 				TIMER_Set( NPC, "noLob", Q_irand( 500, 1000 ) );
 			}

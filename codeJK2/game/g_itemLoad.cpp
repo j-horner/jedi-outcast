@@ -303,73 +303,73 @@ static void IT_Tag( const char **holdBuf ) {
 	}
 
 	if ( !Q_stricmp( tokenStr, "WP_NONE" ) ) {
-		tag = WP_NONE;
+		tag = static_cast<int>(WP_NONE);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_STUN_BATON" ) ) {
-		tag = WP_STUN_BATON;
+		tag = static_cast<int>(WP_STUN_BATON);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_SABER" ) ) {
-		tag = WP_SABER;
+		tag = static_cast<int>(WP_SABER);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_BRYAR_PISTOL" ) ) {
-		tag = WP_BRYAR_PISTOL;
+		tag = static_cast<int>(WP_BRYAR_PISTOL);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_BLASTER" ) ) {
-		tag = WP_BLASTER;
+		tag = static_cast<int>(WP_BLASTER);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_DISRUPTOR" ) ) {
-		tag = WP_DISRUPTOR;
+		tag = static_cast<int>(WP_DISRUPTOR);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_BOWCASTER" ) ) {
-		tag = WP_BOWCASTER;
+		tag = static_cast<int>(WP_BOWCASTER);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_REPEATER" ) ) {
-		tag = WP_REPEATER;
+		tag = static_cast<int>(WP_REPEATER);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_DEMP2" ) ) {
-		tag = WP_DEMP2;
+		tag = static_cast<int>(WP_DEMP2);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_FLECHETTE" ) ) {
-		tag = WP_FLECHETTE;
+		tag = static_cast<int>(WP_FLECHETTE);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_ROCKET_LAUNCHER" ) ) {
-		tag = WP_ROCKET_LAUNCHER;
+		tag = static_cast<int>(WP_ROCKET_LAUNCHER);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_THERMAL" ) ) {
-		tag = WP_THERMAL;
+		tag = static_cast<int>(WP_THERMAL);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_TRIP_MINE" ) ) {
-		tag = WP_TRIP_MINE;
+		tag = static_cast<int>(WP_TRIP_MINE);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_DET_PACK" ) ) {
-		tag = WP_DET_PACK;
+		tag = static_cast<int>(WP_DET_PACK);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_BOT_LASER" ) ) {
-		tag = WP_BOT_LASER;
+		tag = static_cast<int>(WP_BOT_LASER);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_EMPLACED_GUN" ) ) {
-		tag = WP_EMPLACED_GUN;
+		tag = static_cast<int>(WP_EMPLACED_GUN);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_MELEE" ) ) {
-		tag = WP_MELEE;
+		tag = static_cast<int>(WP_MELEE);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_TURRET" ) ) {
-		tag = WP_TURRET;
+		tag = static_cast<int>(WP_TURRET);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_ATST_MAIN" ) ) {
-		tag = WP_ATST_MAIN;
+		tag = static_cast<int>(WP_ATST_MAIN);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_ATST_SIDE" ) ) {
-		tag = WP_ATST_SIDE;
+		tag = static_cast<int>(WP_ATST_SIDE);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_TIE_FIGHTER" ) ) {
-		tag = WP_TIE_FIGHTER;
+		tag = static_cast<int>(WP_TIE_FIGHTER);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_RAPID_FIRE_CONC" ) ) {
-		tag = WP_RAPID_FIRE_CONC;
+		tag = static_cast<int>(WP_RAPID_FIRE_CONC);
 	}
 	else if ( !Q_stricmp( tokenStr,"WP_BLASTER_PISTOL" ) ) {
-		tag = WP_BLASTER_PISTOL;
+		tag = static_cast<int>(WP_BLASTER_PISTOL);
 	}
 	else if ( !Q_stricmp( tokenStr,"AMMO_FORCE" ) ) {
 		tag = AMMO_FORCE;
@@ -465,7 +465,7 @@ static void IT_Tag( const char **holdBuf ) {
 		tag = ITM_SHIELD_LRG_PICKUP;
 	}
 	else {
-		tag = WP_BRYAR_PISTOL;
+		tag = static_cast<int>(WP_BRYAR_PISTOL);
 		gi.Printf( "WARNING: bad tagname in external item data '%s'\n", tokenStr );
 	}
 

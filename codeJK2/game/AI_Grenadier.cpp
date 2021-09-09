@@ -522,7 +522,7 @@ void NPC_BSGrenadier_Attack( void )
 			if ( !trace.allsolid && !trace.startsolid && (trace.fraction == 1.0 || trace.entityNum == NPC->enemy->s.number ) )
 			{//I can get right to him
 				//reset fire-timing variables
-				NPC_ChangeWeapon( WP_MELEE );
+				NPC_ChangeWeapon(static_cast<int>(WP_MELEE) );
 				if ( !(NPCInfo->scriptFlags&SCF_CHASE_ENEMIES) )//NPCInfo->behaviorState == BS_STAND_AND_SHOOT )
 				{//FIXME: should we be overriding scriptFlags?
 					NPCInfo->scriptFlags |= SCF_CHASE_ENEMIES;//NPCInfo->behaviorState = BS_HUNT_AND_KILL;
@@ -532,10 +532,10 @@ void NPC_BSGrenadier_Attack( void )
 	}
 	else if ( enemyDist > 65536 || (NPC->enemy->client && NPC->enemy->client->ps.weapon == WP_SABER && NPC->enemy->client->ps.saberActive) )//256
 	{//enemy is far or using saber
-		if ( NPC->client->ps.weapon == WP_MELEE && (NPC->client->ps.stats[STAT_WEAPONS]&(1<<WP_THERMAL)) )
+		if ( NPC->client->ps.weapon == WP_MELEE && (NPC->client->ps.stats[STAT_WEAPONS]&(1<< static_cast<int>(WP_THERMAL))) )
 		{//fisticuffs, make switch to thermal if have it
 			//reset fire-timing variables
-			NPC_ChangeWeapon( WP_THERMAL );
+			NPC_ChangeWeapon(static_cast<int>(WP_THERMAL) );
 		}
 	}
 

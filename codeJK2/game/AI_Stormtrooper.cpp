@@ -1159,7 +1159,7 @@ void NPC_BSST_Patrol( void )
 		//FIXME: this is a disgusting hack that is supposed to make the Imperials start with their weapon holstered- need a better way
 		if ( NPC->client->ps.weapon != WP_NONE )
 		{
-			ChangeWeapon( NPC, WP_NONE );
+			ChangeWeapon( NPC, static_cast<int>(WP_NONE) );
 			NPC->client->ps.weapon = WP_NONE;
 			NPC->client->ps.weaponstate = WEAPON_READY;
 			if ( NPC->weaponModel >= 0 )
@@ -2506,7 +2506,7 @@ void NPC_BSST_Attack( void )
 			{//use primary fire
 				NPCInfo->scriptFlags |= SCF_ALT_FIRE;
 				//reset fire-timing variables
-				NPC_ChangeWeapon( WP_DISRUPTOR );
+				NPC_ChangeWeapon(static_cast<int>(WP_DISRUPTOR) );
 				NPC_UpdateAngles( qtrue, qtrue );
 				return;
 			}

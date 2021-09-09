@@ -51,7 +51,7 @@ void WP_ATSTMainFire( gentity_t *ent )
 	missile->classname = const_cast<char*>("atst_main_proj");
 	missile->s.weapon = WP_ATST_MAIN;
 
-	missile->damage = weaponData[WP_ATST_MAIN].damage;
+	missile->damage = weaponData[static_cast<int>(WP_ATST_MAIN)].damage;
 	missile->dflags = DAMAGE_DEATH_KNOCKBACK|DAMAGE_HEAVY_WEAP_CLASS;
 	missile->methodOfDeath = MOD_ENERGY;
 	missile->clipmask = MASK_SHOT | CONTENTS_LIGHTSABER;
@@ -68,7 +68,7 @@ void WP_ATSTMainFire( gentity_t *ent )
 void WP_ATSTSideAltFire( gentity_t *ent )
 //---------------------------------------------------------
 {
-	int	damage	= weaponData[WP_ATST_SIDE].altDamage;
+	int	damage	= weaponData[static_cast<int>(WP_ATST_SIDE)].altDamage;
 	float	vel = ATST_SIDE_ALT_NPC_VELOCITY;
 
 	if ( ent->client && (ent->client->ps.eFlags & EF_IN_ATST ))
@@ -113,8 +113,8 @@ void WP_ATSTSideAltFire( gentity_t *ent )
 	missile->clipmask = MASK_SHOT | CONTENTS_LIGHTSABER;
 
 	// Scale damage down a bit if it is coming from an NPC
-	missile->splashDamage = weaponData[WP_ATST_SIDE].altSplashDamage * ( ent->s.number == 0 ? 1.0f : ATST_SIDE_ALT_ROCKET_SPLASH_SCALE );
-	missile->splashRadius = weaponData[WP_ATST_SIDE].altSplashRadius;
+	missile->splashDamage = weaponData[static_cast<int>(WP_ATST_SIDE)].altSplashDamage * ( ent->s.number == 0 ? 1.0f : ATST_SIDE_ALT_ROCKET_SPLASH_SCALE );
+	missile->splashRadius = weaponData[static_cast<int>(WP_ATST_SIDE)].altSplashRadius;
 
 	// we don't want it to ever bounce
 	missile->bounceCount = 0;
@@ -125,7 +125,7 @@ void WP_ATSTSideAltFire( gentity_t *ent )
 void WP_ATSTSideFire( gentity_t *ent )
 //---------------------------------------------------------
 {
-	int	damage	= weaponData[WP_ATST_SIDE].damage;
+	int	damage	= weaponData[static_cast<int>(WP_ATST_SIDE)].damage;
 
 	gentity_t *missile = CreateMissile( wpMuzzle, wpFwd, ATST_SIDE_MAIN_VELOCITY, 10000, ent, qfalse );
 
@@ -157,8 +157,8 @@ void WP_ATSTSideFire( gentity_t *ent )
 	missile->methodOfDeath = MOD_ENERGY;
 	missile->clipmask = MASK_SHOT | CONTENTS_LIGHTSABER;
 
-	missile->splashDamage = weaponData[WP_ATST_SIDE].splashDamage * ( ent->s.number == 0 ? 1.0f : 0.6f );
-	missile->splashRadius = weaponData[WP_ATST_SIDE].splashRadius;
+	missile->splashDamage = weaponData[static_cast<int>(WP_ATST_SIDE)].splashDamage * ( ent->s.number == 0 ? 1.0f : 0.6f );
+	missile->splashRadius = weaponData[static_cast<int>(WP_ATST_SIDE)].splashRadius;
 
 	// we don't want it to bounce
 	missile->bounceCount = 0;

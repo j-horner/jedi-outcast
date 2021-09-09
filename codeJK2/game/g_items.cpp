@@ -140,13 +140,13 @@ int Add_Ammo2 (gentity_t *ent, int ammoType, int count)
 		switch( ammoType )
 		{
 		case AMMO_THERMAL:
-			ent->client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_THERMAL );
+			ent->client->ps.stats[STAT_WEAPONS] |= ( 1 << static_cast<int>(WP_THERMAL) );
 			break;
 		case AMMO_DETPACK:
-			ent->client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_DET_PACK );
+			ent->client->ps.stats[STAT_WEAPONS] |= ( 1 << static_cast<int>(WP_DET_PACK) );
 			break;
 		case AMMO_TRIPMINE:
-			ent->client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_TRIP_MINE );
+			ent->client->ps.stats[STAT_WEAPONS] |= ( 1 << static_cast<int>(WP_TRIP_MINE) );
 			break;
 		}
 
@@ -282,7 +282,7 @@ int Pickup_Weapon (gentity_t *ent, gentity_t *other)
 	}
 	other->client->ps.stats[STAT_WEAPONS] |= ( 1 << ent->item->giTag );
 
-	if ( ent->item->giTag == WP_SABER && !hadWeapon )
+	if ( ent->item->giTag == static_cast<int>(WP_SABER) && !hadWeapon )
 	{
 		WP_SaberInitBladeData( other );
 	}
@@ -292,10 +292,10 @@ int Pickup_Weapon (gentity_t *ent, gentity_t *other)
 		if ( other->s.weapon == WP_NONE )
 		{//NPC with no weapon picked up a weapon, change to this weapon
 			//FIXME: clear/set the alt-fire flag based on the picked up weapon and my class?
-			other->client->ps.weapon = ent->item->giTag;
+			other->client->ps.weapon = static_cast<weapon_t>(ent->item->giTag);
 			other->client->ps.weaponstate = WEAPON_RAISING;
 			ChangeWeapon( other, ent->item->giTag );
-			if ( ent->item->giTag == WP_SABER )
+			if ( ent->item->giTag == static_cast<int>(WP_SABER) )
 			{
 				other->client->ps.saberActive = qtrue;
 				G_CreateG2AttachedWeaponModel( other, other->client->ps.saberModel );
@@ -702,10 +702,10 @@ gentity_t *LaunchItem( gitem_t *item, vec3_t origin, vec3_t velocity, char *targ
 	if ( item->giType == IT_WEAPON )
 	{
 		// give weapon items zero pitch, a random yaw, and rolled onto their sides...but would be bad to do this for a bowcaster
-		if ( item->giTag != WP_BOWCASTER
-			&& item->giTag != WP_THERMAL
-			&& item->giTag != WP_TRIP_MINE
-			&& item->giTag != WP_DET_PACK )
+		if ( item->giTag != static_cast<int>(WP_BOWCASTER)
+			&& item->giTag != static_cast<int>(WP_THERMAL)
+			&& item->giTag != static_cast<int>(WP_TRIP_MINE)
+			&& item->giTag != static_cast<int>(WP_DET_PACK) )
 		{
 			VectorSet( dropped->s.angles, 0, Q_flrand(-1.0f, 1.0f) * 180, 90.0f );
 			G_SetAngles( dropped, dropped->s.angles );

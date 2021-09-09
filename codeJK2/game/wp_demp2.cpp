@@ -37,7 +37,7 @@ static void WP_DEMP2_MainFire( gentity_t *ent )
 //---------------------------------------------------------
 {
 	vec3_t	start;
-	int		damage	= weaponData[WP_DEMP2].damage;
+	int		damage	= weaponData[static_cast<int>(WP_DEMP2)].damage;
 
 	VectorCopy( wpMuzzle, start );
 	WP_TraceSetStart( ent, start, vec3_origin, vec3_origin );//make sure our start point isn't on the other side of a wall
@@ -156,7 +156,7 @@ void DEMP2_AltRadiusDamage( gentity_t *ent )
 		// push the center of mass higher than the origin so players get knocked into the air more
 		dir[2] += 12;
 
-		G_Damage( gent, ent, ent->owner, dir, ent->currentOrigin, weaponData[WP_DEMP2].altDamage, DAMAGE_DEATH_KNOCKBACK, ent->splashMethodOfDeath );
+		G_Damage( gent, ent, ent->owner, dir, ent->currentOrigin, weaponData[static_cast<int>(WP_DEMP2)].altDamage, DAMAGE_DEATH_KNOCKBACK, ent->splashMethodOfDeath );
 		if ( gent->takedamage && gent->client ) 
 		{
 			gent->s.powerups |= ( 1 << PW_SHOCKED );
@@ -196,7 +196,7 @@ void DEMP2_AltDetonate( gentity_t *ent )
 static void WP_DEMP2_AltFire( gentity_t *ent )
 //---------------------------------------------------------
 {
-	int		damage	= weaponData[WP_DEMP2].altDamage;
+	int		damage	= weaponData[static_cast<int>(WP_DEMP2)].altDamage;
 	int		count;
 	vec3_t	start;
 	trace_t	tr;
@@ -234,7 +234,7 @@ static void WP_DEMP2_AltFire( gentity_t *ent )
 
 	missile->splashDamage = missile->damage = damage;
 	missile->splashMethodOfDeath = missile->methodOfDeath = MOD_DEMP2_ALT;
-	missile->splashRadius = weaponData[WP_DEMP2].altSplashRadius;
+	missile->splashRadius = weaponData[static_cast<int>(WP_DEMP2)].altSplashRadius;
 
 	missile->dflags = DAMAGE_DEATH_KNOCKBACK;
 	missile->clipmask = MASK_SHOT | CONTENTS_LIGHTSABER;

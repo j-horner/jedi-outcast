@@ -460,9 +460,9 @@ void WP_SaberInitBladeData( gentity_t *ent )
 				ent->client->ps.saberAnimLevel = FORCE_LEVEL_2;
 			}
 			cg.saberAnimLevelPending = ent->client->ps.saberAnimLevel;
-			if ( ent->client->sess.missionStats.weaponUsed[WP_SABER] <= 0 )
+			if ( ent->client->sess.missionStats.weaponUsed[static_cast<int>(WP_SABER)] <= 0 )
 			{//let missionStats know that we actually do have the saber, even if we never use it
-				ent->client->sess.missionStats.weaponUsed[WP_SABER] = 1;
+				ent->client->sess.missionStats.weaponUsed[static_cast<int>(WP_SABER)] = 1;
 			}
 		}
 		ent->client->ps.saberAttackChainCount = 0;
@@ -4267,7 +4267,7 @@ void WP_SaberCatch( gentity_t *self, gentity_t *saber, qboolean switchToSaber )
 		{
 			if ( self->client->ps.weapon != WP_SABER )
 			{
-				CG_ChangeWeapon( WP_SABER );
+				CG_ChangeWeapon( static_cast<int>(WP_SABER) );
 			}
 			else
 			{//if it's not active, turn it on
@@ -5332,8 +5332,8 @@ void WP_DropWeapon( gentity_t *dropper, vec3_t velocity )
 	{
 		return;
 	}
-	int	replaceWeap = WP_NONE;
-	int oldWeap = dropper->s.weapon;
+	weapon_t replaceWeap = WP_NONE;
+	weapon_t oldWeap = dropper->s.weapon;
 	gentity_t *weapon = TossClientItems( dropper );
 	if ( oldWeap == WP_THERMAL && dropper->NPC )
 	{//Hmm, maybe all NPCs should go into melee?  Not too many, though, or they mob you and look silly
@@ -5345,7 +5345,7 @@ void WP_DropWeapon( gentity_t *dropper, vec3_t velocity )
 		dropper->weaponModel = -1;
 	}
 	//FIXME: does this work on the player?
-	dropper->client->ps.stats[STAT_WEAPONS] |= ( 1 << replaceWeap );
+	dropper->client->ps.stats[STAT_WEAPONS] |= ( 1 << static_cast<int>(replaceWeap) );
 	if ( !dropper->s.number )
 	{
 		if ( oldWeap == WP_THERMAL )
@@ -5354,19 +5354,19 @@ void WP_DropWeapon( gentity_t *dropper, vec3_t velocity )
 		}
 		else
 		{
-			dropper->client->ps.stats[STAT_WEAPONS] &= ~( 1 << oldWeap );
+			dropper->client->ps.stats[STAT_WEAPONS] &= ~( 1 << static_cast<int>(oldWeap) );
 		}
-		CG_ChangeWeapon( replaceWeap );
+		CG_ChangeWeapon( static_cast<int>(replaceWeap) );
 	}
 	else
 	{
-		dropper->client->ps.stats[STAT_WEAPONS] &= ~( 1 << oldWeap );
+		dropper->client->ps.stats[STAT_WEAPONS] &= ~( 1 << static_cast<int>(oldWeap) );
 	}
-	ChangeWeapon( dropper, replaceWeap );
+	ChangeWeapon( dropper, static_cast<int>(replaceWeap) );
 	dropper->s.weapon = replaceWeap;
 	if ( dropper->NPC )
 	{
-		dropper->NPC->last_ucmd.weapon = replaceWeap;
+		dropper->NPC->last_ucmd.weapon = static_cast<byte>(replaceWeap);
 	}
 	if ( weapon != NULL && velocity && !VectorCompare( velocity, vec3_origin ) )
 	{//weapon should have a direction to it's throw
@@ -7036,7 +7036,7 @@ void ForceGrip( gentity_t *self )
 		G_AddVoiceEvent( traceEnt, Q_irand(EV_PUSHED1, EV_PUSHED3), 2000 );
 		if ( self->client->ps.forcePowerLevel[FP_GRIP] > FORCE_LEVEL_2 || traceEnt->s.weapon == WP_SABER )
 		{//if we pick up & carry, drop their weap
-			if ( traceEnt->s.weapon )
+			if ( traceEnt->s.weapon != weapon_t::WP_NONE)
 			{
 				if ( traceEnt->s.weapon != WP_SABER )
 				{

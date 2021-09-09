@@ -128,37 +128,41 @@ stringID_table_t BSETTable[] =
 	{"",				-1},
 };
 
+#define WEAPON_TO_TABLE_ELEMENT(arg) {#arg, static_cast<int>(arg)}
+
 stringID_table_t WPTable[] =
 {
-	{"NULL", WP_NONE},
-	ENUM2STRING(WP_NONE),
+	{"NULL", static_cast<int>(WP_NONE)},
+	WEAPON_TO_TABLE_ELEMENT(WP_NONE),
 	// Player weapons
-	ENUM2STRING(WP_SABER),				 // NOTE: lots of code assumes this is the first weapon (... which is crap) so be careful -Ste.
-	ENUM2STRING(WP_BRYAR_PISTOL),
-	ENUM2STRING(WP_BLASTER),
-	ENUM2STRING(WP_DISRUPTOR),
-	ENUM2STRING(WP_BOWCASTER),
-	ENUM2STRING(WP_REPEATER),
-	ENUM2STRING(WP_DEMP2),
-	ENUM2STRING(WP_FLECHETTE),
-	ENUM2STRING(WP_ROCKET_LAUNCHER),
-	ENUM2STRING(WP_THERMAL),
-	ENUM2STRING(WP_TRIP_MINE),
-	ENUM2STRING(WP_DET_PACK),
-	ENUM2STRING(WP_STUN_BATON),
+	WEAPON_TO_TABLE_ELEMENT(WP_SABER),				 // NOTE: lots of code assumes this is the first weapon (... which is crap) so be careful -Ste.
+	WEAPON_TO_TABLE_ELEMENT(WP_BRYAR_PISTOL),
+	WEAPON_TO_TABLE_ELEMENT(WP_BLASTER),
+	WEAPON_TO_TABLE_ELEMENT(WP_DISRUPTOR),
+	WEAPON_TO_TABLE_ELEMENT(WP_BOWCASTER),
+	WEAPON_TO_TABLE_ELEMENT(WP_REPEATER),
+	WEAPON_TO_TABLE_ELEMENT(WP_DEMP2),
+	WEAPON_TO_TABLE_ELEMENT(WP_FLECHETTE),
+	WEAPON_TO_TABLE_ELEMENT(WP_ROCKET_LAUNCHER),
+	WEAPON_TO_TABLE_ELEMENT(WP_THERMAL),
+	WEAPON_TO_TABLE_ELEMENT(WP_TRIP_MINE),
+	WEAPON_TO_TABLE_ELEMENT(WP_DET_PACK),
+	WEAPON_TO_TABLE_ELEMENT(WP_STUN_BATON),
 	//NOTE: player can only have up to 16 weapons), anything after that is enemy only
-	ENUM2STRING(WP_MELEE),			// Any ol' melee attack
+	WEAPON_TO_TABLE_ELEMENT(WP_MELEE),			// Any ol' melee attack
 	// NPC enemy weapons
-	ENUM2STRING(WP_EMPLACED_GUN),
-	ENUM2STRING(WP_BOT_LASER),		// Probe droid	- Laser blast
-	ENUM2STRING(WP_TURRET),			// turret guns 
-	ENUM2STRING(WP_ATST_MAIN),
-	ENUM2STRING(WP_ATST_SIDE),
-	ENUM2STRING(WP_TIE_FIGHTER),
-	ENUM2STRING(WP_RAPID_FIRE_CONC),
-	ENUM2STRING(WP_BLASTER_PISTOL),	// apparently some enemy only version of the blaster
+	WEAPON_TO_TABLE_ELEMENT(WP_EMPLACED_GUN),
+	WEAPON_TO_TABLE_ELEMENT(WP_BOT_LASER),		// Probe droid	- Laser blast
+	WEAPON_TO_TABLE_ELEMENT(WP_TURRET),			// turret guns 
+	WEAPON_TO_TABLE_ELEMENT(WP_ATST_MAIN),
+	WEAPON_TO_TABLE_ELEMENT(WP_ATST_SIDE),
+	WEAPON_TO_TABLE_ELEMENT(WP_TIE_FIGHTER),
+	WEAPON_TO_TABLE_ELEMENT(WP_RAPID_FIRE_CONC),
+	WEAPON_TO_TABLE_ELEMENT(WP_BLASTER_PISTOL),	// apparently some enemy only version of the blaster
 	{"", 0}
 };
+
+#undef WEAPON_TO_TABLE_ELEMENT
 
 stringID_table_t INVTable[] =
 {
@@ -3344,7 +3348,7 @@ static void Q3_SetWeapon (int entID, const char *wp_name)
 	}
 
 	wp = GetIDForString( WPTable, wp_name );
-	if(wp == WP_NONE)
+	if(static_cast<weapon_t>(wp) == WP_NONE)
 	{//no weapon
 		self->client->ps.weapon = WP_NONE;
 		if ( self->weaponModel >= 0 )
@@ -3368,7 +3372,7 @@ static void Q3_SetWeapon (int entID, const char *wp_name)
 		self->client->ps.ammo[weaponData[wp].ammoIndex] = 999;
 
 		ChangeWeapon( self, wp );
-		self->client->ps.weapon = wp;
+		self->client->ps.weapon = static_cast<weapon_t>(wp);
 		self->client->ps.weaponstate = WEAPON_READY;//WEAPON_RAISING;
 		G_AddEvent( self, EV_GENERAL_SOUND, G_SoundIndex( "sound/weapons/change.wav" ));
 	}
@@ -3387,7 +3391,7 @@ static void Q3_SetWeapon (int entID, const char *wp_name)
 		gi.G2API_RemoveGhoul2Model( self->ghoul2, self->weaponModel );
 	}
 
-	if ( wp == WP_SABER )
+	if (static_cast<weapon_t>(wp) == WP_SABER )
 	{
 		if ( !hadWeapon )
 		{
@@ -5006,7 +5010,7 @@ static void Q3_SetAltFire( int entID, qboolean add)
 		ent->NPC->scriptFlags &= ~SCF_ALT_FIRE;
 	}
 
-	ChangeWeapon( ent, 	ent->client->ps.weapon );
+	ChangeWeapon( ent, 	static_cast<int>(ent->client->ps.weapon) );
 
 }
 
@@ -8777,7 +8781,7 @@ static int Q3_GetString( int entID, int type, const char *name, char **value )
 		}
 		else
 		{
-			*value = (char *)GetStringForID( WPTable, ent->client->ps.weapon );
+			*value = (char *)GetStringForID( WPTable, static_cast<int>(ent->client->ps.weapon) );
 		}
 		break;
 

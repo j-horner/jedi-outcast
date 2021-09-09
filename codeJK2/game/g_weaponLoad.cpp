@@ -377,7 +377,7 @@ void WPN_FuncSkip( const char **holdBuf)
 
 void WPN_WeaponType( const char **holdBuf)
 {
-	int weaponNum;
+	weapon_t weaponNum;
 	const char	*tokenStr;
 
 	if (COM_ParseString(holdBuf,&tokenStr))
@@ -434,11 +434,11 @@ void WPN_WeaponType( const char **holdBuf)
 		weaponNum = WP_BLASTER_PISTOL;
 	else
 	{
-		weaponNum = 0;
+		weaponNum = static_cast<weapon_t>(0);
 		gi.Printf(S_COLOR_YELLOW"WARNING: bad weapontype in external weapon data '%s'\n", tokenStr);
 	}
 
-	wpnParms.weaponNum = weaponNum;
+	wpnParms.weaponNum = static_cast<int>(weaponNum);
 }
 
 //--------------------------------------------
@@ -1377,7 +1377,7 @@ void WP_LoadWeaponParms (void)
 	gi.FS_ReadFile("ext_data/weapons.dat",(void **) &buffer);
 
 	// initialise the data area
-	memset(weaponData, 0, sizeof(weaponData));
+	memset(weaponData.data, 0, sizeof(weaponData.data));
 
 	// put in the default values, because backwards compatibility is awesome!
 	for(int i = 0; i < WP_NUM_WEAPONS; i++)

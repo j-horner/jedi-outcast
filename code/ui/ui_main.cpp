@@ -5561,7 +5561,7 @@ static void UI_ClearWeapons ( void )
 		// Clear out any weapons for the player
 		pState->stats[ STAT_WEAPONS ] = 0;
 
-		pState->weapon = static_cast<int>(weapon_t::WP_NONE);
+		pState->weapon = weapon_t::WP_NONE;
 
 	}
 
@@ -5602,9 +5602,9 @@ static void UI_EquipWeapon ( const int weaponIndex )
 	{
 		playerState_t*	pState = cl->gentity->client;
 
-		if (weaponIndex<WP_NUM_WEAPONS)
+		if (weaponIndex < WP_NUM_WEAPONS)
 		{
-			pState->weapon = weaponIndex;
+			pState->weapon = static_cast<weapon_t>(weaponIndex);
 			//force it to change
 			//CG_ChangeWeapon( wp );
 		}

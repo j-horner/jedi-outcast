@@ -225,12 +225,12 @@ void ATST_Attack( void )
 	switch ( distRate )
 	{
 	case DIST_MELEE:
-		NPC_ChangeWeapon( WP_ATST_MAIN );
+		NPC_ChangeWeapon(static_cast<int>(WP_ATST_MAIN) );
 		break;
 
 	case DIST_LONG:
 
-		NPC_ChangeWeapon( WP_ATST_SIDE );
+		NPC_ChangeWeapon(static_cast<int>(WP_ATST_SIDE) );
 
 		// See if the side weapons are there
 		blasterTest = gi.G2API_GetSurfaceRenderStatus( &NPC->ghoul2[NPC->playerModel], "head_light_blaster_cann" );
@@ -261,7 +261,7 @@ void ATST_Attack( void )
 		}
 		else 
 		{
-			NPC_ChangeWeapon( WP_NONE );
+			NPC_ChangeWeapon(static_cast<int>(WP_NONE) );
 		}
 		break;
 	}

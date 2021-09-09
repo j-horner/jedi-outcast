@@ -486,16 +486,16 @@ void G_SetEnemy( gentity_t *self, gentity_t *enemy )
 		//FIXME: this is a disgusting hack that is supposed to make the Imperials start with their weapon holstered- need a better way
 		if ( self->client->ps.weapon == WP_NONE && !Q_strncmp( self->NPC_type, "imp", 3 ) && !(self->NPC->scriptFlags & SCF_FORCED_MARCH)  )
 		{
-			if ( self->client->ps.stats[STAT_WEAPONS] & ( 1 << WP_BLASTER ) )
+			if ( self->client->ps.stats[STAT_WEAPONS] & ( 1 << static_cast<int>(WP_BLASTER) ) )
 			{
-				ChangeWeapon( self, WP_BLASTER );
+				ChangeWeapon( self, static_cast<int>(WP_BLASTER) );
 				self->client->ps.weapon = WP_BLASTER;
 				self->client->ps.weaponstate = WEAPON_READY;
 				G_CreateG2AttachedWeaponModel( self, weaponData[WP_BLASTER].weaponMdl );
 			}
-			else if ( self->client->ps.stats[STAT_WEAPONS] & ( 1 << WP_BLASTER_PISTOL ) )
+			else if ( self->client->ps.stats[STAT_WEAPONS] & ( 1 << static_cast<int>(WP_BLASTER_PISTOL) ) )
 			{
-				ChangeWeapon( self, WP_BLASTER_PISTOL );
+				ChangeWeapon( self, static_cast<int>(WP_BLASTER_PISTOL) );
 				self->client->ps.weapon = WP_BLASTER_PISTOL;
 				self->client->ps.weaponstate = WEAPON_READY;
 				G_CreateG2AttachedWeaponModel( self, weaponData[WP_BLASTER_PISTOL].weaponMdl );
@@ -561,12 +561,14 @@ int ChooseBestWeapon( void )
 }
 */
 
-void ChangeWeapon( gentity_t *ent, int newWeapon ) 
+void ChangeWeapon( gentity_t *ent, int newWeapon_ ) 
 {
 	if ( !ent || !ent->client || !ent->NPC )
 	{
 		return;
 	}
+
+	const auto newWeapon = static_cast<weapon_t>(newWeapon_);
 
 	ent->client->ps.weapon = newWeapon;
 	ent->NPC->shotTime = 0;
@@ -817,7 +819,7 @@ void ChangeWeapon( gentity_t *ent, int newWeapon )
 void NPC_ChangeWeapon( int newWeapon ) 
 {
 	qboolean	changing = qfalse;
-	if ( newWeapon != NPC->client->ps.weapon )
+	if ( newWeapon != static_cast<int>(NPC->client->ps.weapon) )
 	{
 		changing = qtrue;
 	}
@@ -979,7 +981,7 @@ void WeaponThink( qboolean inCombat )
 
 	if ( client->ps.weaponstate == WEAPON_RAISING || client->ps.weaponstate == WEAPON_DROPPING ) 
 	{
-		ucmd.weapon = client->ps.weapon;
+		ucmd.weapon = static_cast<byte>(client->ps.weapon);
 		return;
 	}
 
@@ -1003,10 +1005,10 @@ void WeaponThink( qboolean inCombat )
 	if(NPC->client->ps.ammo[ weaponData[client->ps.weapon].ammoIndex ] < 10)	// checkme	
 //	if(NPC->client->ps.ammo[ client->ps.weapon ] < 10)
 	{
-		Add_Ammo (NPC, client->ps.weapon, 100);
+		Add_Ammo (NPC, static_cast<int>(client->ps.weapon), 100);
 	}
 
-	ucmd.weapon = client->ps.weapon;
+	ucmd.weapon = static_cast<byte>(client->ps.weapon);
 	ShootThink();
 }
 

@@ -481,7 +481,7 @@ Ghoul2 Insert Start
 
 const weaponData_t  *wData = NULL;
 
-			if ( cc->currentState.weapon )
+			if ( cc->currentState.weapon != weapon_t::WP_NONE)
 			{
 				wData = &weaponData[cc->currentState.weapon];
 			}
@@ -651,10 +651,10 @@ const weaponData_t  *wData = NULL;
 			{//saber is in-flight and active, play a sound on it
 				if ( cent->gent->owner->client->ps.saberEntityState == SES_RETURNING )
 				{
-					if ( cg_weapons[WP_SABER].firingSound )
+					if ( cg_weapons[static_cast<int>(WP_SABER)].firingSound )
 					{
 						cgi_S_AddLoopingSound( cent->currentState.number, 
-							cent->lerpOrigin, vec3_origin, cg_weapons[WP_SABER].firingSound );
+							cent->lerpOrigin, vec3_origin, cg_weapons[static_cast<int>(WP_SABER)].firingSound );
 					}
 				}
 				else
@@ -995,7 +995,7 @@ Ghoul2 Insert End
 	// add to refresh list
 	cgi_R_AddRefEntityToScene(&ent);
 
-	if ( item->giType == IT_WEAPON && item->giTag == WP_SABER )
+	if ( item->giType == IT_WEAPON && item->giTag == static_cast<int>(WP_SABER) )
 	{
 		// saber pickup item needs to be more visible
 		float	wv;
@@ -1037,10 +1037,10 @@ static void CG_Missile( centity_t *cent ) {
 		return;
 
 	s1 = &cent->currentState;
-	if ( s1->weapon >= WP_NUM_WEAPONS ) {
-		s1->weapon = 0;
+	if (static_cast<int>(s1->weapon) >= WP_NUM_WEAPONS ) {
+		s1->weapon = static_cast<weapon_t>(0);
 	}
-	weapon = &cg_weapons[s1->weapon];
+	weapon = &cg_weapons[static_cast<int>(s1->weapon)];
 	wData = &weaponData[s1->weapon];
 
 	if ( s1->pos.trType != TR_INTERPOLATE )
@@ -1942,7 +1942,7 @@ void CG_MatrixEffect ( centity_t *cent )
 	float totalElapsedTime = (float)(cg.time - cent->currentState.time);
 	float elapsedTime = totalElapsedTime;
 	if ( totalElapsedTime > cent->currentState.eventParm //MATRIX_EFFECT_TIME
-		|| (cent->currentState.weapon&&g_entities[cent->currentState.otherEntityNum].client&&g_entities[cent->currentState.otherEntityNum].client->ps.groundEntityNum!=ENTITYNUM_NONE) 
+		|| ((cent->currentState.weapon != weapon_t::WP_NONE) && g_entities[cent->currentState.otherEntityNum].client&&g_entities[cent->currentState.otherEntityNum].client->ps.groundEntityNum!=ENTITYNUM_NONE) 
 		|| cg.missionStatusShow )
 	{//time is up or this is a falling spin and they hit the ground or mission end screen is up
 		cg.overrides.active &= ~(/*CG_OVERRIDE_3RD_PERSON_ENT|*/CG_OVERRIDE_3RD_PERSON_RNG|CG_OVERRIDE_3RD_PERSON_ANG|CG_OVERRIDE_3RD_PERSON_POF);
@@ -1973,7 +1973,7 @@ void CG_MatrixEffect ( centity_t *cent )
 	cg.overrides.active |= CG_OVERRIDE_3RD_PERSON_ANG;
 	cg.overrides.thirdPersonAngle = 360.0f*elapsedTime/MATRIX_EFFECT_TIME;
 
-	if ( !cent->currentState.weapon ) 
+	if ( cent->currentState.weapon == weapon_t::WP_NONE) 
 	{//go ahead and do all the slowdown and vert bob stuff
 		//slowdown
 		float timescale = (elapsedTime/MATRIX_EFFECT_TIME);

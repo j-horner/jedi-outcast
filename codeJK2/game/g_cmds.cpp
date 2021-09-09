@@ -210,7 +210,7 @@ void G_Give( gentity_t *ent, const char *name, const char *args, int argc )
 
 	if ( give_all || !Q_stricmp( name, "weapons" ) )
 	{
-		ent->client->ps.stats[STAT_WEAPONS] = (1 << (MAX_PLAYER_WEAPONS+1)) - ( 1 << WP_NONE );
+		ent->client->ps.stats[STAT_WEAPONS] = (1 << (static_cast<int>(MAX_PLAYER_WEAPONS)+1)) - ( 1 << static_cast<int>(WP_NONE) );
 		if ( !give_all )
 			return;
 	}
@@ -223,7 +223,7 @@ void G_Give( gentity_t *ent, const char *name, const char *args, int argc )
 
 	if ( !give_all && !Q_stricmp( name, "eweaps" ) )	//for developing, gives you all the weapons, including enemy
 	{
-		ent->client->ps.stats[STAT_WEAPONS] = (unsigned)(1 << WP_NUM_WEAPONS) - ( 1 << WP_NONE ); // NOTE: this wasn't giving the last weapon in the list
+		ent->client->ps.stats[STAT_WEAPONS] = (unsigned)(1 << WP_NUM_WEAPONS) - ( 1 << static_cast<int>(WP_NONE) ); // NOTE: this wasn't giving the last weapon in the list
 		return;
 	}
 

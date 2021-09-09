@@ -32,6 +32,8 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "../../shared/qcommon/q_color.h"
 #include "../../shared/qcommon/q_string.h"
 
+#include "../../codeJK2/game/weapons.h"
+
 #ifdef _MSC_VER
 
 #pragma warning(disable : 4018)     // signed/unsigned mismatch
@@ -66,6 +68,7 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #endif // !JK2_MODE
 
 #if JK2_MODE
+
 #define PRODUCT_NAME			"openjo_sp"
 
 #define CLIENT_WINDOW_TITLE "OpenJO (SP)"
@@ -1614,7 +1617,12 @@ public:
 	int			externalEventTime;
 
 	int			clientNum;		// ranges from 0 to MAX_CLIENTS-1
-	int			weapon;			// copied to entityState_t->weapon
+	// int			weapon;			// copied to entityState_t->weapon
+
+	weapon_t weapon;
+
+	static_assert(std::is_same_v<std::underlying_type_t<weapon_t>, int>);
+
 	int			weaponstate;
 
 	int			batteryCharge;
@@ -2413,7 +2421,11 @@ typedef struct entityState_s {// !!!!!!!!!!! LOADSAVE-affecting struct !!!!!!!!!
 
 	// for players
 	int		powerups;		// bit flags
-	int		weapon;			// determines weapon and flash model, etc
+	
+	weapon_t		weapon;			// determines weapon and flash model, etc
+
+	static_assert(std::is_same_v<std::underlying_type_t<weapon_t>, int>);
+
 	int		legsAnim;		//
 	int		legsAnimTimer;	// don't change low priority animations on legs until this runs out
 	int		torsoAnim;		//

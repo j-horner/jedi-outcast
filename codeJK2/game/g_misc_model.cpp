@@ -312,7 +312,7 @@ void GunRackAddItem( gitem_t *gun, vec3_t org, vec3_t angs, float ffwd, float fr
 		{
 			it_ent->spawnflags |= 16;// VERTICAL
 
-			switch( gun->giTag )
+			switch( static_cast<weapon_t>(gun->giTag) )
 			{
 			case WP_BLASTER:
 				it_ent->count = 15;

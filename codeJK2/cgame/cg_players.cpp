@@ -4116,7 +4116,7 @@ Stops any weapon sounds as needed
 void CG_StopWeaponSounds( centity_t *cent )
 {
 	qboolean		weak = qfalse;
-	weaponInfo_t	*weapon = &cg_weapons[ cent->currentState.weapon ];
+	weaponInfo_t	*weapon = &cg_weapons[static_cast<int>(cent->currentState.weapon) ];
 
 	if ( cent->currentState.weapon == WP_SABER )
 	{
@@ -4939,7 +4939,7 @@ void CG_Player( centity_t *cent ) {
 		return;
 	}
 
-	if ( cent->currentState.weapon )
+	if ( cent->currentState.weapon != weapon_t::WP_NONE )
 	{
 		wData = &weaponData[cent->currentState.weapon];
 	}
@@ -5008,7 +5008,7 @@ Ghoul2 Insert Start
 			ent.renderfx |= RF_MORELIGHT;			//bigger than normal min light
 		}
 
-		CG_RegisterWeapon( cent->currentState.weapon );
+		CG_RegisterWeapon(static_cast<int>(cent->currentState.weapon) );
 
 //---------------
 		if ( cent->currentState.eFlags & EF_LOCKED_TO_WEAPON && cent->gent && cent->gent->health > 0 && cent->gent->owner )
@@ -5774,8 +5774,8 @@ Ghoul2 Insert End
 		//
 		// add the gun
 		//
-		CG_RegisterWeapon( cent->currentState.weapon );
-		weapon = &cg_weapons[cent->currentState.weapon];
+		CG_RegisterWeapon(static_cast<int>(cent->currentState.weapon) );
+		weapon = &cg_weapons[static_cast<int>(cent->currentState.weapon)];
 
 		gun.hModel = weapon->weaponWorldModel;
 		if (gun.hModel)

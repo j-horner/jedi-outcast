@@ -107,8 +107,8 @@ void CG_ItemPickup( int itemNum, qboolean bHadItem ) {
 	// see if it should be the grabbed weapon
 	if ( bg_itemlist[itemNum].giType == IT_WEAPON )
 	{
-		const int nCurWpn = cg.predicted_player_state.weapon;
-		const int nNewWpn = bg_itemlist[itemNum].giTag;
+		const auto nCurWpn = cg.predicted_player_state.weapon;
+		const auto nNewWpn = static_cast<weapon_t>(bg_itemlist[itemNum].giTag);
 
 		if ( nCurWpn == WP_SABER || bHadItem)
 		{//never switch away from the saber!
@@ -127,7 +127,7 @@ void CG_ItemPickup( int itemNum, qboolean bHadItem ) {
 		if ( nNewWpn == WP_SABER )
 		{//always switch to saber
 			SetWeaponSelectTime();
-			cg.weaponSelect = nNewWpn;
+			cg.weaponSelect = static_cast<int>(nNewWpn);
 		}
 		else if (0 == cg_autoswitch.integer)
 		{
@@ -145,7 +145,7 @@ void CG_ItemPickup( int itemNum, qboolean bHadItem ) {
 				// switch to new wpn
 //				cg.weaponSelectTime = cg.time;
 				SetWeaponSelectTime();
-				cg.weaponSelect = nNewWpn;
+				cg.weaponSelect = static_cast<int>(nNewWpn);
 			}
 		}
 		else if (2 == cg_autoswitch.integer)
@@ -156,7 +156,7 @@ void CG_ItemPickup( int itemNum, qboolean bHadItem ) {
 				// switch to new wpn
 //				cg.weaponSelectTime = cg.time;
 				SetWeaponSelectTime();
-				cg.weaponSelect = nNewWpn;
+				cg.weaponSelect = static_cast<int>(nNewWpn);
 			}
 		}
 	}
@@ -664,7 +664,7 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 	// This does not necessarily have to be from a grenade...
 	case EV_GRENADE_BOUNCE:
 		DEBUGNAME("EV_GRENADE_BOUNCE");
-		CG_BounceEffect( cent, es->weapon, position, cent->gent->pos1 );
+		CG_BounceEffect( cent, static_cast<int>(es->weapon), position, cent->gent->pos1 );
 		break;
 
 	//
@@ -673,17 +673,17 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 
 	case EV_MISSILE_STICK:
 		DEBUGNAME("EV_MISSILE_STICK");
-		CG_MissileStick( cent, es->weapon, position );
+		CG_MissileStick( cent, static_cast<int>(es->weapon), position );
 		break;
 
 	case EV_MISSILE_HIT:
 		DEBUGNAME("EV_MISSILE_HIT");
-		CG_MissileHitPlayer( cent, es->weapon, position, cent->gent->pos1, cent->gent->alt_fire );
+		CG_MissileHitPlayer( cent, static_cast<int>(es->weapon), position, cent->gent->pos1, cent->gent->alt_fire );
 		break;
 
 	case EV_MISSILE_MISS:
 		DEBUGNAME("EV_MISSILE_MISS");
-		CG_MissileHitWall( cent, es->weapon, position, cent->gent->pos1, cent->gent->alt_fire );
+		CG_MissileHitWall( cent, static_cast<int>(es->weapon), position, cent->gent->pos1, cent->gent->alt_fire );
 		break;
 
 	case EV_BMODEL_SOUND:
@@ -1032,7 +1032,7 @@ void CG_EntityEvent( centity_t *cent, vec3_t position ) {
 
 	case EV_DEBUG_LINE:
 		DEBUGNAME("EV_DEBUG_LINE");
-		CG_TestLine(position, es->origin2, es->time, (unsigned int)(es->time2), es->weapon);
+		CG_TestLine(position, es->origin2, es->time, (unsigned int)(es->time2), static_cast<int>(es->weapon));
 		break;
 
 	default:

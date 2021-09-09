@@ -38,7 +38,7 @@ void WP_BotLaser( gentity_t *ent )
 	missile->classname = const_cast<char*>("bryar_proj");
 	missile->s.weapon = WP_BRYAR_PISTOL;
 
-	missile->damage = weaponData[WP_BOT_LASER].damage;
+	missile->damage = weaponData[static_cast<int>(WP_BOT_LASER)].damage;
 	missile->dflags = DAMAGE_DEATH_KNOCKBACK;
 	missile->methodOfDeath = MOD_ENERGY;
 	missile->clipmask = MASK_SHOT | CONTENTS_LIGHTSABER;

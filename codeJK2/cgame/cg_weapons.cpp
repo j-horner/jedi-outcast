@@ -222,7 +222,7 @@ void CG_RegisterWeapon( int weaponNum ) {
 		weaponInfo->alt_missileTrailFunc = (void (QDECL *)(struct centity_s *,const struct weaponInfo_s *))weaponData[weaponNum].altfunc;
 	}
 
-	switch ( weaponNum )	//extra client only stuff
+	switch ( static_cast<weapon_t>(weaponNum) )	//extra client only stuff
 	{
 	case WP_SABER:
 		//saber/force FX
@@ -575,13 +575,13 @@ void CG_RegisterItemVisuals( int itemNum ) {
 		switch( item->giTag )
 		{
 		case AMMO_THERMAL:
-			CG_RegisterWeapon( WP_THERMAL );
+			CG_RegisterWeapon(static_cast<int>(WP_THERMAL) );
 			break;
 		case AMMO_TRIPMINE:
-			CG_RegisterWeapon( WP_TRIP_MINE );
+			CG_RegisterWeapon(static_cast<int>(WP_TRIP_MINE) );
 			break;
 		case AMMO_DETPACK:
-			CG_RegisterWeapon( WP_DET_PACK );
+			CG_RegisterWeapon(static_cast<int>(WP_DET_PACK) );
 			break;
 		}
 	}
@@ -597,11 +597,11 @@ void CG_RegisterItemVisuals( int itemNum ) {
 			cgi_S_RegisterSound( "sound/chars/seeker/misc/hiss.wav");
 			theFxScheduler.RegisterEffect( "env/small_explode");
 
-			CG_RegisterWeapon( WP_BLASTER );
+			CG_RegisterWeapon(static_cast<int>(WP_BLASTER) );
 			break;
 
 		case INV_SENTRY:
-			CG_RegisterWeapon( WP_TURRET );
+			CG_RegisterWeapon(static_cast<int>(WP_TURRET) );
 			cgi_S_RegisterSound( "sound/player/use_sentry" );
 			break;
 
@@ -956,8 +956,8 @@ void CG_AddViewWeapon( playerState_t *ps )
 //		CG_LightningBolt( cent, origin );
 
 		// We should still do muzzle flashes though...
-		CG_RegisterWeapon( ps->weapon );
-		weapon = &cg_weapons[ps->weapon];
+		CG_RegisterWeapon(static_cast<int>(ps->weapon) );
+		weapon = &cg_weapons[static_cast<int>(ps->weapon)];
 		wData =  &weaponData[ps->weapon];
 
 		CG_DoMuzzleFlash( cent, origin, cg.refdef.viewaxis[0], wData );
@@ -1009,8 +1009,8 @@ void CG_AddViewWeapon( playerState_t *ps )
 		leanOffset = 0;
 	}
 
-	CG_RegisterWeapon( ps->weapon );
-	weapon = &cg_weapons[ps->weapon];
+	CG_RegisterWeapon(static_cast<int>(ps->weapon) );
+	weapon = &cg_weapons[static_cast<int>(ps->weapon)];
 	wData =  &weaponData[ps->weapon];
 
 	memset (&hand, 0, sizeof(hand));
@@ -1061,8 +1061,8 @@ void CG_AddViewWeapon( playerState_t *ps )
 		float animSpeed;
 		if (cent->gent->lowerLumbarBone>=0&& gi.G2API_GetBoneAnimIndex(&cent->gent->ghoul2[cent->gent->playerModel], cent->gent->lowerLumbarBone, cg.time, &currentFrame, &startFrame, &endFrame, &flags, &animSpeed,0) )
 		{
-			hand.oldframe = CG_MapTorsoToWeaponFrame( ci,floor(currentFrame), torsoAnim, cent->currentState.weapon, ( cent->currentState.eFlags & EF_FIRING ) );
-			hand.frame = CG_MapTorsoToWeaponFrame( ci,ceil(currentFrame), torsoAnim, cent->currentState.weapon, ( cent->currentState.eFlags & EF_FIRING ) );
+			hand.oldframe = CG_MapTorsoToWeaponFrame( ci,floor(currentFrame), torsoAnim, static_cast<int>(cent->currentState.weapon), ( cent->currentState.eFlags & EF_FIRING ) );
+			hand.frame = CG_MapTorsoToWeaponFrame( ci,ceil(currentFrame), torsoAnim, static_cast<int>(cent->currentState.weapon), ( cent->currentState.eFlags & EF_FIRING ) );
 			hand.backlerp=1.0f-(currentFrame-floor(currentFrame));
 			if ( cg_debugAnim.integer == 1 && cent->currentState.clientNum == 0 )
 			{
@@ -1267,7 +1267,7 @@ int CG_WeaponCheck( int weaponIndex )
 {
 	int				value;
 
-	if ( weaponIndex == WP_SABER || weaponIndex == WP_STUN_BATON )
+	if ( weaponIndex == static_cast<int>(WP_SABER) || weaponIndex == static_cast<int>(WP_STUN_BATON) )
 	{
 		return qtrue;
 	}
@@ -1504,13 +1504,13 @@ void CG_DrawDataPadWeaponSelect( void )
 	}
 
 	// This seems to be a problem is datapad comes up too early
-	if (cg.DataPadWeaponSelect<FIRST_WEAPON)
+	if (cg.DataPadWeaponSelect< static_cast<int>(FIRST_WEAPON))
 	{
-		cg.DataPadWeaponSelect = FIRST_WEAPON;
+		cg.DataPadWeaponSelect = static_cast<int>(FIRST_WEAPON);
 	}
-	else if (cg.DataPadWeaponSelect>MAX_PLAYER_WEAPONS)
+	else if (cg.DataPadWeaponSelect> static_cast<int>(MAX_PLAYER_WEAPONS))
 	{
-		cg.DataPadWeaponSelect = MAX_PLAYER_WEAPONS;
+		cg.DataPadWeaponSelect = static_cast<int>(MAX_PLAYER_WEAPONS);
 	}
 
 	i = cg.DataPadWeaponSelect - 1;
@@ -2028,7 +2028,7 @@ qboolean CG_WeaponSelectable( int i, int original, qboolean dpMode )
 {
 	int	usage_for_weap;
 
-	if (i > MAX_PLAYER_WEAPONS)
+	if (i > static_cast<int>(MAX_PLAYER_WEAPONS))
 	{
 #ifndef FINAL_BUILD
 		Com_Printf("CG_WeaponSelectable() passed illegal index of %d!\n",i);
@@ -2042,7 +2042,7 @@ qboolean CG_WeaponSelectable( int i, int original, qboolean dpMode )
 	}
 
 	//FIXME: this doesn't work below, can still cycle too fast!
-	if ( original == WP_SABER && cg.weaponSelectTime + 500 > cg.time )
+	if ( original == static_cast<int>(WP_SABER) && cg.weaponSelectTime + 500 > cg.time )
 	{//when sqitch to lightsaber, have to stay there for at least half a second!
 		return qfalse;
 	}
@@ -2055,7 +2055,7 @@ qboolean CG_WeaponSelectable( int i, int original, qboolean dpMode )
 
 		if ( cg.snap->ps.ammo[weaponData[i].ammoIndex] - usage_for_weap < 0 )
 		{
-			if ( i != WP_DET_PACK ) // detpack can be switched to...should possibly check if there are any stuck to a wall somewhere?
+			if ( i != static_cast<int>(WP_DET_PACK) ) // detpack can be switched to...should possibly check if there are any stuck to a wall somewhere?
 			{
 				// This weapon doesn't have enough ammo to shoot either the main or the alt-fire
 				return qfalse;
@@ -2074,13 +2074,13 @@ qboolean CG_WeaponSelectable( int i, int original, qboolean dpMode )
 
 void CG_ToggleATSTWeapon( void )
 {
-	if ( cg.weaponSelect == WP_ATST_MAIN )
+	if ( cg.weaponSelect == static_cast<int>(WP_ATST_MAIN) )
 	{
-		cg.weaponSelect = WP_ATST_SIDE;
+		cg.weaponSelect = static_cast<int>(WP_ATST_SIDE);
 	}
 	else
 	{
-		cg.weaponSelect = WP_ATST_MAIN;
+		cg.weaponSelect = static_cast<int>(WP_ATST_MAIN);
 	}
 //	cg.weaponSelectTime = cg.time;
 	SetWeaponSelectTime();
@@ -2165,7 +2165,7 @@ void CG_NextWeapon_f( void ) {
 
 	original = cg.weaponSelect;
 
-	for ( i = 0 ; i <= MAX_PLAYER_WEAPONS ; i++ )
+	for ( i = 0 ; i <= static_cast<int>(MAX_PLAYER_WEAPONS) ; i++ )
 	{
 		cg.weaponSelect++;
 
@@ -2333,11 +2333,13 @@ void CG_ChangeWeapon( int num )
 
   Meant to be called from the normal game, so checks the game-side weapon inventory data
 */
-void CG_ChangeWeapon( int num )
+void CG_ChangeWeapon( int num_ )
 {
+	const auto num = static_cast<weapon_t>(num_);
+	
 	gentity_t	*player = &g_entities[0];
 
-	if ( num < WP_NONE || num >= WP_NUM_WEAPONS )
+	if ( num < WP_NONE || static_cast<int>(num) >= WP_NUM_WEAPONS )
 	{
 		return;
 	}
@@ -2348,7 +2350,7 @@ void CG_ChangeWeapon( int num )
 		return;
 	}
 
-	if ( player->client != NULL && !(player->client->ps.stats[STAT_WEAPONS] & ( 1 << num )) )
+	if ( player->client != NULL && !(player->client->ps.stats[STAT_WEAPONS] & ( 1 << static_cast<int>(num) )) )
 	{
 		return;		// don't have the weapon
 	}
@@ -2373,7 +2375,7 @@ void CG_ChangeWeapon( int num )
 
 	SetWeaponSelectTime();
 //	cg.weaponSelectTime = cg.time;
-	cg.weaponSelect = num;
+	cg.weaponSelect = static_cast<int>(num);
 }
 
 /*
@@ -2383,8 +2385,6 @@ CG_Weapon_f
 */
 void CG_Weapon_f( void )
 {
-	int		num;
-
 	if ( cg.weaponSelectTime + 200 > cg.time )
 	{
 		return;
@@ -2428,15 +2428,15 @@ void CG_Weapon_f( void )
 		}
 	}
 
-	num = atoi( CG_Argv( 1 ) );
+	auto num = static_cast<weapon_t>(atoi( CG_Argv( 1 ) ));
 
-	if ( num < WP_NONE || num >= WP_NUM_WEAPONS ) {
+	if ( num < WP_NONE || static_cast<int>(num) >= WP_NUM_WEAPONS ) {
 		return;
 	}
 
 	if ( num == WP_SABER )
 	{//lightsaber
-		if ( ! ( cg.snap->ps.stats[STAT_WEAPONS] & ( 1 << num ) ) )
+		if ( ! ( cg.snap->ps.stats[STAT_WEAPONS] & ( 1 << static_cast<int>(num) ) ) )
 		{//don't have saber, try stun baton
 			num = WP_STUN_BATON;
 		}
@@ -2470,12 +2470,13 @@ void CG_Weapon_f( void )
 	}
 	else if ( num >= WP_THERMAL && num <= WP_DET_PACK ) // these weapons cycle
 	{
-		int weap, i = 0;
+		auto i = 0;
+		weapon_t weap;
 
 		if ( cg.snap->ps.weapon >= WP_THERMAL && cg.snap->ps.weapon <= WP_DET_PACK )
 		{
 			// already in cycle range so start with next cycle item
-			weap = cg.snap->ps.weapon + 1;
+			weap = static_cast<weapon_t>(static_cast<int>(cg.snap->ps.weapon) + 1);
 		}
 		else
 		{
@@ -2493,25 +2494,25 @@ void CG_Weapon_f( void )
 
 			if ( cg.snap->ps.ammo[weaponData[weap].ammoIndex] > 0 || weap == WP_DET_PACK )
 			{
-				if ( CG_WeaponSelectable( weap, cg.snap->ps.weapon, qfalse ) )
+				if ( CG_WeaponSelectable(static_cast<int>(weap), static_cast<int>(cg.snap->ps.weapon), qfalse ) )
 				{
 					num = weap;
 					break;
 				}
 			}
 
-			weap++;
+			weap = static_cast<weapon_t>(static_cast<int>(weap) + 1);
 			i++;
 		}
 	}
 
-	if ( ! ( cg.snap->ps.stats[STAT_WEAPONS] & ( 1 << num ) ) ) {
+	if ( ! ( cg.snap->ps.stats[STAT_WEAPONS] & ( 1 << static_cast<int>(num) ) ) ) {
 		return;		// don't have the weapon
 	}
 
 	SetWeaponSelectTime();
 //	cg.weaponSelectTime = cg.time;
-	cg.weaponSelect = num;
+	cg.weaponSelect = static_cast<int>(num);
 }
 
 /*
@@ -2536,7 +2537,7 @@ void CG_OutOfAmmoChange( void ) {
 
 	original = cg.weaponSelect;
 
-	for ( i = WP_ROCKET_LAUNCHER; i > 0 ; i-- )
+	for ( i = static_cast<int>(WP_ROCKET_LAUNCHER); i > 0 ; i-- )
 	{
 		// We don't want the emplaced, melee, or explosive devices here
 		if ( original != i && CG_WeaponSelectable( i, original, qfalse ) )
@@ -2550,12 +2551,12 @@ void CG_OutOfAmmoChange( void ) {
 	if ( cg_autoswitch.integer != 1 )
 	{
 		// didn't have that, so try these. Start with thermal...
-		for ( i = WP_THERMAL; i <= WP_DET_PACK; i++ )
+		for ( i = static_cast<int>(WP_THERMAL); i <= static_cast<int>(WP_DET_PACK); i++ )
 		{
 			// We don't want the emplaced, or melee here
 			if ( original != i && CG_WeaponSelectable( i, original, qfalse ) )
 			{
-				if ( i == WP_DET_PACK && cg.snap->ps.ammo[weaponData[i].ammoIndex] <= 0 )
+				if ( i == static_cast<int>(WP_DET_PACK) && cg.snap->ps.ammo[weaponData[i].ammoIndex] <= 0 )
 				{
 					// crap, no point in switching to this
 				}
@@ -2570,10 +2571,10 @@ void CG_OutOfAmmoChange( void ) {
 	}
 
 	// try stun baton as a last ditch effort
-	if ( CG_WeaponSelectable( WP_STUN_BATON, original, qfalse ))
+	if ( CG_WeaponSelectable(static_cast<int>(WP_STUN_BATON), original, qfalse ))
 	{
 		SetWeaponSelectTime();
-		cg.weaponSelect = WP_STUN_BATON;
+		cg.weaponSelect = static_cast<int>(WP_STUN_BATON);
 	}
 }
 
@@ -2603,7 +2604,7 @@ void CG_FireWeapon( centity_t *cent, qboolean alt_fire )
 	if ( ent->weapon == WP_NONE ) {
 		return;
 	}
-	if ( ent->weapon >= WP_NUM_WEAPONS ) {
+	if (static_cast<int>(ent->weapon) >= WP_NUM_WEAPONS ) {
 		CG_Error( "CG_FireWeapon: ent->weapon >= WP_NUM_WEAPONS" );
 		return;
 	}
@@ -2684,7 +2685,7 @@ Caused by an EV_BOUNCE | EV_BOUNCE_HALF event
 */
 void CG_BounceEffect( centity_t *cent, int weapon, vec3_t origin, vec3_t normal )
 {
-	switch( weapon )
+	switch( static_cast<weapon_t>(weapon) )
 	{
 	case WP_THERMAL:
 		if ( rand() & 1 ) {
@@ -2718,7 +2719,7 @@ void CG_MissileStick( centity_t *cent, int weapon, vec3_t position )
 {
 	sfxHandle_t snd = 0;
 
-	switch( weapon )
+	switch( static_cast<weapon_t>(weapon) )
 	{
 	case WP_FLECHETTE:
 		snd = cgs.media.flechetteStickSound;
@@ -2750,7 +2751,7 @@ void CG_MissileHitWall( centity_t *cent, int weapon, vec3_t origin, vec3_t dir, 
 {
 	int parm;
 
-	switch( weapon )
+	switch( static_cast<weapon_t>(weapon) )
 	{
 	case WP_BRYAR_PISTOL:
 		if ( altFire )
@@ -2880,7 +2881,7 @@ void CG_MissileHitPlayer( centity_t *cent, int weapon, vec3_t origin, vec3_t dir
 		}
 	}
 
-	switch( weapon )
+	switch( static_cast<weapon_t>(weapon) )
 	{
 	case WP_BRYAR_PISTOL:
 		if ( altFire )

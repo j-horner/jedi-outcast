@@ -673,7 +673,7 @@ void NPC_PrecacheWeapons( team_t playerTeam, int spawnflags, char *NPCtype )
 {
 	int weapons = NPC_WeaponsForTeam( playerTeam, spawnflags, NPCtype );
 	gitem_t	*item;
-	for ( int curWeap = WP_SABER; curWeap < WP_NUM_WEAPONS; curWeap++ )
+	for ( int curWeap = static_cast<int>(WP_SABER); curWeap < WP_NUM_WEAPONS; curWeap++ )
 	{
 		if ( (weapons & ( 1 << curWeap )) )
 		{

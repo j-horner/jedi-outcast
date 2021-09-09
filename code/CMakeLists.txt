@@ -239,7 +239,6 @@ if(BuildJK2SPEngine)
 		"${SPDir}/game/genericparser2.h"
 		"${SPDir}/game/statindex.h"
 		"${SPDir}/game/teams.h"
-		"${SPDir}/game/weapons.h"
 		"${SPDir}/game/surfaceflags.h"
 		"${SPDir}/game/ghoul2_shared.h"
 		)

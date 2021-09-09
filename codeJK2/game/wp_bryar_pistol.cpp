@@ -37,7 +37,7 @@ void WP_FireBryarPistol( gentity_t *ent, qboolean alt_fire )
 //---------------------------------------------------------
 {
 	vec3_t	start;
-	int		damage = !alt_fire ? weaponData[ent->s.weapon].damage : weaponData[ent->s.weapon].altDamage;
+	int		damage = !alt_fire ? weaponData[static_cast<int>(ent->s.weapon)].damage : weaponData[static_cast<int>(ent->s.weapon)].altDamage;
 
 	VectorCopy( wpMuzzle, start );
 	WP_TraceSetStart( ent, start, vec3_origin, vec3_origin );//make sure our start point isn't on the other side of a wall

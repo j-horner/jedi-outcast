@@ -351,7 +351,7 @@ static void CG_DrawAmmo(centity_t	*cent,int x,int y)
 
 	ps = &cg.snap->ps;
 
-	if (!cent->currentState.weapon ) // We don't have a weapon right now
+	if (cent->currentState.weapon == weapon_t::WP_NONE) // We don't have a weapon right now
 	{
 		return;
 	}

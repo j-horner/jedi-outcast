@@ -1447,7 +1447,7 @@ Ghoul2 Insert End
 					CG_RegisterClientModels(i);
 					if ( i != 0 )
 					{//Client weapons already precached
-						CG_RegisterWeapon( g_entities[i].client->ps.weapon );
+						CG_RegisterWeapon(static_cast<int>(g_entities[i].client->ps.weapon) );
 						CG_RegisterNPCCustomSounds( &g_entities[i].client->clientInfo );
 						CG_RegisterNPCEffects( g_entities[i].client->playerTeam );
 					}
@@ -1583,7 +1583,7 @@ Ghoul2 Insert End
 
 	CG_LinkCentsToGents();
 
-	cg.weaponSelect = WP_BRYAR_PISTOL;
+	cg.weaponSelect = static_cast<int>(WP_BRYAR_PISTOL);
 	cg.forcepowerSelect = FP_HEAL;
 
 	if (gbUseTheseValuesFromLoadSave)

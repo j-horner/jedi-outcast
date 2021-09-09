@@ -37,7 +37,7 @@ static void WP_FireBlasterMissile( gentity_t *ent, vec3_t start, vec3_t dir, qbo
 //---------------------------------------------------------
 {
 	int velocity	= BLASTER_VELOCITY;
-	int	damage		= !altFire ? weaponData[WP_BLASTER].damage : weaponData[WP_BLASTER].altDamage;
+	int	damage		= !altFire ? weaponData[static_cast<int>(WP_BLASTER)].damage : weaponData[static_cast<int>(WP_BLASTER)].altDamage;
 
 	// If an enemy is shooting at us, lower the velocity so you have a chance to evade
 	if ( ent->client && ent->client->ps.clientNum != 0 )

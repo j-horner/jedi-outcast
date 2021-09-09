@@ -775,7 +775,7 @@ void Use_Shooter( gentity_t *ent, gentity_t *other, gentity_t *activator )
 
 void InitShooter( gentity_t *ent, int weapon ) {
 	ent->e_UseFunc = useF_Use_Shooter;
-	ent->s.weapon = weapon;
+	ent->s.weapon = static_cast<weapon_t>(weapon);
 
 	RegisterItem( FindItemForWeapon( (weapon_t) weapon ) );
 
@@ -807,7 +807,7 @@ Fires at either the target or the current direction.
 */
 void SP_shooter_plasma( gentity_t *ent )
 {
-	InitShooter( ent, WP_BRYAR_PISTOL);
+	InitShooter( ent, static_cast<int>(WP_BRYAR_PISTOL));
 }
 
 /*QUAK-ED shooter_grenade (1 0 0) (-16 -16 -16) (16 16 16)

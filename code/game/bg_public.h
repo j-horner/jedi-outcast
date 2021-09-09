@@ -24,7 +24,6 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #ifndef __BG_PUBLIC_H__
 #define __BG_PUBLIC_H__
 // bg_public.h -- definitions shared by both the server game and client game modules
-#include "weapons.h"
 #include "g_items.h"
 #include "teams.h"
 #include "statindex.h"
@@ -694,7 +693,9 @@ typedef struct ginfoitem_s
 
 //==============================================================================
 
-extern weaponData_s weaponData[WP_NUM_WEAPONS];
+// extern weaponData_s weaponData[WP_NUM_WEAPONS];
+
+extern WeaponData weaponData;
 
 //==============================================================================
 extern ammoData_s ammoData[AMMO_MAX];

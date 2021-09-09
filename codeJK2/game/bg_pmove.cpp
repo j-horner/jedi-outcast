@@ -5505,7 +5505,9 @@ PM_BeginWeaponChange
 ===============
 */
 extern void G_CreateG2AttachedWeaponModel( gentity_t *ent, const char *weaponModel );
-static void PM_BeginWeaponChange( int weapon ) {
+static void PM_BeginWeaponChange( int weapon_ ) {
+
+	const auto weapon = static_cast<weapon_t>(weapon_);
 
 	if ( pm->gent && pm->gent->client && pm->gent->client->pers.enterTime >= level.time - 500 )
 	{//just entered map
@@ -5515,11 +5517,11 @@ static void PM_BeginWeaponChange( int weapon ) {
 		}
 	}
 
-	if ( weapon < WP_NONE || weapon >= WP_NUM_WEAPONS ) {
+	if ( weapon < WP_NONE || static_cast<int>(weapon) >= WP_NUM_WEAPONS ) {
 		return;
 	}
 
-	if ( !( pm->ps->stats[STAT_WEAPONS] & ( 1 << weapon ) ) ) {
+	if ( !( pm->ps->stats[STAT_WEAPONS] & ( 1 << static_cast<int>(weapon) ) ) ) {
 		return;
 	}
 
@@ -5594,22 +5596,22 @@ PM_FinishWeaponChange
 ===============
 */
 static void PM_FinishWeaponChange( void ) {
-	int		weapon;
+	weapon_t		weapon;
 	qboolean	trueSwitch = qtrue;
 
 	if ( pm->gent && pm->gent->client && pm->gent->client->pers.enterTime >= level.time - 500 )
 	{//just entered map
-		if ( pm->cmd.weapon == WP_NONE && pm->ps->weapon != pm->cmd.weapon )
+		if ( pm->cmd.weapon == static_cast<byte>(WP_NONE) && static_cast<byte>(pm->ps->weapon) != pm->cmd.weapon )
 		{//don't switch to weapon none if just entered map
 			return;
 		}
 	}
-	weapon = pm->cmd.weapon;
-	if ( weapon < WP_NONE || weapon >= WP_NUM_WEAPONS ) {
+	weapon = static_cast<weapon_t>(pm->cmd.weapon);
+	if ( weapon < WP_NONE || static_cast<int>(weapon) >= WP_NUM_WEAPONS ) {
 		weapon = WP_NONE;
 	}
 
-	if ( !( pm->ps->stats[STAT_WEAPONS] & ( 1 << weapon ) ) ) {
+	if ( !( pm->ps->stats[STAT_WEAPONS] & ( 1 << static_cast<int>(weapon) ) ) ) {
 		weapon = WP_NONE;
 	}
 
@@ -5617,7 +5619,7 @@ static void PM_FinishWeaponChange( void ) {
 	{
 		trueSwitch = qfalse;
 	}
-	int oldWeap = pm->ps->weapon;
+	const auto oldWeap = pm->ps->weapon;
 	pm->ps->weapon = weapon;
 	pm->ps->weaponstate = WEAPON_RAISING;
 	pm->ps->weaponTime += 250;
@@ -6781,7 +6783,7 @@ void PM_WeaponLightsaber(void)
 			}
 			if ( pm->ps->weaponTime <= 0 || pm->ps->weaponstate != WEAPON_FIRING )
 			{
-				if ( pm->ps->weapon != pm->cmd.weapon )
+				if ( pm->ps->weapon != static_cast<weapon_t>(pm->cmd.weapon) )
 				{
 					PM_BeginWeaponChange( pm->cmd.weapon );
 				}
@@ -7137,7 +7139,7 @@ void PM_WeaponLightsaber(void)
 	// check for weapon change
 	// can't change if weapon is firing, but can change again if lowering or raising
 	if ( pm->ps->weaponTime <= 0 || pm->ps->weaponstate != WEAPON_FIRING ) {
-		if ( pm->ps->weapon != pm->cmd.weapon ) {
+		if (static_cast<byte>(pm->ps->weapon) != pm->cmd.weapon ) {
 			PM_BeginWeaponChange( pm->cmd.weapon );
 		}
 	}
@@ -7694,7 +7696,7 @@ static bool PM_DoChargedWeapons( void )
 				pm->ps->weaponstate = WEAPON_CHARGING_ALT;
 				pm->ps->weaponChargeTime = level.time;
 
-				if ( cg_weapons[pm->ps->weapon].altChargeSound )
+				if ( cg_weapons[static_cast<int>(pm->ps->weapon)].altChargeSound )
 				{
 					G_SoundOnEnt( pm->gent, CHAN_WEAPON, weaponData[pm->ps->weapon].altChargeSnd );
 				}
@@ -7715,7 +7717,7 @@ static bool PM_DoChargedWeapons( void )
 				pm->ps->weaponstate = WEAPON_CHARGING;
 				pm->ps->weaponChargeTime = level.time;
 
-				if ( cg_weapons[pm->ps->weapon].chargeSound && pm->gent && !pm->gent->NPC ) // HACK: !NPC mostly for bowcaster and weequay
+				if ( cg_weapons[static_cast<int>(pm->ps->weapon)].chargeSound && pm->gent && !pm->gent->NPC ) // HACK: !NPC mostly for bowcaster and weequay
 				{
 					G_SoundOnEnt( pm->gent, CHAN_WEAPON, weaponData[pm->ps->weapon].chargeSnd );
 				}
@@ -8040,7 +8042,7 @@ static void PM_Weapon( void )
 	// can't change if weapon is firing, but can change again if lowering or raising
 	if ( (pm->ps->weaponTime <= 0 || pm->ps->weaponstate != WEAPON_FIRING) && pm->ps->weaponstate != WEAPON_CHARGING_ALT && pm->ps->weaponstate != WEAPON_CHARGING) {
 		// eez- don't switch weapons if we're charging our current one up
-		if ( pm->ps->weapon != pm->cmd.weapon && (!pm->ps->viewEntity || pm->ps->viewEntity >= ENTITYNUM_WORLD) && !PM_DoChargedWeapons()) {
+		if ( static_cast<byte>(pm->ps->weapon) != pm->cmd.weapon && (!pm->ps->viewEntity || pm->ps->viewEntity >= ENTITYNUM_WORLD) && !PM_DoChargedWeapons()) {
 			PM_BeginWeaponChange( pm->cmd.weapon );
 		}
 	}

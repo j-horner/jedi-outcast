@@ -57,7 +57,7 @@ int G_GetHitLocFromTrace( trace_t *trace, int mod )
 static void WP_DisruptorMainFire( gentity_t *ent )
 //---------------------------------------------------------
 {
-	int			damage = weaponData[WP_DISRUPTOR].damage;
+	int			damage = weaponData[static_cast<int>(WP_DISRUPTOR)].damage;
 	qboolean	render_impact = qtrue;
 	vec3_t		start, end, spot;
 	trace_t		tr;
@@ -167,7 +167,7 @@ static void WP_DisruptorMainFire( gentity_t *ent )
 void WP_DisruptorAltFire( gentity_t *ent )
 //---------------------------------------------------------
 {
-	int			damage = weaponData[WP_DISRUPTOR].altDamage, skip, traces = DISRUPTOR_ALT_TRACES;
+	int			damage = weaponData[static_cast<int>(WP_DISRUPTOR)].altDamage, skip, traces = DISRUPTOR_ALT_TRACES;
 	qboolean	render_impact = qtrue;
 	vec3_t		start, end;
 	vec3_t		muzzle2, spot, dir;
@@ -227,7 +227,7 @@ void WP_DisruptorAltFire( gentity_t *ent )
 		}
 		//else do full traces
 
-		damage = damage * count + weaponData[WP_DISRUPTOR].damage * 0.5f; // give a boost to low charge shots
+		damage = damage * count + weaponData[static_cast<int>(WP_DISRUPTOR)].damage * 0.5f; // give a boost to low charge shots
 	}
 
 	skip = ent->s.number;

@@ -29,6 +29,8 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "teams.h"
 #include "statindex.h"
 
+#include "../../code/qcommon/q_shared.h"
+
 #define	DEFAULT_GRAVITY		800
 #define	GIB_HEALTH			-40
 #define	ARMOR_PROTECTION	0.40
@@ -609,7 +611,9 @@ typedef struct ginfoitem_s
 
 //==============================================================================
 
-extern weaponData_t weaponData[WP_NUM_WEAPONS];
+// extern weaponData_t weaponData[WP_NUM_WEAPONS];
+
+extern WeaponData weaponData;
 
 //==============================================================================
 extern ammoData_t ammoData[AMMO_MAX];

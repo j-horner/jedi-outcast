@@ -579,7 +579,7 @@ void G_MissileImpact( gentity_t *ent, trace_t *trace, int hitLoc=HL_NONE )
 			}
 			if ( ent->owner->client && !ent->owner->s.number )
 			{
-				if ( W_AccuracyLoggableWeapon( ent->s.weapon, qfalse, ent->methodOfDeath ) )
+				if ( W_AccuracyLoggableWeapon(static_cast<int>(ent->s.weapon), qfalse, ent->methodOfDeath ) )
 				{
 					ent->owner->client->sess.missionStats.hits++;
 				}

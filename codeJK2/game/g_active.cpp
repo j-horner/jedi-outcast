@@ -1079,7 +1079,7 @@ void G_MatchPlayerWeapon( gentity_t *ent )
 {
 	if ( g_entities[0].inuse && g_entities[0].client )
 	{//player is around
-		int newWeap;
+		weapon_t newWeap;
 		if ( g_entities[0].client->ps.weapon > WP_DET_PACK )
 		{
 			newWeap = WP_BRYAR_PISTOL;
@@ -1094,9 +1094,9 @@ void G_MatchPlayerWeapon( gentity_t *ent )
 			{
 				gi.G2API_RemoveGhoul2Model(ent->ghoul2, ent->weaponModel);
 			}
-			ent->client->ps.stats[STAT_WEAPONS] = ( 1 << newWeap );
+			ent->client->ps.stats[STAT_WEAPONS] = ( 1 << static_cast<int>(newWeap) );
 			ent->client->ps.ammo[weaponData[newWeap].ammoIndex] = 999;
-			ChangeWeapon( ent, newWeap );
+			ChangeWeapon( ent, static_cast<int>(newWeap) );
 			ent->client->ps.weapon = newWeap;
 			ent->client->ps.weaponstate = WEAPON_READY;
 			if ( newWeap == WP_SABER )
@@ -1189,7 +1189,7 @@ void ClientTimerActions( gentity_t *ent, int msec ) {
 
 		if ( ent->s.weapon != WP_NONE )
 		{
-			ent->client->sess.missionStats.weaponUsed[ent->s.weapon]++;
+			ent->client->sess.missionStats.weaponUsed[static_cast<int>(ent->s.weapon)]++;
 		}
 		// if we've got the seeker powerup, see if we can shoot it at someone
 /*		if ( ent->client->ps.powerups[PW_SEEKER] > level.time )
@@ -1681,10 +1681,10 @@ void G_UpdateEmplacedWeaponData( gentity_t *ent )
 void ExitEmplacedWeapon( gentity_t *ent )
 {
 	// requesting to unlock from the weapon
-	int oldWeapon;
+	weapon_t oldWeapon;
 
 	// Remove this gun from our inventory
-	ent->client->ps.stats[STAT_WEAPONS] &= ~( 1 << ent->client->ps.weapon );
+	ent->client->ps.stats[STAT_WEAPONS] &= ~( 1 << static_cast<int>(ent->client->ps.weapon) );
 
 	// when we lock or unlock from the the gun, we just swap weapons with it
 	oldWeapon = ent->client->ps.weapon;
@@ -1694,12 +1694,12 @@ void ExitEmplacedWeapon( gentity_t *ent )
 extern void ChangeWeapon( gentity_t *ent, int newWeapon );
 	if ( ent->NPC )
 	{
-		ChangeWeapon( ent, ent->client->ps.weapon );
+		ChangeWeapon( ent, static_cast<int>(ent->client->ps.weapon) );
 	}
 	else
 	{
 extern void CG_ChangeWeapon( int num );
-		CG_ChangeWeapon( ent->client->ps.weapon );
+		CG_ChangeWeapon( static_cast<int>(ent->client->ps.weapon) );
 		if (weaponData[ent->client->ps.weapon].weaponMdl[0])
 		{
 			//might be NONE, so check if it has a model
@@ -1814,7 +1814,7 @@ void RunEmplacedWeapon( gentity_t *ent, usercmd_t **ucmd )
 		(*ucmd)->upmove = 0;
 		(*ucmd)->buttons &= (BUTTON_ATTACK|BUTTON_ALT_ATTACK);
 
-		(*ucmd)->weapon = ent->client->ps.weapon; //WP_EMPLACED_GUN;
+		(*ucmd)->weapon = static_cast<byte>(ent->client->ps.weapon); //WP_EMPLACED_GUN;
 
 		if ( ent->health <= 0 )
 		{

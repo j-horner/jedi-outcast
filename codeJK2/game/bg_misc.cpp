@@ -28,7 +28,10 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "g_items.h"
 
 
-extern weaponData_t weaponData[WP_NUM_WEAPONS];
+// extern weaponData_t weaponData[WP_NUM_WEAPONS];
+
+extern WeaponData weaponData;
+
 extern ammoData_t ammoData[AMMO_MAX];
 
 
@@ -205,7 +208,7 @@ gitem_t	*FindItemForWeapon( weapon_t weapon ) {
 	int		i;
 
 	for ( i = 1 ; i < bg_numItems ; i++ ) {
-		if ( bg_itemlist[i].giType == IT_WEAPON && bg_itemlist[i].giTag == weapon ) {
+		if ( bg_itemlist[i].giType == IT_WEAPON && bg_itemlist[i].giTag == static_cast<int>(weapon) ) {
 			return &bg_itemlist[i];
 		}
 	}
@@ -322,19 +325,19 @@ qboolean	BG_CanItemBeGrabbed( const entityState_t *ent, const playerState_t *ps 
 			switch( item->giTag )
 			{
 			case AMMO_THERMAL:
-				if( !(ps->stats[STAT_WEAPONS] & ( 1 << WP_THERMAL ) ) )
+				if( !(ps->stats[STAT_WEAPONS] & ( 1 << static_cast<int>(WP_THERMAL) ) ) )
 				{
 					return qtrue;
 				}
 				break;
 			case AMMO_DETPACK:
-				if( !(ps->stats[STAT_WEAPONS] & ( 1 << WP_DET_PACK ) ) )
+				if( !(ps->stats[STAT_WEAPONS] & ( 1 << static_cast<int>(WP_DET_PACK) ) ) )
 				{
 					return qtrue;
 				}
 				break;
 			case AMMO_TRIPMINE:
-				if( !(ps->stats[STAT_WEAPONS] & ( 1 << WP_TRIP_MINE ) ) )
+				if( !(ps->stats[STAT_WEAPONS] & ( 1 << static_cast<int>(WP_TRIP_MINE) ) ) )
 				{
 					return qtrue;
 				}

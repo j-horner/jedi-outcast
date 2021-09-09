@@ -21,17 +21,16 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 ===========================================================================
 */
 
+#pragma once
+
 // Filename:-	weapons.h
 //
 // Note that this is now included from both server and game modules, so don't include any other header files
 //	within this one that might break stuff...
 
-#ifndef __WEAPONS_H__
-#define __WEAPONS_H__
+#include "../../shared/qcommon/q_math.h"
 
-#include "../../code/qcommon/q_shared.h"
-
-typedef enum //# weapon_e
+enum class weapon_t : int //# weapon_e
 {
 	WP_NONE,
 
@@ -69,7 +68,7 @@ typedef enum //# weapon_e
 
 	WP_RAPID_FIRE_CONC,
 
-	WP_BLASTER_PISTOL,	// apparently some enemy only version of the blaster
+	WP_BLASTER_PISTOL // ,	// apparently some enemy only version of the blaster
 
 //	WP_CHAOTICA_GUARD_GUN,	//			- B/W version of scav rifle for Chaotica's guards.
 //	WP_BOT_ROCKET,		// Hunter Seeker - Rocket projectile
@@ -80,11 +79,18 @@ typedef enum //# weapon_e
 //	WP_PALADIN,			// special holo-weapon
 
 	//# #eol
-	WP_NUM_WEAPONS
-} weapon_t;
+	// WP_NUM_WEAPONS
+};
 
-#define FIRST_WEAPON		WP_SABER		// this is the first weapon for next and prev weapon switching
-#define MAX_PLAYER_WEAPONS	WP_STUN_BATON	// this is the max you can switch to and get with the give all.
+constexpr static auto WP_NUM_WEAPONS = static_cast<int>(weapon_t::WP_BLASTER_PISTOL) + 1;
+
+constexpr static auto FIRST_WEAPON = static_cast<int>(weapon_t::WP_SABER);
+constexpr static auto MAX_PLAYER_WEAPONS = static_cast<int>(weapon_t::WP_STUN_BATON);
+
+using enum weapon_t;
+
+// #define FIRST_WEAPON		WP_SABER		// this is the first weapon for next and prev weapon switching
+// #define MAX_PLAYER_WEAPONS	WP_STUN_BATON	// this is the max you can switch to and get with the give all.
 
 // AMMO_NONE must be first and AMMO_MAX must be last, cause weapon load validates based off of these vals
 typedef enum //# ammo_e
@@ -159,6 +165,14 @@ typedef struct weaponData_s
 	float	altSplashRadius;
 
 } weaponData_t;
+
+struct WeaponData {
+
+	constexpr auto& operator[](int i) noexcept { return data[i]; }
+	constexpr auto& operator[](weapon_t w) noexcept { return data[static_cast<int>(w)]; }
+
+	weaponData_s data[WP_NUM_WEAPONS];
+};
 
 
 typedef struct ammoData_s
@@ -358,5 +372,3 @@ typedef struct ammoData_s
 #define TD_ALT_MIN_CHARGE	0.15f
 #define TD_ALT_TIME			3000
 
-
-#endif//#ifndef __WEAPONS_H__

@@ -78,7 +78,7 @@ void CG_CheckAmmo( void )
 #endif
 
 	// Don't bother drawing the ammo warning when have no weapon selected
-	if ( cg.weaponSelect == WP_NONE )
+	if ( cg.weaponSelect == static_cast<int>(WP_NONE) )
 	{
 		return;
 	}
@@ -225,7 +225,7 @@ void CG_Respawn( void ) {
 	SetWeaponSelectTime();
 
 	// select the weapon the server says we are using
-	cg.weaponSelect = cg.snap->ps.weapon;
+	cg.weaponSelect = static_cast<int>(cg.snap->ps.weapon);
 }
 
 

@@ -115,7 +115,7 @@ gentity_t *TossClientItems( gentity_t *self )
 {
 	gentity_t	*dropped = NULL;
 	gitem_t		*item = NULL;
-	int			weapon;
+	weapon_t			weapon;
 
 	if ( self->client->NPC_class == CLASS_SEEKER || self->client->NPC_class == CLASS_REMOTE )
 	{
@@ -135,7 +135,7 @@ gentity_t *TossClientItems( gentity_t *self )
 	else if ( weapon == WP_BLASTER_PISTOL )
 	{//FIXME: either drop the pistol and make the pickup only give ammo or drop ammo
 	}
-	else if ( weapon > WP_SABER && weapon <= MAX_PLAYER_WEAPONS )//&& self->client->ps.ammo[ weaponData[weapon].ammoIndex ]
+	else if ( weapon > WP_SABER && weapon <= static_cast<weapon_t>(MAX_PLAYER_WEAPONS) )//&& self->client->ps.ammo[ weaponData[weapon].ammoIndex ]
 	{
 		self->s.weapon = WP_NONE;
 
@@ -759,7 +759,7 @@ void G_StartMatrixEffect( gentity_t *ent, qboolean falling = qfalse, int length 
 		matrix->nextthink = level.time + length + 500;
 		if ( falling )
 		{//no timescale or vert bob
-			matrix->s.weapon = 1;
+			matrix->s.weapon = static_cast<weapon_t>(1);
 		}
 	}
 }
@@ -4215,11 +4215,11 @@ void PlayerPain( gentity_t *self, gentity_t *inflictor, gentity_t *other, vec3_t
 		if ( blasterTest && chargerTest )
 		{//lost both side guns
 			//take away that weapon
-			self->client->ps.stats[STAT_WEAPONS] &= ~( 1 << WP_ATST_SIDE );
+			self->client->ps.stats[STAT_WEAPONS] &= ~( 1 << static_cast<int>(WP_ATST_SIDE) );
 			//switch to primary guns
 			if ( self->client->ps.weapon == WP_ATST_SIDE )
 			{
-				CG_ChangeWeapon( WP_ATST_MAIN );
+				CG_ChangeWeapon( static_cast<int>(WP_ATST_MAIN) );
 			}
 		}
 	}
@@ -4662,7 +4662,7 @@ void G_TrackWeaponUsage( gentity_t *self, gentity_t *inflictor, int add, int mod
 	{//player only
 		return;
 	}
-	int weapon = WP_NONE;
+	weapon_t weapon = WP_NONE;
 	//FIXME: need to check the MOD to find out what weapon (if *any*) actually did the killing
 	if ( inflictor && !inflictor->client && mod != MOD_SABER && inflictor->lastEnemy && inflictor->lastEnemy != self )
 	{//a missile that was reflected, ie: not owned by me originally
@@ -4735,7 +4735,7 @@ void G_TrackWeaponUsage( gentity_t *self, gentity_t *inflictor, int add, int mod
 	}
 	if ( weapon != WP_NONE )
 	{
-		self->client->sess.missionStats.weaponUsed[weapon] += add;
+		self->client->sess.missionStats.weaponUsed[static_cast<int>(weapon)] += add;
 	}
 }
 
